@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include layout="@layout/search_activity_toolbar"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/searchContentLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.androidkun.xtablayout.XTabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                app:xTabSelectedTextColor="@color/main_red"
+                app:xTabSelectedTextSize="16sp"
+                app:xTabTextColor="#333"
+                app:xTabDisplayNum="3"
+                app:xTabMode="scrollable"
+                app:xTabTextSize="14sp" />
+
+
+            <com.ww.commonlibrary.view.NoScrollViewpager
+                android:id="@+id/viewPage"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="@color/white"
+            android:id="@+id/hotAndHistoryLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clickable="true"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15dp"
+                            android:layout_weight="1"
+                            android:text="历史记录" />
+
+                        <ToggleButton
+                            android:id="@+id/deleteToggle"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_marginRight="15dp"
+                            android:background="@drawable/isdeleted_drawable_selector"
+                            android:textOff="@null"
+                            android:textOn="@null" />
+
+                    </LinearLayout>
+                    <View
+                        style="@style/divider_hor"/>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/historySearchRv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:overScrollMode="never" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15dp"
+                            android:layout_weight="1"
+                            android:text="猜你想搜的" />
+
+                        <ToggleButton
+                            android:id="@+id/ToggleButton"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_marginRight="15dp"
+                            android:background="@drawable/toggle_drawable_selector"
+                            android:textOff="@null"
+                            android:textOn="@null" />
+
+                    </LinearLayout>
+                    <View
+                        style="@style/divider_hor"/>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/hotSearchRv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:overScrollMode="never" />
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/keywordRvLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:background="@color/white"
+                android:id="@+id/keywordRv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true" />
+        </LinearLayout>
+
+    </FrameLayout>
+</LinearLayout>

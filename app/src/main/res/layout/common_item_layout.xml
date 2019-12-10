@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.ww.commonlibrary.view.CircleImageView
+        android:id="@+id/header"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp" />
+
+    <TextView
+        android:id="@+id/author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/header"
+        android:text=""
+        android:textColor="#406599"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/author"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="12dp"
+        android:ellipsize="end"
+        android:maxLines="6"
+        android:text=""
+        android:textColor="#333333"
+        android:textSize="15dp" />
+
+    <LinearLayout
+        android:id="@+id/likeLayout"
+        android:layout_marginRight="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <com.ww.commonlibrary.view.ClickAnimImage
+            android:id="@+id/likeImage"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@mipmap/ic_like_normal"
+            app:isShowPop="true"
+            app:normalSource="@mipmap/ic_like_normal"
+            app:activeSource="@mipmap/ic_like_active"/>
+
+        <TextView
+            android:id="@+id/likeCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="#878787"
+            android:textSize="14dp" />
+    </LinearLayout>
+
+    <View
+        style="@style/divider_hor"
+        android:layout_below="@id/content"
+        android:layout_marginTop="10dp"/>
+</RelativeLayout>

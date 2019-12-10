@@ -1,0 +1,2 @@
+include ':app', ':commonlibrary',':jiaozivideoplayer'
+rootProject.name='TodayLife'

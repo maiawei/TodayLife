@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/contentView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/divider_color"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:padding="12dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/hiddenContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="将减少推荐相关内容的"
+                android:textColor="#333"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/cancelHidden"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="撤销"
+                android:textColor="@color/blue"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

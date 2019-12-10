@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/news_detail_activity_toolbar" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <com.ww.commonlibrary.view.nestedViewGroup.NestedWebViewRecyclerViewGroup
+            android:id="@+id/detailParent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.ww.commonlibrary.view.nestedViewGroup.NestedScrollWebView
+                android:id="@+id/webView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.ww.commonlibrary.view.autoLoadMoreRecyclerView.AutoLoadRecyclerView
+                android:id="@+id/commentRv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.ww.commonlibrary.view.nestedViewGroup.NestedWebViewRecyclerViewGroup>
+
+        <com.ww.commonlibrary.view.LoadStateView
+            android:id="@+id/loadingView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:clickable="true" />
+    </FrameLayout>
+
+    <include layout="@layout/news_detail_bottom" />
+</LinearLayout>

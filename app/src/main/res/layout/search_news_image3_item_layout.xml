@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="12dp">
+    <TextView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:visibility="gone"
+        android:id="@+id/abstractTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/newsTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="left"
+        android:maxLines="2"
+        android:text=""
+        android:textColor="#000"
+        android:textSize="17sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:scaleType="centerCrop"
+        android:id="@+id/newsImg1"
+        android:layout_width="0dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/newsImg2"
+        app:layout_constraintTop_toBottomOf="@id/newsTitle" />
+
+
+    <ImageView
+        android:scaleType="centerCrop"
+        android:id="@+id/newsImg2"
+        android:layout_width="0dp"
+        android:layout_height="78dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toRightOf="@id/newsImg1"
+        app:layout_constraintRight_toRightOf="@id/newsImg3"
+        app:layout_constraintTop_toBottomOf="@id/newsTitle" />
+
+
+    <ImageView
+        android:scaleType="centerCrop"
+        android:id="@+id/newsImg3"
+        android:layout_width="0dp"
+        android:layout_height="78dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toRightOf="@id/newsImg2"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/newsTitle" />
+    <TextView
+        android:layout_marginTop="15dp"
+        android:id="@+id/tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_marginRight="10dp"
+        android:textColor="#F96B6B"
+        android:textSize="13dp"
+        android:visibility="gone"
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp"
+        android:background="@drawable/news_tag_bg"
+        app:layout_constraintTop_toBottomOf="@id/newsImg3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+    <com.ww.commonlibrary.view.CircleImageView
+        android:id="@+id/authorImg"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintLeft_toRightOf="@id/tag"
+        app:layout_constraintTop_toBottomOf="@id/newsImg3" />
+
+    <TextView
+        android:layout_marginTop="15dp"
+        android:id="@+id/authorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="#999999"
+        android:textSize="13dp"
+        app:layout_constraintLeft_toRightOf="@id/authorImg"
+        app:layout_constraintTop_toBottomOf="@id/newsImg3" />
+
+    <ImageView
+        android:id="@+id/vipImg"
+        android:layout_width="13dp"
+        android:layout_height="13dp"
+        android:layout_marginLeft="5dp"
+        android:src="@mipmap/ic_vip"
+        app:layout_constraintBottom_toBottomOf="@id/authorName"
+        app:layout_constraintLeft_toRightOf="@id/authorName"
+        app:layout_constraintTop_toTopOf="@id/authorName" />
+
+    <TextView
+        android:layout_marginTop="15dp"
+        android:id="@+id/commentCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:text=""
+        android:textColor="#999999"
+        android:textSize="13dp"
+        app:layout_constraintLeft_toRightOf="@id/vipImg"
+        app:layout_constraintTop_toBottomOf="@id/newsImg3"/>
+    <TextView
+        android:layout_marginTop="15dp"
+        android:id="@+id/newsDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:text=""
+        android:textColor="#999999"
+        android:textSize="13dp"
+        app:layout_constraintLeft_toRightOf="@id/commentCount"
+        app:layout_constraintBottom_toBottomOf="@id/commentCount" />
+    <ImageView
+        android:id="@+id/deleteImage"
+        android:layout_width="21dp"
+        android:layout_height="14dp"
+        android:src="@mipmap/ic_news_delete"
+        app:layout_constraintTop_toTopOf="@id/commentCount"
+        android:layout_marginRight="15dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/commentCount" />
+</androidx.constraintlayout.widget.ConstraintLayout>

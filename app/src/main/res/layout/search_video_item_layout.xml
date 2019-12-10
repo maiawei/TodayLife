@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp">
+
+
+    <ImageView
+        android:scaleType="centerCrop"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintDimensionRatio="16:10"
+        android:id="@+id/newsImg1"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <TextView
+        android:padding="4dp"
+        android:background="@drawable/video_duration_bg"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        android:drawableLeft="@mipmap/ic_play_s"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:text=""
+        app:layout_constraintRight_toRightOf="@id/newsImg1"
+        app:layout_constraintBottom_toBottomOf="@id/newsImg1"
+        android:id="@+id/videoDuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:textColor="#333"
+        android:maxLines="3"
+        android:textSize="16sp"
+        android:ellipsize="end"
+        android:id="@+id/abstractTv"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toRightOf="@id/newsImg1"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.ww.commonlibrary.view.CircleImageView
+        android:id="@+id/authorImg"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/newsImg1" />
+
+    <TextView
+        android:id="@+id/authorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text=""
+        android:textColor="#666666"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@id/authorImg"
+        app:layout_constraintLeft_toRightOf="@id/authorImg"
+        app:layout_constraintTop_toTopOf="@id/authorImg" />
+
+    <ImageView
+        android:id="@+id/vipImg"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginLeft="5dp"
+        android:src="@mipmap/ic_vip"
+        app:layout_constraintBottom_toBottomOf="@id/authorName"
+        app:layout_constraintLeft_toRightOf="@id/authorName"
+        app:layout_constraintTop_toTopOf="@id/authorName" />
+
+    <TextView
+        android:id="@+id/commentCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:text=""
+        android:textColor="#666666"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@id/authorImg"
+        app:layout_constraintLeft_toRightOf="@id/vipImg"
+        app:layout_constraintTop_toTopOf="@id/authorImg" />
+    <TextView
+        android:id="@+id/newsDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:text=""
+        android:textColor="#666666"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@id/commentCount"
+        app:layout_constraintLeft_toRightOf="@id/commentCount"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="35dp"
+    android:layout_alignParentBottom="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_marginBottom="2dp"
+    android:id="@+id/comment_bottom">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        >
+
+        <TextView
+            android:textColorHint="#ffffff"
+            android:id="@+id/replyTv"
+            android:width="150dp"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/hsvideo_bottom_bg"
+            android:drawablePadding="6dp"
+            android:gravity="center|left"
+            android:paddingLeft="12dp"
+            android:hint="写评论..."
+            android:textColor="#ffffff"
+            android:textSize="13sp"/>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2">
+
+            <FrameLayout
+                android:id="@+id/commentLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:tint="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="5dp"
+                    android:scaleType="center"
+                    android:src="@mipmap/comment_count"/>
+
+                <TextView
+                    android:id="@+id/commentCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="8.5dip"
+                    android:background="@drawable/main_tab_badge_bg"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp"
+                    android:singleLine="true"
+                    android:textColor="#fffafafa"
+                    android:textSize="8sp"
+                    android:text="0"
+                    android:visibility="visible"/>
+            </FrameLayout>
+        </FrameLayout>
+
+        <com.ww.commonlibrary.view.ClickAnimImage
+            android:layout_width="0dp"
+            android:tint="@color/white"
+            android:id="@+id/starImage"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="2"
+            android:paddingLeft="5dip"
+            android:scaleType="center"
+            app:normalSource="@mipmap/ic_star"
+            app:activeSource="@mipmap/ic_star_active"
+            android:src="@mipmap/ic_star"
+            />
+
+        <ImageView
+            android:tint="@color/white"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="2"
+            android:paddingLeft="5dip"
+            android:scaleType="center"
+            android:src="@mipmap/ic_share"/>
+    </LinearLayout>
+</LinearLayout>

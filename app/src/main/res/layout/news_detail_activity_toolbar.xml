@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:id="@+id/toolbarLayout">
+    <ImageView
+        android:id="@+id/backImg"
+        android:padding="10dp"
+        android:src="@mipmap/ic_back"
+        android:layout_width="45dp"
+        android:layout_height="45dp"/>
+    <LinearLayout
+        android:id="@+id/titleLayout"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent">
+        <com.ww.commonlibrary.view.CircleImageView
+            app:civ_border_width="1px"
+            app:civ_border_color="@color/main_grey"
+            android:id="@+id/titleImg"
+            android:layout_marginRight="10dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"/>
+        <TextView
+            android:lines="1"
+            android:id="@+id/titleTv"
+            android:textSize="16sp"
+            android:text=""
+            android:ellipsize="end"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <ImageView
+        android:visibility="invisible"
+        android:id="@+id/moreImg"
+        android:padding="10dp"
+        android:src="@mipmap/ic_more"
+        android:layout_width="45dp"
+        android:layout_height="45dp"/>
+
+</LinearLayout>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+
+    <com.ww.commonlibrary.view.MyScrollView
+        android:id="@+id/scrollView"
+        android:fillViewport="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/headerImage"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/mine_head_bg" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="122dp">
+
+                    <com.ww.commonlibrary.view.CircleImageView
+                        android:id="@+id/mediaAvatar"
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:layout_marginLeft="15dp"
+                         />
+
+                    <Button
+                        android:layout_width="60dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="70dp"
+                        android:layout_marginRight="15dp"
+                        android:background="@color/main_red"
+                        android:text="关注"
+                        android:textColor="#fff" />
+
+                    <TextView
+                        android:id="@+id/mediaName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/mediaAvatar"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="20dp"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/mediaSureInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/mediaName"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="15dp"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/mediaSureInfo"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/followCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:text=""
+                            android:textColor="@color/blue"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="关注"
+                            android:textColor="#666"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/fansCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text=""
+                            android:textColor="@color/blue"
+                            android:textSize="14sp" />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="粉丝"
+                            android:textColor="#666"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+                <com.androidkun.xtablayout.XTabLayout
+                    android:id="@+id/tabLayout"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    app:xTabMode="scrollable"
+                    app:xTabIndicatorColor="@color/main_red"
+                    app:xTabIndicatorHeight="2dp"
+                    app:xTabSelectedTextColor="@color/main_red"
+                    app:xTabTextColor="#333"
+                    app:xTabTextSize="14sp"
+                    app:xTabDividerWidthWidthText="true"
+                    app:xTabSelectedTextSize="16sp" />
+                <View
+                    style="@style/divider_hor"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1000dp"/>
+            </LinearLayout>
+        </RelativeLayout>
+    </com.ww.commonlibrary.view.MyScrollView>
+    <include layout="@layout/news_detail_activity_toolbar" />
+    <com.androidkun.xtablayout.XTabLayout
+        android:visibility="invisible"
+        android:layout_below="@id/toolbarLayout"
+        android:id="@+id/tabLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:xTabMode="scrollable"
+        app:xTabIndicatorColor="@color/main_red"
+        app:xTabIndicatorHeight="2dp"
+        app:xTabDividerWidthWidthText="true"
+        app:xTabSelectedTextColor="@color/main_red"
+        app:xTabTextColor="#333"
+        app:xTabTextSize="14sp"
+        app:xTabSelectedTextSize="16sp" />
+    <View
+        android:visibility="gone"
+        android:id="@+id/divider"
+        android:layout_below="@id/tabLayout2"
+        style="@style/divider_hor"/>
+</RelativeLayout>

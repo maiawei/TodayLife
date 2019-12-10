@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:padding="15dp"
+    android:layout_height="wrap_content">
+    <TextView
+        android:clickable="true"
+        android:id="@+id/positionTv"
+        android:layout_centerVertical="true"
+        android:textSize="14sp"
+        android:textColor="#fff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:background="@null"
+        android:clickable="true"
+        android:text="保存"
+        android:id="@+id/saveTv"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:textSize="14sp"
+        android:textColor="#fff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>

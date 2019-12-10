@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:id="@+id/toolbarLayout">
+    <ImageView
+        android:id="@+id/backImg"
+        android:padding="10dp"
+        android:src="@mipmap/ic_back"
+        android:layout_width="45dp"
+        android:layout_height="45dp"/>
+
+    <com.ww.commonlibrary.view.ClearEditText
+        android:id="@+id/searchEdit"
+        android:singleLine="true"
+        android:imeOptions="actionSearch"
+        android:textColorHint="#666666"
+        android:textColor="#333333"
+        android:hint="搜你想搜的"
+        android:textSize="15sp"
+        android:gravity="center_vertical"
+        android:drawablePadding="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:drawableLeft="@mipmap/ic_search"
+        android:background="@drawable/main_search_bg"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="30dp"/>
+    <TextView
+        android:id="@+id/searchTv"
+        android:textSize="17sp"
+        android:gravity="center"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:text="搜索"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+</LinearLayout>

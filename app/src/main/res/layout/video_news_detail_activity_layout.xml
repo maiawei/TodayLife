@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View
+                android:id="@+id/statusBarView"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:background="@color/black" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <com.ww.todaylife.view.DetailJzvdStd
+                    android:id="@+id/jzPlayer"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/authorInfoLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:visibility="gone">
+
+                <com.ww.commonlibrary.view.CircleImageView
+                    android:id="@+id/authorAvatar"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="10dp"
+                     />
+
+                <TextView
+                    android:id="@+id/authorName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/authorAvatar"
+                    android:layout_toRightOf="@id/authorAvatar"
+                    android:text="作者"
+                    android:textColor="#333"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/authorName"
+                    android:layout_alignBottom="@id/authorAvatar"
+                    android:layout_toRightOf="@id/authorAvatar"
+                    android:text="无数粉丝"
+                    android:textColor="#666"
+                    android:textSize="14sp" />
+
+                <Button
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:background="@color/main_red"
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/follow"
+                    android:textColor="@color/white" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/onBackImg"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="25dp"
+            android:padding="10dp"
+            android:src="@mipmap/ic_back"
+            android:tint="@color/white" />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.ww.commonlibrary.view.autoLoadMoreRecyclerView.AutoLoadRecyclerView
+            android:id="@+id/commentRv"
+            android:scrollbars="vertical"
+            android:scrollbarSize="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.ww.commonlibrary.view.LoadStateView
+            android:id="@+id/loadingView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:clickable="true" />
+    </FrameLayout>
+    <include layout="@layout/news_detail_bottom"/>
+</LinearLayout>

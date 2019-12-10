@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="news_category">
+        <item>推荐</item>
+        <item>热点 </item>
+        <item>视频</item>
+        <item>娱乐</item>
+        <item>上海</item>
+        <item>体育</item>
+        <item>NBA</item>
+        <item>社会</item>
+        <item>科技</item>
+        <item>军事</item>
+        <item>旅游</item>
+    </string-array>
+    <string-array name="category_code">
+        <item></item>
+        <item>news_hot</item>
+        <item>video</item>
+        <item>news_entertainment</item>
+        <item>news_local</item>
+        <item>news_sports</item>
+        <item>nba</item>
+        <item>news_society</item>
+        <item>news_tech</item>
+        <item>news_military</item>
+        <item>news_travel</item>
+    </string-array>
+    <string-array name="video_category">
+        <item>推荐</item>
+        <item>影视</item>
+        <item>游戏</item>
+        <item>音乐</item>
+        <item>懂车帝</item>
+        <item>科技</item>
+        <item>综艺</item>
+        <item>宠物</item>
+        <item>儿童</item>
+        <item>体育</item>
+        <item>旅游</item>
+        <item>军事</item>
+        <item>农人</item>
+        <item>情感</item>
+    </string-array>
+    <string-array name="videoCategory_code">
+        <item>video</item>
+        <item>subv_movie</item>
+        <item>subv_game</item>
+        <item>subv_voice</item>
+        <item>subv_tt_video_car</item>
+        <item>subv_tt_video_tech</item>
+        <item>subv_tt_video_variety</item>
+        <item>subv_tt_video_pet</item>
+        <item>subv_tt_video_child</item>
+        <item>subv_tt_video_sports</item>
+        <item>tt_subv_travel</item>
+        <item>subv_tt_military</item>
+        <item>subv_tt_video_agriculture</item>
+        <item>subv_tt_emotion</item>
+    </string-array>
+</resources>
