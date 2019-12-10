@@ -235,9 +235,8 @@
                 </LinearLayout>
 
                 <View
-                    android:layout_width="match_parent"
                     android:layout_height="10dp"
-                    android:background="#f8f8f8" />
+                    style="@style/divider_hor" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -314,6 +313,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/settingLayout"
                         android:layout_width="match_parent"
                         android:layout_height="45dp">
 
@@ -337,9 +337,9 @@
                 </LinearLayout>
 
                 <View
-                    android:layout_width="match_parent"
                     android:layout_height="10dp"
-                    android:background="#f8f8f8" />
+                    style="@style/divider_hor" />
+
             </LinearLayout>
         </ScrollView>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>

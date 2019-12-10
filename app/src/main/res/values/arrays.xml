@@ -58,4 +58,10 @@
         <item>subv_tt_video_agriculture</item>
         <item>subv_tt_emotion</item>
     </string-array>
+    <string-array name="wlan_setting">
+        <item>最佳效果(下载大图)</item>
+        <item>较省流量(智能下载)</item>
+        <item>极省效果(不下载图)</item>
+
+    </string-array>
 </resources>

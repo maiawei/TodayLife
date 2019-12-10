@@ -5,11 +5,11 @@
         android:fromYDelta="100%p"
         android:toYDelta="0"
         android:fillAfter="false"
-        android:duration="300"
+        android:duration="150"
         />
     <alpha
         android:fromAlpha="0.0"
         android:toAlpha="1.0"
-        android:duration="300"
+        android:duration="150"
         android:fillAfter="true"/>
     </set>

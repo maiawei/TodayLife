@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
+import com.ww.commonlibrary.CommonConstant;
 import com.ww.commonlibrary.base.BaseAdapter;
 import com.ww.commonlibrary.util.StringUtils;
 import com.ww.commonlibrary.util.TimeUtils;
@@ -17,6 +18,7 @@ import com.ww.commonlibrary.view.CircleImageView;
 import com.ww.todaylife.R;
 import com.ww.todaylife.base.BaseViewHolder;
 import com.ww.todaylife.bean.httpResponse.NewsDetail;
+import com.ww.todaylife.util.PreUtils;
 import com.ww.todaylife.view.DeletePopWindow;
 
 import java.util.List;
@@ -98,7 +100,11 @@ public class NewsList2Adapter extends BaseAdapter<NewsDetail, BaseViewHolder> {
     private void bindCommonData(NewsDetail item, NewsItemVh holder, int position) {
         holder.newsDate.setText(TimeUtils.getShortTime(item.behot_time * 1000));
         holder.newsTitle.setText(item.title);
-        holder.abstractTv.setVisibility(View.GONE);
+        if (PreUtils.getBoolean(CommonConstant.SHOW_ABSTRACT, false)) {
+            holder.abstractTv.setVisibility(View.VISIBLE);
+        } else {
+            holder.abstractTv.setVisibility(View.GONE);
+        }
         holder.abstractTv.setText(item.abstractX);
         holder.authorName.setText(item.media_name == null ? item.source : item.media_name);
         holder.commentCount.setText(String.format("%d评论", item.comment_count));
@@ -214,6 +220,7 @@ public class NewsList2Adapter extends BaseAdapter<NewsDetail, BaseViewHolder> {
         ImageView deleteImage;
         @BindView(R.id.abstractTv)
         TextView abstractTv;
+
         private NewsItemVh(View itemView) {
             super(itemView);
         }

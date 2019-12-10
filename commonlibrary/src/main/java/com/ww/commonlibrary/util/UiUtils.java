@@ -25,29 +25,52 @@ import java.lang.ref.WeakReference;
 public class UiUtils {
     //弱引用 有助于重复利用以及内存回收
     private static WeakReference<ToastView> sToastRef = null;
+    private static WeakReference<ProgressDialog> sProgressDialogRef = null;
 
 
-    public static void showAProgressDialog(final Context context, String message) {
+    public static void showProgressDialog(final Context context, String message) {
         ProgressDialog progressDialog = new ProgressDialog(context);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setMessage(message);
         progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.setCancelable(true);
-        progressDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-            @Override
-            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-                    if (context != null) {
-                        ((Activity) context).finish();
-                    }
-                }
-                return false;
-            }
-        });
-        // sProgressDialogRef = new WeakReference<ProgressDialog>(progressDialog);
+        progressDialog.setCancelable(false);
+//        progressDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+//            @Override
+//            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+//                if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+//                    if (context != null) {
+//                        ((Activity) context).finish();
+//                    }
+//                }
+//                return false;
+//            }
+//        });
+        sProgressDialogRef = new WeakReference<>(progressDialog);
         progressDialog.show();
     }
 
+    public static void hideProgressDialog() {
+        if (sProgressDialogRef != null) {
+            if (sProgressDialogRef.get() != null) {
+                sProgressDialogRef.get().dismiss();
+            }
+        }
+    }
+
+    public static AlertDialog showSelectedDialog(Context context, int position, String title, String[] items, final DialogItemSelectedListener listener) {
+        new AlertDialog.Builder(context, R.style.AlertDialog)
+                .setTitle(title)
+                .setSingleChoiceItems(items, position, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int po) {
+                        dialogInterface.dismiss();
+                        listener.onItemSelected(po);
+                    }
+                })
+                .setNegativeButton(R.string.cancel, null)
+                .show();
+        return null;
+    }
 
 
     public static AlertDialog showAlertDialog(Context context, String title, String message, final DialogClickListener listener) {
@@ -72,7 +95,6 @@ public class UiUtils {
                     }
                 }
         );
-
         dialog = builder.create();
         dialog.setCanceledOnTouchOutside(false);
         dialog.setCancelable(true);
@@ -103,9 +125,11 @@ public class UiUtils {
     public static void showShortToast(Context context, String msg, int status) {
         showToast(Toast.LENGTH_SHORT, msg, context, status);
     }
+
     public static void showShortToast(Context context, String msg) {
         showToast(Toast.LENGTH_SHORT, msg, context, ToastView.TYPE_ERROR);
     }
+
     /**
      * 显示输入法
      * showSoftInput
@@ -114,7 +138,7 @@ public class UiUtils {
      * @since 1.0
      */
     public static void showSoftInput(Activity activity) {
-       // activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN|WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        // activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN|WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
@@ -146,4 +170,7 @@ public class UiUtils {
         public void cancelClick();
     }
 
+    public interface DialogItemSelectedListener {
+        public void onItemSelected(int position);
+    }
 }

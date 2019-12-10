@@ -17,9 +17,15 @@ import com.ww.todaylife.R;
 import com.ww.todaylife.VideoNewsDetailActivity;
 import com.ww.todaylife.adapter.VideoListAdapter;
 import com.ww.todaylife.base.LazyFragment;
+import com.ww.todaylife.bean.eventBean.OnBackEvent;
 import com.ww.todaylife.bean.httpResponse.NewsDetail;
 import com.ww.todaylife.presenter.Iview.INewsListView;
 import com.ww.todaylife.presenter.NewsListPresenter;
+import com.ww.todaylife.util.PreUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +58,15 @@ public class VideoListFragment extends LazyFragment<NewsListPresenter> implement
         return fragment;
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(OnBackEvent event) {
+        if (isVisible && refreshLayout != null) {
+            if (PreUtils.getBoolean(CommonConstant.RETURN_REFRESH, false))
+                recyclerView.scrollToPosition(0);
+            refreshLayout.autoRefresh();
+        }
+    }
+
     @Override
     protected NewsListPresenter createPresenter() {
         return new NewsListPresenter(this);
@@ -59,12 +74,13 @@ public class VideoListFragment extends LazyFragment<NewsListPresenter> implement
 
     @Override
     protected void initViews() {
+        EventBus.getDefault().register(this);
         Jzvd.SAVE_PROGRESS = true;
         recyclerView.setItemAnimator(null);
         recyclerView.addItemDecoration(new DividerItemDecoration(mBaseActivity, DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(mBaseActivity));
-        refreshLayout.setOnRefreshListener(refreshlayout -> loadData(CommonConstant.TYPE_REFRESH));
-        refreshLayout.setOnLoadMoreListener(refreshlayout -> mPresenter.getNewsLoadMore(typeCode, CommonConstant.TYPE_NEXT, typeCode.equals("") ? mList.size() + 2 : mList.size()));
+        refreshLayout.setOnRefreshListener(refreshLayout -> loadData(CommonConstant.TYPE_REFRESH));
+        refreshLayout.setOnLoadMoreListener(refreshLayout -> mPresenter.getNewsLoadMore(typeCode, CommonConstant.TYPE_NEXT, typeCode.equals("") ? mList.size() + 2 : mList.size()));
         loadingView.setRetryListener(() -> {
             loadData(CommonConstant.TYPE_REFRESH);
         });
@@ -160,12 +176,8 @@ public class VideoListFragment extends LazyFragment<NewsListPresenter> implement
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
-
-    @Override
     public void onDestroy() {
+        EventBus.getDefault().unregister(this);
         super.onDestroy();
     }
 }

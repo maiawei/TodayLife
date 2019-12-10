@@ -6,7 +6,15 @@
     <style name="AlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="buttonBarPositiveButtonStyle">@style/positiveBtnStyle</item>
+        <item name="buttonBarNegativeButtonStyle">@style/negativeBtnStyle</item>
         <item name="android:windowAnimationStyle">@style/AnimBottom</item>
+    </style>
+    <style name="positiveBtnStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/main_red</item>
+    </style>
+    <style name="negativeBtnStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/main_red</item>
     </style>
 
     <style name="AnimBottom" parent="@android:style/Animation">
@@ -18,7 +26,7 @@
     <style name="divider_hor">
         <item name="android:background">@color/divider_color</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">1px</item>
+        <item name="android:layout_height">1dp</item>
     </style>
 
     <style name="TransBottomSheetDialogStyle" parent="Theme.Design.Light.BottomSheetDialog">

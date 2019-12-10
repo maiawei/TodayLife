@@ -9,6 +9,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.ww.todaylife.HistoryAndStarNewsActivity;
 import com.ww.todaylife.PicWatchActivity;
 import com.ww.todaylife.R;
+import com.ww.todaylife.SystemSettingActivity;
 import com.ww.todaylife.base.BaseFragment;
 import com.ww.todaylife.base.BasePresenter;
 
@@ -29,8 +30,7 @@ public class MeFragment extends BaseFragment {
 
     @Override
     protected void initViews() {
-
-
+        refreshLayout.setEnableLoadMore(false);
     }
 
     @Override
@@ -43,14 +43,19 @@ public class MeFragment extends BaseFragment {
         return null;
     }
 
-    @OnClick({R.id.noticesLayout, R.id.starLayout, R.id.historyLayout})
+    @OnClick({R.id.noticesLayout, R.id.starLayout, R.id.historyLayout, R.id.settingLayout})
     public void onViewClicked(View view) {
-        Intent intent = new Intent(mBaseActivity, HistoryAndStarNewsActivity.class);
-        if (view.getId() == R.id.starLayout) {
-            intent.putExtra("position", 0);
-        } else {
-            intent.putExtra("position", 1);
+        if (view.getId() == R.id.starLayout || view.getId() == R.id.historyLayout) {
+            Intent intent = new Intent(mBaseActivity, HistoryAndStarNewsActivity.class);
+            if (view.getId() == R.id.starLayout) {
+                intent.putExtra("position", 0);
+            } else {
+                intent.putExtra("position", 1);
+            }
+            startActivity(intent);
+        } else if (view.getId() == R.id.settingLayout) {
+            startActivity(new Intent(mBaseActivity, SystemSettingActivity.class));
         }
-        startActivity(intent);
+
     }
 }

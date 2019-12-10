@@ -20,11 +20,14 @@ import com.ww.todaylife.VideoNewsDetailActivity;
 import com.ww.todaylife.R;
 import com.ww.todaylife.adapter.NewsList2Adapter;
 import com.ww.todaylife.base.LazyFragment;
+import com.ww.todaylife.bean.eventBean.OnBackEvent;
+import com.ww.todaylife.bean.eventBean.RefreshNewsList;
 import com.ww.todaylife.bean.eventBean.UpdateNewsItem;
 import com.ww.todaylife.bean.httpResponse.NewsDetail;
 import com.ww.todaylife.dataBase.TlDatabase;
 import com.ww.todaylife.presenter.Iview.INewsListView;
 import com.ww.todaylife.presenter.NewsListPresenter;
+import com.ww.todaylife.util.PreUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -70,7 +73,25 @@ public class NewsListFragment extends LazyFragment<NewsListPresenter> implements
     public void onEventMainThread(UpdateNewsItem event) {
         if (TextUtils.equals(typeCode, event.typeCode)) {
             mList.get(currentPosition + mList.size() - currentSize).htmlString = event.htmlStr;
-            mList.get(currentPosition + mList.size() - currentSize).isStar=event.isStar;
+            mList.get(currentPosition + mList.size() - currentSize).isStar = event.isStar;
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(RefreshNewsList event) {
+        if (event != null) {
+            newsListAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(OnBackEvent event) {
+        if (isVisible && refreshLayout != null) {
+            if (PreUtils.getBoolean(CommonConstant.RETURN_REFRESH, false)) {
+                recyclerView.scrollToPosition(0);
+                refreshLayout.autoRefresh();
+            }
+
         }
     }
 

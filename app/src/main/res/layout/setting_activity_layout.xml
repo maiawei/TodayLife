@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/news_detail_activity_toolbar" />
+
+    <View
+        style="@style/divider_hor"
+        android:layout_height="10dp" />
+
+    <RelativeLayout
+        android:id="@+id/clearCacheLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="清除缓存"
+            android:textColor="#333"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/cacheTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="110MB"
+            android:textColor="#666"
+            android:textSize="15sp" />
+
+        <View
+            style="@style/divider_hor"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="列表显示摘要"
+            android:textColor="#333"
+            android:textSize="16sp" />
+
+        <Switch
+            android:id="@+id/abstractSt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+
+        <View
+            style="@style/divider_hor"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/wLanSettingLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="非WLAN网络"
+            android:textColor="#333"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/wLanSettingTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textColor="#666"
+            android:textSize="15sp" />
+
+        <View
+            style="@style/divider_hor"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="点击返回获取新资讯"
+            android:textColor="#333"
+            android:textSize="16sp" />
+
+        <Switch
+            android:id="@+id/returnRefreshSt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+
+    </RelativeLayout>
+
+    <View
+        style="@style/divider_hor"
+        android:layout_height="10dp" />
+
+    <RelativeLayout
+        android:id="@+id/checkVersionLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="检查版本"
+            android:textColor="#333"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/versionCodeTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="110MB"
+            android:textColor="#666"
+            android:textSize="15sp" />
+
+        <View
+            style="@style/divider_hor"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+</LinearLayout>

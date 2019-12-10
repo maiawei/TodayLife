@@ -21,10 +21,13 @@ import com.ww.commonlibrary.view.NoScrollViewpager;
 import com.ww.todaylife.base.BasePresenter;
 import com.ww.todaylife.base.BaseSwipeActivity;
 import com.ww.todaylife.base.LazyFragment;
+import com.ww.todaylife.bean.eventBean.OnBackEvent;
 import com.ww.todaylife.fragment.HSVideoFragment;
 import com.ww.todaylife.fragment.HomeFragment;
 import com.ww.todaylife.fragment.MeFragment;
 import com.ww.todaylife.fragment.VideoFragment;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -115,7 +118,8 @@ public class MainActivity extends BaseSwipeActivity {
             MainActivity.this.finish();
         } else {
             backTime = System.currentTimeMillis();
-            Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.finish_hint), Toast.LENGTH_SHORT).show();
+            EventBus.getDefault().post(new OnBackEvent());
         }
     }
 }

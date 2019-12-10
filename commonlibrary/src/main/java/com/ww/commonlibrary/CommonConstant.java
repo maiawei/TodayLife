@@ -16,4 +16,9 @@ public class CommonConstant {
     public static final String WEBVIEW_TITLE = "TITLE";
     public static final String SELECTED_CHANEL = "selected_chanel";
 
+
+    //system setting
+    public static final String SHOW_ABSTRACT = "abstract";
+    public static final String RETURN_REFRESH = "return_refresh";
+    public static final String WLAN_SETTING = "wLan_setting";
 }

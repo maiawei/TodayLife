@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">今日生活</string>
-
-
     <string name="follow">关注</string>
+    <string name="finish_hint">再按一次退出</string>
+
+    //setting
+    <string name="clear_cache_hint">确定要删除所有缓存吗？离线内容、图片均会被清除</string>
+    <string name="wlan_setting">非WLAN网络设置</string>
+    <string name="default_wlan_setting">最佳效果(下载大图)</string>
 </resources>
