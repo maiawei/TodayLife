@@ -40,9 +40,7 @@ public class SearchListAdapter extends BaseAdapter<NewsDetail, SearchListAdapter
     public void bindViewHolderData(NewsItemVh holder, int position) {
         NewsDetail item = mItems.get(position);
         if (item != null) {
-            holder.deleteImage.setVisibility(View.GONE);
             holder.newsDate.setText(TimeUtils.getShortTime(item.create_time*1000));
-            holder.tag.setVisibility(View.GONE);
             holder.newsTitle.setText(item.title);
             holder.authorName.setText(item.media_name);
             holder.commentCount.setText(String.format("评论%d", item.comment_count));
@@ -107,12 +105,9 @@ public class SearchListAdapter extends BaseAdapter<NewsDetail, SearchListAdapter
         TextView authorName;
         @BindView(R.id.commentCount)
         TextView commentCount;
-        @BindView(R.id.tag)
-        TextView tag;
         @BindView(R.id.newsDate)
         TextView newsDate;
-        @BindView(R.id.deleteImage)
-        ImageView deleteImage;
+
 
         public NewsItemVh(View itemView) {
             super(itemView);

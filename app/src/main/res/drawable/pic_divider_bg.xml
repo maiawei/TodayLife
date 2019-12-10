@@ -4,6 +4,6 @@
 
     <solid
         android:color="@color/divider_color"/>
-    <size android:height="5px"/>
+    <size android:height="4dp"/>
 
 </shape>

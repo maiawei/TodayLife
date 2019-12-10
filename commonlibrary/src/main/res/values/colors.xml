@@ -7,11 +7,11 @@
     <color name="black">#000000</color>
     <color name="black_222">#222222</color>
 
-    <color name="ripple_color">#d8d8d8</color>
+    <color name="ripple_color">#f1f2f4</color>
     <color name="toast_bg_color">#77000000</color>
     <color name="main_color">#F5F5F5</color>
     <color name="main_grey">#999999</color>
-    <color name="divider_color">#d8d8d8</color>
+    <color name="divider_color">#f1f2f4</color>
     <color name="main_red">#D33D3C</color>
     <color name="load_text_color">#eeeeee</color>
     <color name="black_bg">#66ffffff</color>

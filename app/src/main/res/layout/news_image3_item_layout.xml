@@ -7,79 +7,80 @@
 
     <TextView
         android:id="@+id/newsTitle"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="3"
         android:text=""
         android:textColor="#000"
-        android:textSize="16dp"
+        android:textSize="17sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/newsImg1"
+        android:layout_width="0dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="10dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/newsImg2"
+        app:layout_constraintTop_toBottomOf="@id/newsTitle" />
+
 
     <ImageView
-        android:id="@+id/news_cover"
+        android:id="@+id/newsImg2"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="12dp"
-        android:background="#33333333"
-        android:scaleType="fitXY"
-        app:layout_constraintDimensionRatio="16:9"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_height="78dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toRightOf="@id/newsImg1"
+        app:layout_constraintRight_toRightOf="@id/newsImg3"
+        app:layout_constraintTop_toBottomOf="@id/newsTitle" />
+
+
+    <ImageView
+        android:id="@+id/newsImg3"
+        android:layout_width="0dp"
+        android:layout_height="78dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toRightOf="@id/newsImg2"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/newsTitle" />
 
-    <ImageView
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:src="@mipmap/ic_play_xxh"
-        app:layout_constraintBottom_toBottomOf="@id/news_cover"
-        app:layout_constraintLeft_toLeftOf="@id/news_cover"
-        app:layout_constraintRight_toRightOf="@id/news_cover"
-        app:layout_constraintTop_toTopOf="@id/news_cover" />
-
     <TextView
-        android:id="@+id/durationTv"
+        android:id="@+id/abstractTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/video_duration_bg"
-        android:gravity="center"
-        android:padding="4dp"
-        android:text=""
-        android:textColor="#fff"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@id/news_cover"
-        app:layout_constraintRight_toRightOf="@id/news_cover" />
-    <TextView
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/news_cover"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:layout_marginTop="10dp"
+        android:textColor="#666"
+        android:textSize="15sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:id="@+id/abstractTv"
-        android:textSize="15sp"
-        android:text=""
-        android:textColor="#666"
-        android:maxLines="3"
-        android:ellipsize="end"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        app:layout_constraintTop_toBottomOf="@id/newsImg3" />
+
     <TextView
         android:id="@+id/tag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/news_tag_bg"
         android:gravity="center"
         android:paddingLeft="5dp"
         android:paddingRight="8dp"
         android:text="置顶"
-        android:textSize="13sp"
         android:textColor="@color/main_red"
+        android:textSize="13sp"
         app:layout_constrainedWidth="true"
         app:layout_constraintRight_toLeftOf="@id/authorName"
         app:layout_constraintTop_toBottomOf="@id/abstractTv" />
@@ -88,7 +89,7 @@
         android:id="@+id/space"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintLeft_toRightOf="@id/tag"
         app:layout_constraintTop_toBottomOf="@id/abstractTv"
         app:layout_constraintTop_toTopOf="parent" />
@@ -97,7 +98,7 @@
         android:id="@+id/authorName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="10dp"
         android:text="author"
         android:textColor="#999999"
         android:textSize="13sp"
@@ -109,7 +110,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="10dp"
         android:text="comment"
         android:textColor="#999999"
         android:textSize="13sp"
@@ -121,18 +122,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="10dp"
         android:text="date"
         android:textColor="#999999"
         android:textSize="13sp"
         app:layout_constraintLeft_toRightOf="@id/commentCount"
         app:layout_constraintTop_toBottomOf="@id/abstractTv" />
+
     <ImageView
         android:id="@+id/deleteImage"
         android:layout_width="22dp"
         android:layout_height="15dp"
         android:src="@mipmap/ic_news_delete"
-        app:layout_constraintTop_toTopOf="@id/commentCount"
+        app:layout_constraintBottom_toBottomOf="@id/commentCount"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/commentCount" />
+        app:layout_constraintTop_toTopOf="@id/commentCount" />
 </androidx.constraintlayout.widget.ConstraintLayout>

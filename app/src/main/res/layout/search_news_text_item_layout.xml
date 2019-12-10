@@ -14,7 +14,7 @@
         android:maxLines="2"
         android:text=""
         android:textColor="#000"
-        android:textSize="17sp"
+        android:textSize="16sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,50 +29,36 @@
         android:maxLines="3"
         android:text=""
         android:textColor="#666"
-        android:textSize="15sp"
+        android:textSize="14sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/newsTitle" />
 
-    <TextView
-        android:id="@+id/tag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/news_tag_bg"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:text="置顶"
-        android:textColor="#F96B6B"
-        android:textSize="13dp"
-        app:layout_constraintRight_toLeftOf="@id/authorImg"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/abstractTv"
-         />
 
     <com.ww.commonlibrary.view.CircleImageView
         android:id="@+id/authorImg"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
         android:layout_marginTop="15dp"
-        app:layout_constraintLeft_toRightOf="@id/tag"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/abstractTv"
         android:layout_marginEnd="50dp"
         android:layout_marginRight="50dp" />
     <TextView
+        android:layout_marginLeft="3dp"
         android:id="@+id/authorName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="444"
+        android:text=""
         android:textColor="#999999"
-        android:textSize="13dp"
+        android:textSize="12sp"
         app:layout_constraintLeft_toRightOf="@id/authorImg"
         app:layout_constraintTop_toBottomOf="@id/abstractTv" />
 
     <ImageView
         android:id="@+id/vipImg"
-        android:layout_width="13dp"
-        android:layout_height="13dp"
+        android:layout_width="11dp"
+        android:layout_height="11dp"
         android:layout_marginLeft="5dp"
         android:src="@mipmap/ic_vip"
         app:layout_constraintBottom_toBottomOf="@id/authorName"
@@ -83,11 +69,11 @@
         android:id="@+id/commentCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="15dp"
         android:text=""
         android:textColor="#999999"
-        android:textSize="13dp"
+        android:textSize="12sp"
         app:layout_constraintLeft_toRightOf="@id/vipImg"
         app:layout_constraintTop_toBottomOf="@id/abstractTv" />
 
@@ -95,20 +81,12 @@
         android:id="@+id/newsDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="15dp"
         android:text=""
         android:textColor="#999999"
-        android:textSize="13dp"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@id/commentCount"
         app:layout_constraintLeft_toRightOf="@id/commentCount" />
 
-    <ImageView
-        android:id="@+id/deleteImage"
-        android:layout_width="21dp"
-        android:layout_height="14dp"
-        android:layout_marginRight="15dp"
-        android:src="@mipmap/ic_news_delete"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

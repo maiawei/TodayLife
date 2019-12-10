@@ -88,7 +88,7 @@ public class DeletePopWindow extends PopupWindow {
     }
 
     public void initData() {
-        blackAuthor.setText("拉黑作者:" + newsDetail.media_name == null ? newsDetail.source : newsDetail.media_name);
+        blackAuthor.setText(newsDetail.media_name == null ? "拉黑作者:" + newsDetail.source : "拉黑作者:" + newsDetail.media_name);
         ArrayList<String> keys = DataProcessUtils.dealHiddenWords(newsDetail.filter_words);
         if (keys.size() > 1) {
             keywordTv.setText(keys.get(0) + "、" + keys.get(1));

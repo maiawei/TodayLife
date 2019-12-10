@@ -55,22 +55,18 @@ public class NewsList2Adapter extends BaseAdapter<NewsDetail, BaseViewHolder> {
             }
             if (holder instanceof TextNewsVh) {
                 TextNewsVh vh = (TextNewsVh) holder;
-                vh.abstractTv.setText(item.abstractX);
             } else if (holder instanceof ImageNewsVh) {
                 ImageNewsVh vh = (ImageNewsVh) holder;
-                vh.abstractTv.setText(item.abstractX);
                 if (item.middle_image != null) {
                     Glide.with(mContext).load(item.middle_image.url).into(vh.newsImg1);
                 }
             } else if (holder instanceof Image3NewsVh) {
                 Image3NewsVh vh = (Image3NewsVh) holder;
-                vh.abstractTv.setText(item.abstractX);
                 Glide.with(mContext).load(item.image_list.get(0).url).into(vh.newsImg1);
                 Glide.with(mContext).load(item.image_list.get(1).url).into(vh.newsImg2);
                 Glide.with(mContext).load(item.image_list.get(2).url).into(vh.newsImg3);
             } else if (holder instanceof ImagesNewsVh) {
                 ImagesNewsVh vh = (ImagesNewsVh) holder;
-                vh.abstractTv.setText(item.abstractX);
                 if (item.middle_image != null) {
                     Glide.with(mContext).load(item.middle_image.url).into(vh.newsImg1);
                 }
@@ -101,12 +97,11 @@ public class NewsList2Adapter extends BaseAdapter<NewsDetail, BaseViewHolder> {
 
     private void bindCommonData(NewsDetail item, NewsItemVh holder, int position) {
         holder.newsDate.setText(TimeUtils.getShortTime(item.behot_time * 1000));
-        holder.vipImg.setVisibility(View.GONE);
-        holder.authorImg.setVisibility(View.GONE);
         holder.newsTitle.setText(item.title);
+        holder.abstractTv.setVisibility(View.GONE);
+        holder.abstractTv.setText(item.abstractX);
         holder.authorName.setText(item.media_name == null ? item.source : item.media_name);
-        holder.commentCount.setText(String.format("评论%d", item.comment_count));
-        Glide.with(mContext).load(item.media_url).into(holder.authorImg);
+        holder.commentCount.setText(String.format("%d评论", item.comment_count));
         if (item.topping == 1) {
             holder.tag.setText("置顶");
             holder.tag.setVisibility(View.VISIBLE);
@@ -144,13 +139,13 @@ public class NewsList2Adapter extends BaseAdapter<NewsDetail, BaseViewHolder> {
         View view;
         switch (viewType) {
             case IMAGE_NEWS:
-                view = mInflater.inflate(R.layout.search_news_image_item_layout, parent, false);
+                view = mInflater.inflate(R.layout.news_image_item_layout, parent, false);
                 return new ImageNewsVh(view);
             case IMAGES_NEWS:
-                view = mInflater.inflate(R.layout.search_news_images_item_layout, parent, false);
+                view = mInflater.inflate(R.layout.news_images_item_layout, parent, false);
                 return new ImagesNewsVh(view);
             case IMAGE3_NEWS:
-                view = mInflater.inflate(R.layout.search_news_image3_item_layout, parent, false);
+                view = mInflater.inflate(R.layout.news_image3_item_layout, parent, false);
                 return new Image3NewsVh(view);
             case VIDEO_NEWS:
                 view = mInflater.inflate(R.layout.news_item_ver_layout, parent, false);
@@ -159,7 +154,7 @@ public class NewsList2Adapter extends BaseAdapter<NewsDetail, BaseViewHolder> {
                 view = mInflater.inflate(R.layout.hidden_news_item_layout, parent, false);
                 return new HiddenVh(view);
             default:
-                view = mInflater.inflate(R.layout.search_news_text_item_layout, parent, false);
+                view = mInflater.inflate(R.layout.news_text_item_layout, parent, false);
                 return new TextNewsVh(view);
         }
     }
@@ -207,21 +202,18 @@ public class NewsList2Adapter extends BaseAdapter<NewsDetail, BaseViewHolder> {
 
         @BindView(R.id.newsTitle)
         TextView newsTitle;
-        @BindView(R.id.authorImg)
-        CircleImageView authorImg;
         @BindView(R.id.authorName)
         TextView authorName;
         @BindView(R.id.commentCount)
         TextView commentCount;
-        @BindView(R.id.vipImg)
-        ImageView vipImg;
         @BindView(R.id.tag)
         TextView tag;
         @BindView(R.id.newsDate)
         TextView newsDate;
         @BindView(R.id.deleteImage)
         ImageView deleteImage;
-
+        @BindView(R.id.abstractTv)
+        TextView abstractTv;
         private NewsItemVh(View itemView) {
             super(itemView);
         }
@@ -229,22 +221,17 @@ public class NewsList2Adapter extends BaseAdapter<NewsDetail, BaseViewHolder> {
 
     public class TextNewsVh extends NewsItemVh {
 
-        TextView abstractTv;
-
         private TextNewsVh(View view) {
             super(view);
-            abstractTv = view.findViewById(R.id.abstractTv);
         }
     }
 
     public class ImageNewsVh extends NewsItemVh {
 
         ImageView newsImg1;
-        TextView abstractTv;
 
         private ImageNewsVh(View view) {
             super(view);
-            abstractTv = view.findViewById(R.id.abstractTv);
             newsImg1 = view.findViewById(R.id.newsImg1);
 
         }
@@ -252,13 +239,11 @@ public class NewsList2Adapter extends BaseAdapter<NewsDetail, BaseViewHolder> {
 
     public class Image3NewsVh extends NewsItemVh {
         ImageView newsImg1;
-        TextView abstractTv;
         ImageView newsImg2;
         ImageView newsImg3;
 
         private Image3NewsVh(View view) {
             super(view);
-            abstractTv = view.findViewById(R.id.abstractTv);
             newsImg1 = view.findViewById(R.id.newsImg1);
             newsImg2 = view.findViewById(R.id.newsImg2);
             newsImg3 = view.findViewById(R.id.newsImg3);
@@ -267,11 +252,10 @@ public class NewsList2Adapter extends BaseAdapter<NewsDetail, BaseViewHolder> {
 
     public class ImagesNewsVh extends NewsItemVh {
         ImageView newsImg1;
-        TextView abstractTv, picCount;
+        TextView picCount;
 
         private ImagesNewsVh(View view) {
             super(view);
-            abstractTv = view.findViewById(R.id.abstractTv);
             newsImg1 = view.findViewById(R.id.newsImg1);
             picCount = view.findViewById(R.id.picCount);
         }
