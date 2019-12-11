@@ -1,10 +1,9 @@
 package com.ww.todaylife;
 
-import android.graphics.Bitmap;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
@@ -12,13 +11,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory;
-import com.bumptech.glide.request.FutureTarget;
 import com.ww.commonlibrary.CommonConstant;
 import com.ww.commonlibrary.base.BaseObserver;
 import com.ww.commonlibrary.util.FileUtils;
 import com.ww.commonlibrary.util.SystemUtils;
 import com.ww.commonlibrary.util.UiUtils;
 import com.ww.commonlibrary.view.CircleImageView;
+import com.ww.commonlibrary.view.ToastView;
 import com.ww.todaylife.base.BasePresenter;
 import com.ww.todaylife.base.BaseSwipeActivity;
 import com.ww.todaylife.bean.eventBean.RefreshNewsList;
@@ -125,6 +124,7 @@ public class SystemSettingActivity extends BaseSwipeActivity {
 
     }
 
+    @SuppressLint("DefaultLocale")
     public void getCaCheSize() {
         abstractSt.setChecked(PreUtils.getBoolean(CommonConstant.SHOW_ABSTRACT, false));
         long size = FileUtils.getFileSize(new File(getCacheDir() + "/" + InternalCacheDiskCacheFactory.DEFAULT_DISK_CACHE_DIR));
@@ -137,6 +137,14 @@ public class SystemSettingActivity extends BaseSwipeActivity {
             wLanSettingTv.setText(wLanSettingItems[position]);
         });
     }
+    public void checkVersion(){
+        UiUtils.showProgressDialog(SystemSettingActivity.this, "检查中");
+        new Handler().postDelayed(() -> {
+            UiUtils.hideProgressDialog();
+            UiUtils.showShortToast(this,"这是最新版本了", ToastView.TYPE_SUCCESS);
+        },1500);
+
+    }
 
 
     @OnClick({R.id.clearCacheLayout, R.id.checkVersionLayout, R.id.wLanSettingLayout})
@@ -146,6 +154,7 @@ public class SystemSettingActivity extends BaseSwipeActivity {
                 clearCache();
                 break;
             case R.id.checkVersionLayout:
+                checkVersion();
                 break;
             case R.id.wLanSettingLayout:
                 wLanSetting();

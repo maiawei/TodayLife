@@ -1,7 +1,24 @@
 package com.ww.commonlibrary.util;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
+import android.text.style.AbsoluteSizeSpan;
+import android.text.style.BackgroundColorSpan;
+import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.ImageSpan;
+import android.view.View;
 import android.widget.TextView;
+
+import com.ww.commonlibrary.MyApplication;
+import com.ww.commonlibrary.R;
+import com.ww.commonlibrary.view.widget.BackgroundImageSpan;
+import com.ww.commonlibrary.view.widget.CenterAlignImageSpan;
 
 import java.util.Random;
 import java.util.zip.CRC32;
@@ -13,6 +30,7 @@ public class StringUtils {
     public static String trimStr(String s) {
         return s.trim();
     }
+
 
 
     public static String getVideoContentApi(String videoid) {

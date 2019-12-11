@@ -52,7 +52,15 @@ public abstract class BaseSwipeActivity<T extends BasePresenter> extends  SwipeB
         mPresenter = createPresenter();
         initView();
         initData(savedInstanceState);
+        setOnBack();
     }
+   public void setOnBack(){
+        if(findViewById(R.id.backImg)!=null){
+            findViewById(R.id.backImg).setOnClickListener(v -> {
+                this.finish();
+            });
+        }
+   }
 
     public void setToolbar(View view) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
