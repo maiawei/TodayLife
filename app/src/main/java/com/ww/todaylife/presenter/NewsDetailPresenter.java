@@ -8,6 +8,7 @@ import com.ww.todaylife.base.BasePresenter;
 import com.ww.todaylife.bean.BaseResponse;
 import com.ww.todaylife.bean.httpResponse.CommentResponse;
 import com.ww.todaylife.bean.httpResponse.NewsContentBean;
+import com.ww.todaylife.bean.httpResponse.ReplyListResponse;
 import com.ww.todaylife.bean.httpResponse.VideoContentBean;
 import com.ww.todaylife.presenter.Iview.IDetailBaseView;
 import com.ww.todaylife.presenter.Iview.INewsDetailView;
@@ -116,6 +117,20 @@ public class NewsDetailPresenter extends BasePresenter<IDetailBaseView, BaseResp
             @Override
             public void failure() {
                 mView.onError("视频解析失败");
+            }
+        });
+    }
+
+    public void getCommentReplyList(String id, int size, int loadType) {
+        addDisposable(ServiceGenerator.createService(NewsApi.class).getCommentReplyList(id, String.valueOf(size)), new BaseObserver<ReplyListResponse>() {
+            @Override
+            public void success(ReplyListResponse response) {
+                ((INewsDetailView) mView).onGetCommentReply(response,loadType, response.data.has_more);
+            }
+
+            @Override
+            public void failure() {
+                mView.onGetNewsComment(null, loadType, true);
             }
         });
     }

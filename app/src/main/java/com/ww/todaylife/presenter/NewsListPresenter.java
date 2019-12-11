@@ -14,7 +14,7 @@ import com.ww.todaylife.dataBase.TlDatabase;
 import com.ww.todaylife.util.DataProcessUtils;
 import com.ww.todaylife.util.PreUtils;
 import com.ww.todaylife.base.BasePresenter;
-import com.ww.todaylife.bean.httpResponse.MultiNewsArticleBean;
+import com.ww.todaylife.bean.httpResponse.NewsListResponse;
 import com.ww.todaylife.presenter.Iview.INewsListView;
 import com.ww.todaylife.api.NewsApi;
 
@@ -38,7 +38,7 @@ public class NewsListPresenter extends BasePresenter<INewsListView, BaseResponse
         if (lastTime == 0) {
             lastTime = System.currentTimeMillis() / 1000;
         }
-        Observable<MultiNewsArticleBean> observable;
+        Observable<NewsListResponse> observable;
         if (TextUtils.equals("hotsoon_video", typeCode)) {
             observable = ServiceGenerator.createService(NewsApi.class).getHSVideoNewsList(typeCode, lastTime, System.currentTimeMillis() / 1000);
         } else {
@@ -46,10 +46,10 @@ public class NewsListPresenter extends BasePresenter<INewsListView, BaseResponse
         }
         addDisposable(observable.doOnNext(responseData -> {
             //可做数据处理 2条数据置顶
-            List<MultiNewsArticleBean.DataBean> dataBeans = responseData.data;
+            List<NewsListResponse.DataBean> dataBeans = responseData.data;
             List<NewsDetail> newsList = new ArrayList<>();
             if (dataBeans.size() != 0) {
-                for (MultiNewsArticleBean.DataBean newsData : dataBeans) {
+                for (NewsListResponse.DataBean newsData : dataBeans) {
                     NewsDetail news = new Gson().fromJson(newsData.content, NewsDetail.class);
                     news.typeCode = typeCode;
                     newsList.add(news);
@@ -62,9 +62,9 @@ public class NewsListPresenter extends BasePresenter<INewsListView, BaseResponse
             }
             DataProcessUtils.dealNewsData(newsList);
             responseData.news = newsList;
-        }), new BaseObserver<MultiNewsArticleBean>() {
+        }), new BaseObserver<NewsListResponse>() {
             @Override
-            public void success(MultiNewsArticleBean multiNewsArticleBean) {
+            public void success(NewsListResponse multiNewsArticleBean) {
                 PreUtils.putLong(typeCode, lastTime);
                 mView.onGetNewsList(multiNewsArticleBean.news, loadType);
             }

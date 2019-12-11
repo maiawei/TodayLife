@@ -214,8 +214,11 @@ public class FileUtils {
             return file.length();
         } else {
             File[] fileList = file.listFiles();
-            for (int i = 0; i < fileList.length; i++) {
-                size = size + getFileSize(fileList[i]);
+            if(fileList==null){
+                return size;
+            }
+            for (File value : fileList) {
+                size = size + getFileSize(value);
             }
             return size;
         }

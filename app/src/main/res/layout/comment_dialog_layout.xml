@@ -10,32 +10,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:text="暂无回复"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
         android:textColor="#333333"
         android:textSize="18sp" />
 
     <View style="@style/divider_hor" />
 
-    <androidx.core.widget.NestedScrollView
+
+    <com.ww.commonlibrary.view.autoLoadMoreRecyclerView.AutoLoadRecyclerView
+        android:id="@+id/replyRv"
         android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_height="0dp"
+        android:scrollbarSize="5dp"
+        android:scrollbars="vertical" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/replyCount">
-
-            <include layout="@layout/common_item_layout"></include>
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+    <View style="@style/divider_hor" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 

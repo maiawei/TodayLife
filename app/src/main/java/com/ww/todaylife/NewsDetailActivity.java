@@ -18,6 +18,7 @@ import com.ww.commonlibrary.view.ClickAnimImage;
 import com.ww.commonlibrary.view.ToastView;
 import com.ww.commonlibrary.view.nestedViewGroup.NestedScrollWebView;
 import com.ww.commonlibrary.view.nestedViewGroup.NestedWebViewRecyclerViewGroup;
+import com.ww.todaylife.bean.httpResponse.CommentReply;
 import com.ww.todaylife.bean.httpResponse.NewsContentBean;
 import com.ww.todaylife.bean.httpResponse.VideoContentBean;
 import com.ww.todaylife.util.PicJavaScript;
@@ -95,6 +96,7 @@ public class NewsDetailActivity extends NewsDetailBaseActivity {
             Glide.with(this).load(newsContentBean.data.media_user.avatar_url).into(titleImg);
         }
     }
+
     @Override
     public void onError(String msg) {
        super.onError(msg);

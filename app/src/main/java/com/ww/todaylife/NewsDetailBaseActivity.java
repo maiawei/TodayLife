@@ -21,8 +21,10 @@ import com.ww.todaylife.adapter.NewsComment2Adapter;
 import com.ww.todaylife.base.BaseSwipeActivity;
 import com.ww.todaylife.bean.eventBean.UpdateNewsItem;
 import com.ww.todaylife.bean.httpResponse.CommentData;
+import com.ww.todaylife.bean.httpResponse.CommentReply;
 import com.ww.todaylife.bean.httpResponse.CommentResponse;
 import com.ww.todaylife.bean.httpResponse.NewsDetail;
+import com.ww.todaylife.bean.httpResponse.ReplyListResponse;
 import com.ww.todaylife.bean.httpResponse.StarNews;
 import com.ww.todaylife.dataBase.TlDatabase;
 import com.ww.todaylife.fragment.dialogfragment.CommentDialogFragment;
@@ -86,6 +88,7 @@ public abstract class NewsDetailBaseActivity extends BaseSwipeActivity<NewsDetai
             Bundle b = new Bundle();
             b.putSerializable("comment", mList.get(position));
             commentDialogFragment.setArguments(b);
+            commentDialogFragment.setPresenter(mPresenter);
             commentDialogFragment.show(getSupportFragmentManager(), "CommentDialogFragment");
         });
         if (newsDetail.isStar) {
@@ -137,6 +140,11 @@ public abstract class NewsDetailBaseActivity extends BaseSwipeActivity<NewsDetai
     public void updateNewsDetail() {
         EventBus.getDefault().post(new UpdateNewsItem(newsDetail.typeCode, newsDetail.htmlString, newsDetail.isStar));
         TlDatabase.getInstance().newsDao().updateHtmlStrByItemId(newsDetail.htmlString, newsDetail.item_id);
+    }
+    @Override
+    public void onGetCommentReply(ReplyListResponse commentReply, int loadType, boolean hasMore) {
+        if(commentDialogFragment!=null)
+        commentDialogFragment.handleData(commentReply, loadType, hasMore);
     }
 
     @Override

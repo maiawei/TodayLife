@@ -5,7 +5,7 @@ import com.ww.todaylife.bean.BaseResponse;
 import java.util.List;
 
 
-public class MultiNewsArticleBean extends BaseResponse {
+public class NewsListResponse extends BaseResponse {
 
 
 

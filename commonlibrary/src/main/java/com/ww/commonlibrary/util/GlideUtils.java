@@ -24,5 +24,10 @@ public class GlideUtils {
                 .apply(RequestOptions.bitmapTransform(new CircleCrop()))
                 .into(target);
     }
-
+    public static void loadAvatar(Context context,String url, ImageView target){
+        Glide.with(context)
+                .load(url)
+                .placeholder(R.mipmap.ic_default_avatar)
+                .into(target);
+    }
 }

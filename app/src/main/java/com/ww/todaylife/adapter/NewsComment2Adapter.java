@@ -83,7 +83,7 @@ public class NewsComment2Adapter extends BaseLoadAdapter<CommentData> {
                 } else {
                     viewHolder.authorReplyLayout.setVisibility(View.GONE);
                 }
-                viewHolder.likeCount.setText(String.valueOf(item.comment.digg_count));
+                viewHolder.likeCount.setText((item.comment.digg_count > 0 ? item.comment.digg_count + "" : "赞"));
                 viewHolder.likeLayout.setOnClickListener(v -> {
                     viewHolder.likeImage.startAnimation();
                 });

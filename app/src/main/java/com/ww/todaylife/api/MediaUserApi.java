@@ -1,6 +1,5 @@
 package com.ww.todaylife.api;
 
-import com.ww.todaylife.bean.httpResponse.MultiNewsArticleBean;
 import com.ww.todaylife.bean.httpResponse.mediaUser.MediaUserBean;
 import com.ww.todaylife.util.UrlConstant;
 

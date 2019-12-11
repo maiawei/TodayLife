@@ -2,15 +2,15 @@ package com.ww.todaylife.api;
 
 import com.ww.todaylife.bean.httpResponse.CommentResponse;
 import com.ww.todaylife.bean.httpResponse.HotKeywordResponse;
-import com.ww.todaylife.bean.httpResponse.MultiNewsArticleBean;
+import com.ww.todaylife.bean.httpResponse.NewsListResponse;
 import com.ww.todaylife.bean.httpResponse.NewsContentBean;
 import com.ww.todaylife.bean.httpResponse.RecommendKeyword;
+import com.ww.todaylife.bean.httpResponse.ReplyListResponse;
 import com.ww.todaylife.bean.httpResponse.SearchResponse;
 import com.ww.todaylife.bean.httpResponse.VideoContentBean;
 import com.ww.todaylife.util.UrlConstant;
 
 import io.reactivex.Observable;
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Query;
@@ -18,8 +18,8 @@ import retrofit2.http.Url;
 
 public interface NewsApi {
     @GET(UrlConstant.GET_NEWS_LIST)
-    Observable<MultiNewsArticleBean> getNewsList(@Query("category") String category,
-                                                 @Query("min_behot_time") long lastTime, @Query("last_refresh_sub_entrance_interval") long currentTime);
+    Observable<NewsListResponse> getNewsList(@Query("category") String category,
+                                             @Query("min_behot_time") long lastTime, @Query("last_refresh_sub_entrance_interval") long currentTime);
 
 
     @GET(UrlConstant.GET_NEWS_COMMENT_LIST)
@@ -49,8 +49,9 @@ public interface NewsApi {
 
 
     @GET(UrlConstant.GET_HSVIDEO_LIST)
-    Observable<MultiNewsArticleBean> getHSVideoNewsList(@Query("category") String category,
-                                                        @Query("min_behot_time") long lastTime,
-                                                  @Query("last_refresh_sub_entrance_interval") long currentTime);
-
+    Observable<NewsListResponse> getHSVideoNewsList(@Query("category") String category,
+                                                    @Query("min_behot_time") long lastTime,
+                                                    @Query("last_refresh_sub_entrance_interval") long currentTime);
+    @GET(UrlConstant.GET_REPLY_LIST)
+    Observable<ReplyListResponse> getCommentReplyList(@Query("id") String id,  @Query("offset") String offset);
 }

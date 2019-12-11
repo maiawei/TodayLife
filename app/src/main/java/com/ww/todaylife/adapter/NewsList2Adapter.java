@@ -75,8 +75,8 @@ public class NewsList2Adapter extends BaseAdapter<NewsDetail, BaseViewHolder> {
                 vh.picCount.setText(String.format("%d图", item.gallary_image_count));
             } else if (holder instanceof VideoNewsVh) {
                 VideoNewsVh vh = (VideoNewsVh) holder;
-                if (item.middle_image != null) {
-                    Glide.with(mContext).load(item.middle_image.url).into(vh.newsCover);
+                if (item.video_detail_info != null) {
+                    Glide.with(mContext).load(item.video_detail_info.detail_video_large_image.url).into(vh.newsCover);
                 }
                 vh.durationTv.setText(StringUtils.timeToMS(item.video_duration));
             }

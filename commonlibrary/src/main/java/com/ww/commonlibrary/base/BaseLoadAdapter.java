@@ -15,6 +15,7 @@ import com.ww.commonlibrary.view.autoLoadMoreRecyclerView.RecyclerItemType;
 import java.util.List;
 
 import static com.ww.commonlibrary.view.autoLoadMoreRecyclerView.RecyclerItemType.TYPE_EMPTY;
+import static com.ww.commonlibrary.view.autoLoadMoreRecyclerView.RecyclerItemType.TYPE_HEADER;
 import static com.ww.commonlibrary.view.autoLoadMoreRecyclerView.RecyclerItemType.TYPE_LOADING;
 import static com.ww.commonlibrary.view.autoLoadMoreRecyclerView.RecyclerItemType.TYPE_LOAD_COMPLETE;
 import static com.ww.commonlibrary.view.autoLoadMoreRecyclerView.RecyclerItemType.TYPE_NETWORK;
@@ -25,9 +26,13 @@ import static com.ww.commonlibrary.view.autoLoadMoreRecyclerView.RecyclerItemTyp
  */
 public abstract class BaseLoadAdapter<E> extends BaseAdapter<E, RecyclerView.ViewHolder> {
 
+
+    private View headerView;
+
     public BaseLoadAdapter(Context context, List list) {
         super(context, list);
     }
+
 
     @NonNull
     @Override
@@ -49,6 +54,11 @@ public abstract class BaseLoadAdapter<E> extends BaseAdapter<E, RecyclerView.Vie
             view.findViewById(R.id.progressBar).setVisibility(View.GONE);
             tv.setText(TYPE_NETWORK.msgId);
             return new FootHolder(view);
+        } else if (viewType == TYPE_HEADER.type) {
+            if (headerView == null) {
+                throw new NullPointerException("please set a header view !");
+            }
+            return new HeaderHolder(headerView);
         }
         return onCreateItemVh(parent, viewType);
     }
@@ -57,6 +67,18 @@ public abstract class BaseLoadAdapter<E> extends BaseAdapter<E, RecyclerView.Vie
         int size = mItems.size();
         getItems().add(type);
         notifyItemInserted(size);
+    }
+
+    public void setHeaderView(View headerView) {
+        getItems().add(0, TYPE_HEADER);
+        this.headerView = headerView;
+        notifyDataSetChanged();
+    }
+
+    public class HeaderHolder extends RecyclerView.ViewHolder {
+        private HeaderHolder(View itemView) {
+            super(itemView);
+        }
     }
 
     public abstract RecyclerView.ViewHolder onCreateItemVh(ViewGroup parent, int viewType);

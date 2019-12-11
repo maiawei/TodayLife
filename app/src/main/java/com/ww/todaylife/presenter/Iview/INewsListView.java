@@ -1,9 +1,7 @@
 package com.ww.todaylife.presenter.Iview;
 
-import com.ww.todaylife.bean.httpResponse.MultiNewsArticleBean;
 import com.ww.todaylife.bean.httpResponse.NewsDetail;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface INewsListView {

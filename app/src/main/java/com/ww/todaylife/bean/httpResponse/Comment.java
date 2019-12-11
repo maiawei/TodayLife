@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Comment implements Serializable {
-
+    public long id;
     public String text;
     public int digg_count;
     public String user_name;

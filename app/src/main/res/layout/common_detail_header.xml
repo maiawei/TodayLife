@@ -11,6 +11,16 @@
         android:layout_height="35dp" />
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:text="关注"
+        android:textColor="@color/main_red"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <TextView
         android:id="@+id/author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,14 +31,15 @@
 
     <TextView
         android:id="@+id/content"
-        android:lineSpacingExtra="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/author"
         android:layout_marginLeft="45dp"
         android:layout_marginTop="12dp"
         android:ellipsize="end"
+        android:lineSpacingExtra="5dp"
         android:maxLines="6"
+        android:text=""
         android:textColor="#333333"
         android:textSize="16sp" />
 
@@ -36,7 +47,9 @@
         android:id="@+id/likeLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/dateLayout"
         android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <com.ww.commonlibrary.view.ClickAnimImage
@@ -76,55 +89,41 @@
             android:textSize="12sp" />
 
         <TextView
-            android:id="@+id/replyCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:background="@drawable/reply_bg"
             android:gravity="center"
-            android:paddingLeft="10dp"
-            android:paddingTop="3dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="3dp"
-            android:text=""
+            android:text=" · 举报"
             android:textColor="#333"
             android:textSize="12sp" />
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/authorReplyLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/dateLayout"
-        android:layout_marginLeft="45dp"
-        android:layout_marginTop="12dp"
-        android:background="@color/divider_color"
-        android:orientation="vertical"
-        android:padding="12dp">
-
-        <LinearLayout
-            android:gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:gravity="center_vertical"
-                android:padding="0dp"
-                android:id="@+id/ReplyAuthorTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="作者"
-                android:textColor="#333"
-                android:textSize="15sp" />
-        </LinearLayout>
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/allReplyTv"
-            android:layout_marginTop="12dp"
+            android:id="@+id/diggCountTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="查看全部回复"
-            android:textColor="@color/blue"
-            android:textSize="15sp" />
+            android:layout_marginLeft="45dp"
+            android:text="100人赞过 >"
+            android:textColor="#333"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_marginTop="15dp"
+            style="@style/divider_hor" />
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="全部回复"
+            android:textColor="#666"
+            android:textSize="13dp" />
     </LinearLayout>
+
 </RelativeLayout>

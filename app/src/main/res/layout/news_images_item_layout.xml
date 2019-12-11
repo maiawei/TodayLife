@@ -76,11 +76,12 @@
         android:background="@drawable/news_tag_bg"
         android:gravity="center"
         android:paddingLeft="5dp"
-        android:paddingRight="8dp"
+        android:paddingRight="5dp"
         android:text="置顶"
-        android:textSize="13sp"
+        android:textSize="11sp"
         android:textColor="@color/main_red"
         app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toBottomOf="@id/authorName"
         app:layout_constraintRight_toLeftOf="@id/authorName"
         app:layout_constraintTop_toBottomOf="@id/abstractTv" />
 

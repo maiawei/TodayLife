@@ -9,7 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ww.commonlibrary.base.BaseLoadAdapter;
+import com.ww.commonlibrary.util.LogUtils;
 import com.ww.commonlibrary.util.NetworkUtil;
+
+import org.jetbrains.annotations.NotNull;
 
 import static com.ww.commonlibrary.view.autoLoadMoreRecyclerView.RecyclerItemType.TYPE_EMPTY;
 import static com.ww.commonlibrary.view.autoLoadMoreRecyclerView.RecyclerItemType.TYPE_LOADING;
@@ -54,12 +57,16 @@ public class AutoLoadRecyclerView extends RecyclerView {
     public void init() {
         addOnScrollListener(new OnScrollListener() {
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            public void onScrolled(@NotNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 visibleItemCount = recyclerView.getChildCount();
                 totalItemCount = mLinearLayoutManager.getItemCount();
                 firstVisibleItem = mLinearLayoutManager.findFirstVisibleItemPosition();
                 lastVisibleItem = mLinearLayoutManager.findLastVisibleItemPosition();
+                if (totalItemCount <= visibleItemCount) {
+                    //不满一屏
+                    return;
+                }
                 //判断滑到底部
                 if (lastVisibleItem >= totalItemCount - 1 && visibleItemCount > 0 && totalItemCount > visibleItemCount && !isAddLoadType) {
                     if (!NetworkUtil.isNetWorkConnected(getContext())) {
@@ -76,7 +83,7 @@ public class AutoLoadRecyclerView extends RecyclerView {
                 if (!enableLoadMore) {
                     return;
                 }
-                if(!NetworkUtil.isNetWorkConnected(getContext())){
+                if (!NetworkUtil.isNetWorkConnected(getContext())) {
                     return;
                 }
                 if (loading) {
@@ -87,9 +94,7 @@ public class AutoLoadRecyclerView extends RecyclerView {
                 }
                 if (!loading && (totalItemCount - visibleItemCount)
                         <= (firstVisibleItem + visibleThreshold)) {
-                    // End has been reached
 
-                    // Do something
                     if (onLoadMoreListener != null && enableLoadMore && loadComplete) {
                         onLoadMoreListener.onLoadMore();
                         loadComplete = false;

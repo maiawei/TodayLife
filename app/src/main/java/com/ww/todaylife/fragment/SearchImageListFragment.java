@@ -145,12 +145,6 @@ public class SearchImageListFragment extends LazyFragment<SearchNewsListPresente
             newsListAdapter.addAll(searchResponse.data);
         }
         refreshLayout.setNoMoreData((searchResponse.has_more == 0));
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                loadingView.hide();
-            }
-        }, 200);
 
     }
 

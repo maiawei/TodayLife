@@ -6,7 +6,7 @@ import com.ww.commonlibrary.base.BaseObserver;
 import com.ww.todaylife.base.BasePresenter;
 import com.ww.todaylife.bean.BaseResponse;
 import com.ww.todaylife.bean.httpResponse.HsVideoRootBean;
-import com.ww.todaylife.bean.httpResponse.MultiNewsArticleBean;
+import com.ww.todaylife.bean.httpResponse.NewsListResponse;
 import com.ww.todaylife.api.NewsApi;
 import com.ww.todaylife.presenter.Iview.IHSVideoListView;
 import com.ww.todaylife.util.PreUtils;
@@ -27,18 +27,18 @@ public class HsVideoListPresenter extends BasePresenter<IHSVideoListView, BaseRe
             lastTime = System.currentTimeMillis() / 1000;
         }
         addDisposable(ServiceGenerator.createService(NewsApi.class).getHSVideoNewsList("hotsoon_video",  lastTime,System.currentTimeMillis() / 1000).doOnNext(responseData -> {
-            List<MultiNewsArticleBean.DataBean> dataBeans = responseData.data;
+            List<NewsListResponse.DataBean> dataBeans = responseData.data;
             List<HsVideoRootBean> newsList = new ArrayList<>();
             if (dataBeans.size() != 0) {
-                for (MultiNewsArticleBean.DataBean newsData : dataBeans) {
+                for (NewsListResponse.DataBean newsData : dataBeans) {
                     HsVideoRootBean news = new Gson().fromJson(newsData.content, HsVideoRootBean.class);
                     newsList.add(news);
                 }
             }
             responseData.video = newsList;
-        }), new BaseObserver<MultiNewsArticleBean>() {
+        }), new BaseObserver<NewsListResponse>() {
             @Override
-            public void success(MultiNewsArticleBean multiNewsArticleBean) {
+            public void success(NewsListResponse multiNewsArticleBean) {
                 PreUtils.putLong("hotsoon_video", lastTime);
                 mView.onGetHSVideoList(multiNewsArticleBean.video, loadType);
             }

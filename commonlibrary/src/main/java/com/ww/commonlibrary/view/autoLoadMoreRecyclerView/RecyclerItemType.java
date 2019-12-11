@@ -10,8 +10,8 @@ public enum RecyclerItemType {
     TYPE_LOADING(1, R.string.list_footer_loading),
     TYPE_LOAD_COMPLETE(2, R.string.list_footer_complete),
     TYPE_EMPTY(3, R.string.list_footer_empty),
-    TYPE_NETWORK(4, R.string.list_footer_network);
-
+    TYPE_NETWORK(4, R.string.list_footer_network),
+    TYPE_HEADER(5, -1);
     public int type;
 
     public int msgId;

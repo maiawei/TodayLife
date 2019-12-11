@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.ww.commonlibrary.CommonConstant;
+import com.ww.commonlibrary.util.LogUtils;
 import com.ww.commonlibrary.view.LoadStateView;
 import com.ww.todaylife.NewsDetailActivity;
 import com.ww.todaylife.VideoNewsDetailActivity;

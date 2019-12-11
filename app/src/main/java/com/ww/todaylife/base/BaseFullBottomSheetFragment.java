@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
@@ -27,6 +28,7 @@ import java.lang.reflect.Field;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+import static android.view.WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE;
 import static java.security.AccessController.getContext;
 
 
@@ -58,6 +60,8 @@ public abstract class BaseFullBottomSheetFragment extends BottomSheetDialogFragm
         unbinder = ButterKnife.bind(this, view);
         mContext = getActivity();
         initData();
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
+        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
         return view;
     }
 
