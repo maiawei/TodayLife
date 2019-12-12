@@ -16,15 +16,13 @@
         android:textSize="18sp" />
 
     <View style="@style/divider_hor" />
-
-
     <com.ww.commonlibrary.view.autoLoadMoreRecyclerView.AutoLoadRecyclerView
         android:id="@+id/replyRv"
         android:layout_weight="1"
+        style="@style/scrollbarStyle"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:scrollbarSize="5dp"
-        android:scrollbars="vertical" />
+       />
 
     <View style="@style/divider_hor" />
 

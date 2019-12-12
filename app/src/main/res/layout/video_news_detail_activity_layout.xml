@@ -94,8 +94,7 @@
 
         <com.ww.commonlibrary.view.autoLoadMoreRecyclerView.AutoLoadRecyclerView
             android:id="@+id/commentRv"
-            android:scrollbars="vertical"
-            android:scrollbarSize="5dp"
+            style="@style/scrollbarStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

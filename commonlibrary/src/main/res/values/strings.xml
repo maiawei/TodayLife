@@ -15,8 +15,8 @@
     <string name="permissions_hint">请到设置里打开存储空间权限，\n否则应用无法使用!</string>
     <string name="network_retry">网络异常,点击重试</string>
 
-    <string name="list_footer_complete">加载完成</string>
-    <string name="list_footer_empty">暂无评论，快去抢沙发~</string>
+    <string name="list_footer_complete">我是有底线的</string>
+    <string name="list_footer_empty">暂无内容，快去抢沙发~</string>
     <string name="list_footer_loading">正在加载</string>
     <string name="list_footer_network">网络异常</string>
 </resources>

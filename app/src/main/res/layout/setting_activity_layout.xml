@@ -17,8 +17,10 @@
         android:paddingLeft="15dp"
         android:paddingRight="15dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <com.ww.commonlibrary.view.LimitTextView
+            android:lines="1"
+            android:id="@+id/limitText"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:text="清除缓存"

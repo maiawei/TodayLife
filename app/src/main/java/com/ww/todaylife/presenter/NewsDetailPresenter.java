@@ -130,7 +130,7 @@ public class NewsDetailPresenter extends BasePresenter<IDetailBaseView, BaseResp
 
             @Override
             public void failure() {
-                mView.onGetNewsComment(null, loadType, true);
+                ((INewsDetailView) mView).onGetCommentReply(null, loadType, true);
             }
         });
     }

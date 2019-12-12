@@ -138,12 +138,7 @@ public class SearchNewsListFragment extends LazyFragment<SearchNewsListPresenter
             newsListAdapter.addAll(searchResponse.data);
         }
         refreshLayout.setNoMoreData((searchResponse.has_more == 0));
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                loadingView.hide();
-            }
-        }, 200);
+        loadingView.hide();
 
     }
 

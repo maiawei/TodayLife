@@ -145,7 +145,7 @@ public class SearchImageListFragment extends LazyFragment<SearchNewsListPresente
             newsListAdapter.addAll(searchResponse.data);
         }
         refreshLayout.setNoMoreData((searchResponse.has_more == 0));
-
+        loadingView.hide();
     }
 
     @Override

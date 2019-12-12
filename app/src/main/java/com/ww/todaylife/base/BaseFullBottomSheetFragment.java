@@ -37,7 +37,7 @@ public abstract class BaseFullBottomSheetFragment extends BottomSheetDialogFragm
     private int height = 0;
     private Unbinder unbinder;
     protected Context mContext;
-
+    private Dialog dialog;
     public void setDialogDisMissListener(DialogDisMissListener listener) {
         this.listener = listener;
     }
@@ -53,12 +53,18 @@ public abstract class BaseFullBottomSheetFragment extends BottomSheetDialogFragm
         return new BottomSheetDialog(getContext(), R.style.TransBottomSheetDialogStyle);
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mContext = getActivity();
+
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(providerView(), container, false);
         unbinder = ButterKnife.bind(this, view);
-        mContext = getActivity();
         initData();
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
@@ -69,7 +75,7 @@ public abstract class BaseFullBottomSheetFragment extends BottomSheetDialogFragm
     public void onStart() {
         super.onStart();
         super.onStart();
-        Dialog dialog = getDialog();
+        dialog = getDialog();
         if (dialog != null) {
             View bottomSheet = dialog.findViewById(R.id.design_bottom_sheet);
             bottomSheet.getLayoutParams().height = height == 0 ? ViewGroup.LayoutParams.MATCH_PARENT : height; //可以写入自己想要的高度
@@ -95,6 +101,10 @@ public abstract class BaseFullBottomSheetFragment extends BottomSheetDialogFragm
     @Override
     public void onDestroy() {
         unbinder.unbind();
+        if(dialog!=null){
+            dialog.dismiss();
+            dialog=null;
+        }
         super.onDestroy();
     }
 
@@ -107,7 +117,7 @@ public abstract class BaseFullBottomSheetFragment extends BottomSheetDialogFragm
     }
 
     public interface DialogDisMissListener {
-         void onDialogDisMiss();
+        void onDialogDisMiss();
     }
 
     @Override

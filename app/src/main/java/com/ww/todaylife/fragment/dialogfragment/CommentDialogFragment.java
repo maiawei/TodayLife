@@ -4,6 +4,7 @@ package com.ww.todaylife.fragment.dialogfragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -13,9 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.bumptech.glide.Glide;
 import com.ww.commonlibrary.CommonConstant;
 import com.ww.commonlibrary.util.LogUtils;
+import com.ww.commonlibrary.util.ScreenUtils;
 import com.ww.commonlibrary.util.TimeUtils;
 import com.ww.commonlibrary.view.CircleImageView;
 import com.ww.commonlibrary.view.ClickAnimImage;
+import com.ww.commonlibrary.view.LimitTextView;
 import com.ww.commonlibrary.view.autoLoadMoreRecyclerView.AutoLoadRecyclerView;
 import com.ww.todaylife.R;
 import com.ww.todaylife.adapter.ReplyAdapter;
@@ -33,8 +36,7 @@ import butterknife.BindView;
 public class CommentDialogFragment extends BaseFullBottomSheetFragment {
     private CircleImageView header;
     private TextView author;
-    private TextView content;
-    private ClickAnimImage likeImage;
+    private LimitTextView content;
     private TextView likeCount;
     private TextView diggCountTv;
     private TextView commentDate;
@@ -42,12 +44,13 @@ public class CommentDialogFragment extends BaseFullBottomSheetFragment {
     @BindView(R.id.replyRv)
     AutoLoadRecyclerView replyRv;
     private ReplyAdapter mAdapter;
-    private  ArrayList<CommentReply> mList = new ArrayList<>();
-    private  NewsDetailPresenter presenter;
+    private ArrayList<CommentReply> mList = new ArrayList<>();
+    private NewsDetailPresenter presenter;
     @BindView(R.id.replyCount)
     TextView replyCount;
     @BindView(R.id.reply)
     TextView reply;
+    LinearLayout loadLayout;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,12 +66,15 @@ public class CommentDialogFragment extends BaseFullBottomSheetFragment {
     public void initData() {
         Bundle bundle = getArguments();
         CommentData item = (CommentData) bundle.getSerializable("comment");
+        if (item == null) {
+            return;
+        }
         mAdapter = new ReplyAdapter(mContext, mList);
         replyRv.setAdapter(mAdapter);
         initHeaderView();
         Glide.with(mContext).load(item.comment.user_profile_image_url).into(header);
         author.setText(item.comment.user_name);
-        content.setText(item.comment.text);
+        content.setContent(item.comment.text, ScreenUtils.getScreenWidth() - ScreenUtils.dip2px(mContext, 75));
         diggCountTv.setText(item.comment.digg_count > 0 ? item.comment.digg_count + "人赞过 >" : "暂无人赞过");
         likeCount.setText(String.valueOf(item.comment.digg_count));
         replyCount.setText(item.comment.reply_count > 0 ? item.comment.reply_count + "条回复" : "暂无回复");
@@ -81,23 +87,26 @@ public class CommentDialogFragment extends BaseFullBottomSheetFragment {
             dialogFragment.show(getChildFragmentManager(), "ReleaseCommentDialogFragment");
         });
         replyRv.setOnLoadMoreListener(() -> {
-            presenter.getCommentReplyList(String.valueOf(item.comment.id), mList.size()-1, CommonConstant.TYPE_REFRESH);
+            presenter.getCommentReplyList(String.valueOf(item.comment.id), mList.size() - 1, CommonConstant.TYPE_REFRESH);
         }, layoutManager);
         presenter.getCommentReplyList(String.valueOf(item.comment.id), 0, CommonConstant.TYPE_INIT);
     }
-    private void initHeaderView(){
+
+    private void initHeaderView() {
         View hView = LayoutInflater.from(mContext).inflate(R.layout.common_detail_header, null);
-        header=hView.findViewById(R.id.header);
-        author=hView.findViewById(R.id.author);
-        content=hView.findViewById(R.id.content);
-        likeImage=hView.findViewById(R.id.likeImage);
-        likeCount=hView.findViewById(R.id.likeCount);
-        diggCountTv=hView.findViewById(R.id.diggCountTv);
-        commentDate=hView.findViewById(R.id.commentDate);
+        header = hView.findViewById(R.id.header);
+        author = hView.findViewById(R.id.author);
+        content = hView.findViewById(R.id.content);
+        likeCount = hView.findViewById(R.id.likeCount);
+        diggCountTv = hView.findViewById(R.id.diggCountTv);
+        commentDate = hView.findViewById(R.id.commentDate);
+        loadLayout = hView.findViewById(R.id.loadLayout);
+        content.setCanExpand(true);
         mAdapter.setHeaderView(hView);
     }
 
     public void handleData(ReplyListResponse commentReply, int loadType, boolean hasMore) {
+        loadLayout.setVisibility(View.GONE);
         if (commentReply == null) {
             replyRv.setNoMoreData(true);
             return;

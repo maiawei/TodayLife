@@ -16,6 +16,7 @@
     <color name="load_text_color">#eeeeee</color>
     <color name="black_bg">#66ffffff</color>
     <color name="black_999">#999999</color>
+    <color name="scrollbar_bg_color">#55000000</color>
 
     <color name="black_333">#333333</color>
     <color name="black_777">#777777</color>

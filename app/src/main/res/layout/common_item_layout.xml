@@ -19,7 +19,7 @@
         android:textColor="@color/blue"
         android:textSize="15sp" />
 
-    <TextView
+    <com.ww.commonlibrary.view.LimitTextView
         android:id="@+id/content"
         android:lineSpacingExtra="5dp"
         android:layout_width="wrap_content"
@@ -27,8 +27,6 @@
         android:layout_below="@id/author"
         android:layout_marginLeft="45dp"
         android:layout_marginTop="12dp"
-        android:ellipsize="end"
-        android:maxLines="6"
         android:textColor="#333333"
         android:textSize="16sp" />
 
@@ -114,6 +112,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="作者"
+                android:lineSpacingExtra="5dp"
                 android:textColor="#333"
                 android:textSize="15sp" />
         </LinearLayout>

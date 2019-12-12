@@ -3,6 +3,7 @@ package com.ww.todaylife;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,9 +15,12 @@ import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory;
 import com.ww.commonlibrary.CommonConstant;
 import com.ww.commonlibrary.base.BaseObserver;
 import com.ww.commonlibrary.util.FileUtils;
+import com.ww.commonlibrary.util.LogUtils;
+import com.ww.commonlibrary.util.ScreenUtils;
 import com.ww.commonlibrary.util.SystemUtils;
 import com.ww.commonlibrary.util.UiUtils;
 import com.ww.commonlibrary.view.CircleImageView;
+import com.ww.commonlibrary.view.LimitTextView;
 import com.ww.commonlibrary.view.ToastView;
 import com.ww.todaylife.base.BasePresenter;
 import com.ww.todaylife.base.BaseSwipeActivity;
@@ -58,7 +62,8 @@ public class SystemSettingActivity extends BaseSwipeActivity {
     @BindView(R.id.wLanSettingTv)
     TextView wLanSettingTv;
     String[] wLanSettingItems;
-
+    @BindView(R.id.limitText)
+    LimitTextView limitText;
     @Override
     public int setContentId() {
         return R.layout.setting_activity_layout;

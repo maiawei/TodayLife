@@ -10,9 +10,11 @@
         <item name="buttonBarNegativeButtonStyle">@style/negativeBtnStyle</item>
         <item name="android:windowAnimationStyle">@style/AnimBottom</item>
     </style>
+
     <style name="positiveBtnStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
         <item name="android:textColor">@color/main_red</item>
     </style>
+
     <style name="negativeBtnStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
         <item name="android:textColor">@color/main_red</item>
     </style>
@@ -27,6 +29,13 @@
         <item name="android:background">@color/divider_color</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
+    </style>
+
+    <style name="scrollbarStyle">
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+        <item name="android:scrollbarThumbVertical">@drawable/scrollbar_vertical_thumb</item>
+        <item name="android:scrollbarSize">4dp</item>
+        <item name="android:scrollbars">vertical</item>
     </style>
 
     <style name="TransBottomSheetDialogStyle" parent="Theme.Design.Light.BottomSheetDialog">

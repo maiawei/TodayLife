@@ -29,16 +29,14 @@
         android:textColor="@color/blue"
         android:textSize="15sp" />
 
-    <TextView
+    <com.ww.commonlibrary.view.LimitTextView
         android:id="@+id/content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/author"
         android:layout_marginLeft="45dp"
         android:layout_marginTop="12dp"
-        android:ellipsize="end"
         android:lineSpacingExtra="5dp"
-        android:maxLines="6"
         android:text=""
         android:textColor="#333333"
         android:textSize="16sp" />
@@ -124,6 +122,24 @@
             android:text="全部回复"
             android:textColor="#666"
             android:textSize="13dp" />
+        <LinearLayout
+            android:id="@+id/loadLayout"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:indeterminateDrawable="@drawable/progress_load"
+                android:layout_width="15dp"
+                android:layout_height="15dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="15dp"
+                android:text="正在加载" />
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

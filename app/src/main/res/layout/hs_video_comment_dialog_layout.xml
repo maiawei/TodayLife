@@ -20,6 +20,7 @@
     <com.ww.commonlibrary.view.autoLoadMoreRecyclerView.AutoLoadRecyclerView
         android:layout_weight="1"
         android:id="@+id/commentRv"
+        style="@style/scrollbarStyle"
         android:layout_width="match_parent"
         android:layout_height="0dp"/>
 

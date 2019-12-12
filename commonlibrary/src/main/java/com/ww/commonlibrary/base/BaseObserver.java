@@ -30,9 +30,6 @@ public abstract class BaseObserver<T> extends DisposableObserver<T> {
 
     @Override
     public void onComplete() {
-//        if(!isDisposed()){
-//            this.dispose();
-//        }
 
     }
 

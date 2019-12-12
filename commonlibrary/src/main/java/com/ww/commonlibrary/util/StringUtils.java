@@ -32,7 +32,6 @@ public class StringUtils {
     }
 
 
-
     public static String getVideoContentApi(String videoid) {
         String VIDEO_HOST = "http://ib.365yg.com";
         String VIDEO_URL = "/video/urls/v/1/toutiao/mp4/%s?r=%s";
@@ -70,6 +69,18 @@ public class StringUtils {
         }
         strings[0] = text;
         return strings;
+    }
+
+    /**
+     * str出现的次数
+     */
+    public static int strCount(String st, String target) {
+        int count = 0;
+        while (st.indexOf(target) >= 0) {
+            st = st.substring(st.indexOf(target) + target.length());
+            count++;
+        }
+        return count;
     }
 
     private static String getRandom() {

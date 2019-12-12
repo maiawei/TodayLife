@@ -46,7 +46,7 @@ public class NewsListFragment extends LazyFragment<NewsListPresenter> implements
     SmartRefreshLayout refreshLayout;
     @BindView(R.id.loadingView)
     LoadStateView loadingView;
-    int currentPosition, currentSize;
+    int currentPosition = -1, currentSize = -1;
     private NewsList2Adapter newsListAdapter;
     private ArrayList<NewsDetail> mList = new ArrayList<>();
     private String typeCode;
@@ -72,6 +72,9 @@ public class NewsListFragment extends LazyFragment<NewsListPresenter> implements
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(UpdateNewsItem event) {
+        if (currentPosition == -1 || currentSize == -1) {
+            return;
+        }
         if (TextUtils.equals(typeCode, event.typeCode)) {
             mList.get(currentPosition + mList.size() - currentSize).htmlString = event.htmlStr;
             mList.get(currentPosition + mList.size() - currentSize).isStar = event.isStar;

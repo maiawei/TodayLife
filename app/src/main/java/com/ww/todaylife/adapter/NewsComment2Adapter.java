@@ -16,20 +16,28 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.ww.commonlibrary.MyApplication;
 import com.ww.commonlibrary.base.BaseLoadAdapter;
+import com.ww.commonlibrary.util.ScreenUtils;
 import com.ww.commonlibrary.util.StringUtils;
 import com.ww.commonlibrary.util.TimeUtils;
+import com.ww.commonlibrary.util.UiUtils;
 import com.ww.commonlibrary.view.CircleImageView;
 import com.ww.commonlibrary.view.ClickAnimImage;
+import com.ww.commonlibrary.view.LimitTextView;
 import com.ww.commonlibrary.view.widget.CenterAlignImageSpan;
+import com.ww.commonlibrary.view.widget.LinkTouchMovementMethod;
+import com.ww.commonlibrary.view.widget.TouchableSpan;
 import com.ww.todaylife.R;
 import com.ww.todaylife.UserDetailActivity;
 import com.ww.todaylife.base.BaseViewHolder;
 import com.ww.todaylife.bean.httpResponse.CommentData;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -66,7 +74,7 @@ public class NewsComment2Adapter extends BaseLoadAdapter<CommentData> {
                 ItemViewHolder viewHolder = (ItemViewHolder) holder;
                 Glide.with(mContext).load(item.comment.user_profile_image_url).placeholder(R.mipmap.ic_default_avatar).into(viewHolder.headerImage);
                 viewHolder.author.setText(item.comment.user_name);
-                viewHolder.content.setText(item.comment.text);
+                viewHolder.content.setContent(item.comment.text, ScreenUtils.getScreenWidth()-ScreenUtils.dip2px(mContext,75));
                 if (item.comment.reply_count > 0) {
                     viewHolder.commentDate.setText(TimeUtils.getShortTime(item.comment.create_time * 1000) + " · ");
                     viewHolder.replyCount.setVisibility(View.VISIBLE);
@@ -93,6 +101,9 @@ public class NewsComment2Adapter extends BaseLoadAdapter<CommentData> {
                 viewHolder.headerImage.setOnClickListener(v -> {
                     gotoUserDetail(String.valueOf(item.comment.user_id));
                 });
+                viewHolder.content.setOnClickListener(v -> {
+                    viewHolder.itemView.performClick();
+                });
             }
         }
     }
@@ -111,20 +122,16 @@ public class NewsComment2Adapter extends BaseLoadAdapter<CommentData> {
         drawable.setBounds(userName.length(), 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
         CenterAlignImageSpan ab = new CenterAlignImageSpan(drawable);
         stringBuilder.setSpan(ab, userName.length(), stringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        ClickableSpan clickableSpan = new ClickableSpan() {
+        ClickableSpan clickableSpan = new TouchableSpan(ContextCompat.getColor(mContext,R.color.blue),
+                ContextCompat.getColor(mContext,R.color.main_red),ContextCompat.getColor(mContext,R.color.translucent)) {
             @Override
-            public void onClick(View view) {
+            public void onClick(@NotNull View view) {
                 gotoUserDetail(id);
             }
 
-            @Override
-            public void updateDrawState(TextPaint ds) {
-                //去掉可点击文字的下划线
-                ds.setUnderlineText(false);
-            }
         };
         stringBuilder.setSpan(clickableSpan, 0, userName.length() + 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        textView.setMovementMethod(LinkMovementMethod.getInstance());
+        textView.setMovementMethod(new LinkTouchMovementMethod());
         stringBuilder.append(":" + Content);
         return stringBuilder;
     }
@@ -135,7 +142,7 @@ public class NewsComment2Adapter extends BaseLoadAdapter<CommentData> {
         @BindView(R.id.author)
         TextView author;
         @BindView(R.id.content)
-        TextView content;
+        LimitTextView content;
         @BindView(R.id.likeImage)
         ClickAnimImage likeImage;
         @BindView(R.id.likeCount)

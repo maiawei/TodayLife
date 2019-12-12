@@ -13,6 +13,7 @@
 
         <com.ww.commonlibrary.view.nestedViewGroup.NestedWebViewRecyclerViewGroup
             android:id="@+id/detailParent"
+            style="@style/scrollbarStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
