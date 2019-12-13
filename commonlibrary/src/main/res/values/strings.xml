@@ -19,4 +19,13 @@
     <string name="list_footer_empty">暂无内容，快去抢沙发~</string>
     <string name="list_footer_loading">正在加载</string>
     <string name="list_footer_network">网络异常</string>
+
+    <string name="dialog_title">提示</string>
+    <string name="dialog_cancel">取消</string>
+    <string name="dialog_ok">确定</string>
+    <string name="dialog_select">选择</string>
+
+    <string name="dialog_deleting">删除中…</string>
+    <string name="dialog_loading">加载中…</string>
+    <string name="dialog_checking">检查中…</string>
 </resources>

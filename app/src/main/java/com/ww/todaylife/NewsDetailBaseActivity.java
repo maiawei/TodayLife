@@ -3,10 +3,12 @@ package com.ww.todaylife;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.ww.commonlibrary.CommonConstant;
@@ -21,7 +23,6 @@ import com.ww.todaylife.adapter.NewsComment2Adapter;
 import com.ww.todaylife.base.BaseSwipeActivity;
 import com.ww.todaylife.bean.eventBean.UpdateNewsItem;
 import com.ww.todaylife.bean.httpResponse.CommentData;
-import com.ww.todaylife.bean.httpResponse.CommentReply;
 import com.ww.todaylife.bean.httpResponse.CommentResponse;
 import com.ww.todaylife.bean.httpResponse.NewsDetail;
 import com.ww.todaylife.bean.httpResponse.ReplyListResponse;
@@ -78,18 +79,23 @@ public abstract class NewsDetailBaseActivity extends BaseSwipeActivity<NewsDetai
         commentRv.setAdapter(newsCommonAdapter);
         commentRv.setOnLoadMoreListener(() -> mPresenter.getNewsCommentList(String.valueOf(newsDetail.group_id), String.valueOf(newsDetail.item_id), mList.size() / CommonConstant.COMMENT_PAGE_SIZE + 1, CommonConstant.TYPE_NEXT), mLayoutManager);
         newsCommonAdapter.setItemClickListener(position -> {
-            commentDialogFragment = new CommentDialogFragment();
-            if (newsDetail.has_video) {
-                int height = ScreenUtils.getScreenHeight() - ScreenUtils.getStatusBarHeight(NewsDetailBaseActivity.this) - ScreenUtils.dip2px(NewsDetailBaseActivity.this, 200);
-                commentDialogFragment.setHeight(height);
-            } else {
-                commentDialogFragment.setHeight(0);
+            if (commentDialogFragment == null) {
+                commentDialogFragment = new CommentDialogFragment();
+                commentDialogFragment.setPresenter(mPresenter);
+                if (newsDetail.has_video) {
+                    int height = ScreenUtils.getScreenHeight() - ScreenUtils.getStatusBarHeight(NewsDetailBaseActivity.this) - ScreenUtils.dip2px(NewsDetailBaseActivity.this, 200);
+                    commentDialogFragment.setHeight(height);
+                } else {
+                    commentDialogFragment.setHeight(0);
+                }
             }
-            Bundle b = new Bundle();
-            b.putSerializable("comment", mList.get(position));
-            commentDialogFragment.setArguments(b);
-            commentDialogFragment.setPresenter(mPresenter);
-            commentDialogFragment.show(getSupportFragmentManager(), "CommentDialogFragment");
+            Bundle bundle1 = new Bundle();
+            bundle1.putSerializable("comment", mList.get(position));
+            commentDialogFragment.setArguments(bundle1);
+            if(commentDialogFragment.isAdded()){
+                return;
+            }
+            commentDialogFragment.show(getSupportFragmentManager(), "commentDialogFragment");
         });
         if (newsDetail.isStar) {
             starImage.setIsActive(true);
@@ -115,11 +121,11 @@ public abstract class NewsDetailBaseActivity extends BaseSwipeActivity<NewsDetai
             newsDetail.isStar = !newsDetail.isStar;
             EventBus.getDefault().post(new UpdateNewsItem(newsDetail.typeCode, newsDetail.htmlString, newsDetail.isStar));
             TlDatabase.getInstance().newsDao().updateIsStarByItemId(newsDetail.isStar, newsDetail.item_id);
-            StarNews news=new StarNews();
-            news.newsDetail=newsDetail;
+            StarNews news = new StarNews();
+            news.newsDetail = newsDetail;
             TlDatabase.getInstance().starNewsDao().insertNews(news);
-            List<StarNews> list=TlDatabase.getInstance().starNewsDao().searchAllNews();
-            LogUtils.e(list.size()+"");
+            List<StarNews> list = TlDatabase.getInstance().starNewsDao().searchAllNews();
+            LogUtils.e(list.size() + "");
         });
         loadingView.show();
     }
@@ -141,10 +147,11 @@ public abstract class NewsDetailBaseActivity extends BaseSwipeActivity<NewsDetai
         EventBus.getDefault().post(new UpdateNewsItem(newsDetail.typeCode, newsDetail.htmlString, newsDetail.isStar));
         TlDatabase.getInstance().newsDao().updateHtmlStrByItemId(newsDetail.htmlString, newsDetail.item_id);
     }
+
     @Override
     public void onGetCommentReply(ReplyListResponse commentReply, int loadType, boolean hasMore) {
-        if(commentDialogFragment!=null)
-        commentDialogFragment.handleData(commentReply, loadType, hasMore);
+        if (commentDialogFragment != null)
+            commentDialogFragment.handleData(commentReply, loadType, hasMore);
     }
 
     @Override

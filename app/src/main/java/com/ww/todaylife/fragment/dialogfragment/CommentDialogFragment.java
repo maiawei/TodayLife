@@ -1,12 +1,14 @@
 package com.ww.todaylife.fragment.dialogfragment;
 
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,6 +27,7 @@ import com.ww.todaylife.adapter.ReplyAdapter;
 import com.ww.todaylife.base.BaseFullBottomSheetFragment;
 import com.ww.todaylife.bean.httpResponse.CommentData;
 import com.ww.todaylife.bean.httpResponse.CommentReply;
+import com.ww.todaylife.bean.httpResponse.HsVideoRootBean;
 import com.ww.todaylife.bean.httpResponse.ReplyListResponse;
 import com.ww.todaylife.presenter.NewsDetailPresenter;
 
@@ -34,12 +37,6 @@ import butterknife.BindView;
 
 
 public class CommentDialogFragment extends BaseFullBottomSheetFragment {
-    private CircleImageView header;
-    private TextView author;
-    private LimitTextView content;
-    private TextView likeCount;
-    private TextView diggCountTv;
-    private TextView commentDate;
 
     @BindView(R.id.replyRv)
     AutoLoadRecyclerView replyRv;
@@ -50,38 +47,26 @@ public class CommentDialogFragment extends BaseFullBottomSheetFragment {
     TextView replyCount;
     @BindView(R.id.reply)
     TextView reply;
-    LinearLayout loadLayout;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.TransBottomSheetDialogStyle);
-    }
+    private LinearLayout loadLayout;
+    private CommentData item;
 
     public void setPresenter(NewsDetailPresenter presenter) {
         this.presenter = presenter;
     }
 
+
     @Override
     public void initData() {
         Bundle bundle = getArguments();
-        CommentData item = (CommentData) bundle.getSerializable("comment");
+        item = (CommentData) bundle.getSerializable("comment");
         if (item == null) {
             return;
         }
+        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
+        replyRv.setLayoutManager(layoutManager);
         mAdapter = new ReplyAdapter(mContext, mList);
         replyRv.setAdapter(mAdapter);
         initHeaderView();
-        Glide.with(mContext).load(item.comment.user_profile_image_url).into(header);
-        author.setText(item.comment.user_name);
-        content.setContent(item.comment.text, ScreenUtils.getScreenWidth() - ScreenUtils.dip2px(mContext, 75));
-        diggCountTv.setText(item.comment.digg_count > 0 ? item.comment.digg_count + "人赞过 >" : "暂无人赞过");
-        likeCount.setText(String.valueOf(item.comment.digg_count));
-        replyCount.setText(item.comment.reply_count > 0 ? item.comment.reply_count + "条回复" : "暂无回复");
-        commentDate.setText(TimeUtils.getShortTime(item.comment.create_time * 1000));
-        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
-        replyRv.setLayoutManager(layoutManager);
-        replyRv.setItemAnimator(null);
         reply.setOnClickListener(v -> {
             ReleaseCommentDialogFragment dialogFragment = new ReleaseCommentDialogFragment();
             dialogFragment.show(getChildFragmentManager(), "ReleaseCommentDialogFragment");
@@ -89,19 +74,27 @@ public class CommentDialogFragment extends BaseFullBottomSheetFragment {
         replyRv.setOnLoadMoreListener(() -> {
             presenter.getCommentReplyList(String.valueOf(item.comment.id), mList.size() - 1, CommonConstant.TYPE_REFRESH);
         }, layoutManager);
+        replyCount.setText(item.comment.reply_count > 0 ? item.comment.reply_count + "条回复" : "暂无回复");
         presenter.getCommentReplyList(String.valueOf(item.comment.id), 0, CommonConstant.TYPE_INIT);
     }
 
+
     private void initHeaderView() {
         View hView = LayoutInflater.from(mContext).inflate(R.layout.common_detail_header, null);
-        header = hView.findViewById(R.id.header);
-        author = hView.findViewById(R.id.author);
-        content = hView.findViewById(R.id.content);
-        likeCount = hView.findViewById(R.id.likeCount);
-        diggCountTv = hView.findViewById(R.id.diggCountTv);
-        commentDate = hView.findViewById(R.id.commentDate);
+        CircleImageView header = hView.findViewById(R.id.header);
+        TextView author = hView.findViewById(R.id.author);
+        LimitTextView content = hView.findViewById(R.id.content);
+        TextView likeCount = hView.findViewById(R.id.likeCount);
+        TextView diggCountTv = hView.findViewById(R.id.diggCountTv);
+        TextView commentDate = hView.findViewById(R.id.commentDate);
         loadLayout = hView.findViewById(R.id.loadLayout);
         content.setCanExpand(true);
+        Glide.with(mContext).load(item.comment.user_profile_image_url).into(header);
+        author.setText(item.comment.user_name);
+        content.setContent(item.comment.text, ScreenUtils.getScreenWidth() - ScreenUtils.dip2px(mContext, 75));
+        diggCountTv.setText(item.comment.digg_count > 0 ? item.comment.digg_count + "人赞过 >" : "暂无人赞过");
+        likeCount.setText(String.valueOf(item.comment.digg_count));
+        commentDate.setText(TimeUtils.getShortTime(item.comment.create_time * 1000));
         mAdapter.setHeaderView(hView);
     }
 
@@ -129,5 +122,9 @@ public class CommentDialogFragment extends BaseFullBottomSheetFragment {
         return R.layout.comment_dialog_layout;
     }
 
-
+    @Override
+    public void onDismiss(@NonNull DialogInterface dialog) {
+        mList.clear();
+        super.onDismiss(dialog);
+    }
 }

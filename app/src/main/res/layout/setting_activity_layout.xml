@@ -11,9 +11,10 @@
         android:layout_height="10dp" />
 
     <RelativeLayout
+        android:background="@drawable/item_click_style"
         android:id="@+id/clearCacheLayout"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="58dp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp">
 
@@ -44,7 +45,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="58dp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp">
 
@@ -69,9 +70,10 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:background="@drawable/item_click_style"
         android:id="@+id/wLanSettingLayout"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="58dp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp">
 
@@ -99,7 +101,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="58dp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp">
 
@@ -125,9 +127,10 @@
         android:layout_height="10dp" />
 
     <RelativeLayout
+        android:background="@drawable/item_click_style"
         android:id="@+id/checkVersionLayout"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="58dp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp">
 

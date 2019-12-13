@@ -83,19 +83,19 @@ public class StartActivity extends AppCompatActivity {
                 //外部存储同意授权
                 dealConfig();
             } else {
-                UiUtils.showAlertDialog(StartActivity.this, getResources().getString(R.string.permissions_hint), new UiUtils.DialogClickListener() {
-                    @Override
-                    public void okClick() {
-                        startActivity(SystemUtils.getAppDetailSettingIntent(getPackageName()));
-                        StartActivity.this.finish();
-                    }
-
-                    @Override
-                    public void cancelClick() {
-                        StartActivity.this.finish();
-                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);//透明主题与activity动画不兼容
-                    }
-                });
+//                UiUtils.showAlertDialog(StartActivity.this, getResources().getString(R.string.permissions_hint), new UiUtils.DialogClickListener() {
+//                    @Override
+//                    public void okClick() {
+//                        startActivity(SystemUtils.getAppDetailSettingIntent(getPackageName()));
+//                        StartActivity.this.finish();
+//                    }
+//
+//                    @Override
+//                    public void cancelClick() {
+//                        StartActivity.this.finish();
+//                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);//透明主题与activity动画不兼容
+//                    }
+//                });
             }
         }
     }

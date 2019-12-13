@@ -58,7 +58,7 @@ public class LimitTextView extends AppCompatTextView {
 
     public void setContent(String s, int maxWidth) {
         realContent = s.replaceAll(" ", "");
-        if (StringUtils.strCount(realContent, "\n") > maxLines) {
+        if (StringUtils.strCount(realContent, "\n") > maxLines-1) {
             showContent = realContent.substring(0, realContent.length() - maxLines);
             showContent();
             return;

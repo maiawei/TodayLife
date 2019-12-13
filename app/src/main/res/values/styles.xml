@@ -49,4 +49,16 @@
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowSoftInputMode">stateAlwaysVisible</item>
     </style>
+
+    <!--无标题弹窗-->
+    <style name="testDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>//无标题
+        <item name="android:windowBackground">@android:color/transparent</item>//背景
+        <item name="android:windowIsFloating">true</item>//悬浮
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsTranslucent">true</item><!-- 是否半透明 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowAnimationStyle">@style/AnimBottom</item>
+    </style>
 </resources>

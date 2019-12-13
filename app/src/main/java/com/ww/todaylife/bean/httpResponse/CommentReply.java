@@ -1,9 +1,11 @@
 package com.ww.todaylife.bean.httpResponse;
 
+import java.io.Serializable;
+
 /**
  * created by wang.wei on 2019-12-10
  */
-public class CommentReply {
+public class CommentReply  implements Serializable {
     public long id;
     public long digg_count;
     public String text;

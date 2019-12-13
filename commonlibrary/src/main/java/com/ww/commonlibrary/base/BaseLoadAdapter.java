@@ -28,7 +28,7 @@ public abstract class BaseLoadAdapter<E> extends BaseAdapter<E, RecyclerView.Vie
 
 
     private View headerView;
-
+    private HeaderHolder headerHolder;
     public BaseLoadAdapter(Context context, List list) {
         super(context, list);
     }
@@ -58,7 +58,10 @@ public abstract class BaseLoadAdapter<E> extends BaseAdapter<E, RecyclerView.Vie
             if (headerView == null) {
                 throw new NullPointerException("please set a header view !");
             }
-            return new HeaderHolder(headerView);
+            if(headerHolder==null){
+                headerHolder=new HeaderHolder(headerView);
+            }
+            return headerHolder;
         }
         return onCreateItemVh(parent, viewType);
     }

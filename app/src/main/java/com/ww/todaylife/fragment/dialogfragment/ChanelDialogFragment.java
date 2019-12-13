@@ -16,6 +16,7 @@ import com.ww.todaylife.bean.eventBean.NewsTabEvent;
 import com.ww.todaylife.dao.ChanelDao;
 
 import org.greenrobot.eventbus.EventBus;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -62,7 +63,7 @@ public class ChanelDialogFragment extends BaseFullBottomSheetFragment {
 
     }
 
-    public void initRv() {
+    private void initRv() {
         GridLayoutManager layoutManager = new GridLayoutManager(mContext, 4);
         mRv.setLayoutManager(layoutManager);
         mRv.setItemAnimator(new RvItemAnimator());
@@ -153,7 +154,7 @@ public class ChanelDialogFragment extends BaseFullBottomSheetFragment {
     };
 
     @Override
-    public void onDismiss(DialogInterface dialog) {
+    public void onDismiss(@NotNull DialogInterface dialog) {
         EventBus.getDefault().post(new NewsTabEvent(selectedList));
         super.onDismiss(dialog);
     }

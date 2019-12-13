@@ -19,6 +19,8 @@ import com.ww.todaylife.bean.httpResponse.CommentResponse;
 import com.ww.todaylife.bean.httpResponse.HsVideoRootBean;
 import com.ww.todaylife.presenter.NewsDetailPresenter;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -46,7 +48,7 @@ public class HsVideoCommentDialogFragment extends BaseFullBottomSheetFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.TransBottomSheetDialogStyle);
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.bottomDialog);
     }
 
     public static HsVideoCommentDialogFragment newInstance(HsVideoRootBean bean) {
@@ -103,7 +105,7 @@ public class HsVideoCommentDialogFragment extends BaseFullBottomSheetFragment {
     }
 
     @Override
-    public void onDismiss(DialogInterface dialog) {
+    public void onDismiss(@NotNull DialogInterface dialog) {
         mList.clear();
         super.onDismiss(dialog);
     }

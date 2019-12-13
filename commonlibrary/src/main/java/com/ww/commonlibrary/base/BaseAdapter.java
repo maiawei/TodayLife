@@ -24,7 +24,8 @@ public abstract class BaseAdapter<E, VH extends RecyclerView.ViewHolder> extends
         this.clickListener = clickListener;
     }
 
-    protected ItemClickListener clickListener;
+    private ItemClickListener clickListener;
+    private ItemLongClickListener longClickListener;
 
     public BaseAdapter(Context context, List<E> list) {
         mContext = context;
@@ -65,6 +66,15 @@ public abstract class BaseAdapter<E, VH extends RecyclerView.ViewHolder> extends
                 if (clickListener != null) {
                     clickListener.itemClick(holder.getAdapterPosition());
                 }
+            }
+        });
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (longClickListener != null) {
+                    longClickListener.itemLongClick(holder.getAdapterPosition());
+                }
+                return false;
             }
         });
     }
@@ -178,6 +188,9 @@ public abstract class BaseAdapter<E, VH extends RecyclerView.ViewHolder> extends
         void itemClick(int position);
     }
 
+    public interface ItemLongClickListener {
+        void itemLongClick(int position);
+    }
 
     public static class FootHolder extends RecyclerView.ViewHolder {
 

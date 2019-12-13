@@ -3,7 +3,6 @@ package com.ww.todaylife;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,8 +14,6 @@ import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory;
 import com.ww.commonlibrary.CommonConstant;
 import com.ww.commonlibrary.base.BaseObserver;
 import com.ww.commonlibrary.util.FileUtils;
-import com.ww.commonlibrary.util.LogUtils;
-import com.ww.commonlibrary.util.ScreenUtils;
 import com.ww.commonlibrary.util.SystemUtils;
 import com.ww.commonlibrary.util.UiUtils;
 import com.ww.commonlibrary.view.CircleImageView;
@@ -64,6 +61,7 @@ public class SystemSettingActivity extends BaseSwipeActivity {
     String[] wLanSettingItems;
     @BindView(R.id.limitText)
     LimitTextView limitText;
+
     @Override
     public int setContentId() {
         return R.layout.setting_activity_layout;
@@ -97,36 +95,27 @@ public class SystemSettingActivity extends BaseSwipeActivity {
     }
 
     public void clearCache() {
-        UiUtils.showAlertDialog(this, getString(R.string.clear_cache_hint), new UiUtils.DialogClickListener() {
-            @Override
-            public void okClick() {
-                UiUtils.showProgressDialog(SystemSettingActivity.this, "删除中");
-                Observable.create(emitter -> {
-                    Glide.get(SystemSettingActivity.this).clearDiskCache();
-                    emitter.onNext(new Object());
-                }).subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new BaseObserver<Object>() {
-                            @Override
-                            public void success(Object o) {
-                                new Handler().postDelayed(() -> {
-                                    UiUtils.hideProgressDialog();
-                                    getCaCheSize();
-                                }, 500);
-                            }
+        UiUtils.showConfirmDialog(this, R.string.clear_cache_hint, () -> {
+            UiUtils.showProgressDialog(SystemSettingActivity.this, R.string.dialog_deleting);
+            Observable.create(emitter -> {
+                Glide.get(SystemSettingActivity.this).clearDiskCache();
+                emitter.onNext(new Object());
+            }).subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new BaseObserver<Object>() {
+                        @Override
+                        public void success(Object o) {
+                            new Handler().postDelayed(() -> {
+                                UiUtils.hideProgressDialog();
+                                getCaCheSize();
+                            }, 500);
+                        }
 
-                            @Override
-                            public void failure() {
-                            }
-                        });
-            }
-
-            @Override
-            public void cancelClick() {
-
-            }
+                        @Override
+                        public void failure() {
+                        }
+                    });
         });
-
     }
 
     @SuppressLint("DefaultLocale")
@@ -137,18 +126,18 @@ public class SystemSettingActivity extends BaseSwipeActivity {
     }
 
     public void wLanSetting() {
-        UiUtils.showSelectedDialog(this, PreUtils.getInt(WLAN_SETTING, 0), getString(R.string.wlan_setting), wLanSettingItems, position -> {
+        UiUtils.showSingleChoiceDialog(this, R.string.wlan_setting, R.array.wlan_setting, PreUtils.getInt(WLAN_SETTING, 0), position -> {
             PreUtils.putInt(WLAN_SETTING, position);
-            wLanSettingTv.setText(wLanSettingItems[position]);
+            wLanSettingTv.setText(wLanSettingItems[PreUtils.getInt(WLAN_SETTING, 0)]);
         });
     }
-    public void checkVersion(){
-        UiUtils.showProgressDialog(SystemSettingActivity.this, "检查中");
+
+    public void checkVersion() {
+        UiUtils.showProgressDialog(this, R.string.dialog_checking);
         new Handler().postDelayed(() -> {
             UiUtils.hideProgressDialog();
-            UiUtils.showShortToast(this,"这是最新版本了", ToastView.TYPE_SUCCESS);
-        },1500);
-
+            UiUtils.showShortToast(SystemSettingActivity.this, "已是最新版本", ToastView.TYPE_SUCCESS);
+        }, 1500);
     }
 
 

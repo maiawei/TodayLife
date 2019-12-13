@@ -27,8 +27,6 @@
         android:layout_below="@id/author"
         android:layout_marginLeft="45dp"
         android:layout_marginTop="12dp"
-        android:ellipsize="end"
-        android:maxLines="6"
         android:textColor="#333333"
         android:textSize="16sp" />
 

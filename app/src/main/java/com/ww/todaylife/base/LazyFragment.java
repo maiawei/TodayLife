@@ -23,7 +23,7 @@ public abstract class LazyFragment<T extends BasePresenter> extends Fragment {
 
     public abstract int getLayoutId();
 
-    protected View mRootView;
+    private View mRootView;
     /**
      * 标志位，标志已经初始化完成
      */

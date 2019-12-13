@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ww.commonlibrary.base.BaseAdapter;
 import com.ww.commonlibrary.util.GlideUtils;
 import com.ww.commonlibrary.util.ScreenUtils;
+import com.ww.commonlibrary.util.StringUtils;
 import com.ww.commonlibrary.view.CircleImageView;
 import com.ww.todaylife.HsVideoDetailActivity;
 import com.ww.todaylife.R;
@@ -45,7 +46,7 @@ public class HSVideoListAdapter extends BaseAdapter<HsVideoRootBean, HSVideoList
             params.height = params.width*item.raw_data.video.height/item.raw_data.video.width;
             vh.thumb.setLayoutParams(params);
             vh.author.setText(item.raw_data.user.info.name);
-            vh.playCount.setText(item.raw_data.action.play_count + "次播放");
+            vh.playCount.setText(StringUtils.getCountStr(item.raw_data.action.play_count) + "次播放");
             GlideUtils.loadImageList(mContext,item.raw_data.user.info.avatar_url,vh.avatar);
             GlideUtils.loadImageList(mContext,item.raw_data.thumb_image_list.get(0).url_list.get(0).url,vh.thumb);
             vh.title.setText(item.raw_data.title);

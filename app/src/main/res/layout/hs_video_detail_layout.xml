@@ -18,68 +18,69 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
+
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/videoInfoLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="55dp"
+        android:orientation="vertical">
+
         <LinearLayout
-            android:id="@+id/videoInfoLayout"
+            android:id="@+id/authorInfoLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.ww.commonlibrary.view.CircleImageView
+                android:id="@+id/avatar"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="12dp"
+                android:transitionName="avatar" />
+
+            <TextView
+                android:id="@+id/author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text=""
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:transitionName="author" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/videoTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="15dp"
+            android:text=""
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:transitionName="title" />
+
+        <TextView
+            android:id="@+id/videoDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="55dp"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <com.ww.commonlibrary.view.CircleImageView
-                    android:id="@+id/avatar"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="12dp"
-                    android:transitionName="avatar" />
-
-                <TextView
-                    android:id="@+id/author"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text=""
-                    android:textColor="#ffffff"
-                    android:textSize="18sp"
-                    android:transitionName="author" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/videoTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="15dp"
-                android:text=""
-                android:textColor="#ffffff"
-                android:textSize="14sp"
-                android:transitionName="title" />
-
-            <TextView
-                android:id="@+id/videoDesc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginRight="12dp"
-                android:drawableLeft="@mipmap/ic_music"
-                android:ellipsize="marquee"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:marqueeRepeatLimit="marquee_forever"
-                android:singleLine="true"
-                android:text=""
-                android:textColor="#ffffff"
-                android:textSize="14sp"
-                android:visibility="gone" />
-        </LinearLayout>
-    </RelativeLayout>
-
-    <include layout="@layout/hsvideo_detail_bottom"></include>
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="12dp"
+            android:drawableLeft="@mipmap/ic_music"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:text=""
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:visibility="gone" />
+    </LinearLayout>
+    <include layout="@layout/hsvideo_detail_bottom"/>
 </RelativeLayout>

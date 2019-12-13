@@ -21,6 +21,17 @@
         <item>生活</item>
         <item>历史</item>
         <item>正能量</item>
+
+        <item>小说</item>
+        <item>钓鱼</item>
+        <item>音乐</item>
+        <item>懂车帝</item>
+        <item>数码</item>
+        <item>手机</item>
+        <item>教育</item>
+        <item>公益</item>
+        <item>精选</item>
+        <item>文化</item>
     </string-array>
     <string-array name="all_code">
         <item></item>
@@ -43,6 +54,17 @@
         <item>news_life</item>
         <item>news_history</item>
         <item>positive</item>
+
+        <item>novel_channel</item>
+        <item>news_angling</item>
+        <item>music</item>
+        <item>news_car</item>
+        <item>digital</item>
+        <item>cellphone</item>
+        <item>news_edu</item>
+        <item>public_welfare</item>
+        <item>boutique</item>
+        <item>news_culture</item>
     </string-array>
 
 </resources>

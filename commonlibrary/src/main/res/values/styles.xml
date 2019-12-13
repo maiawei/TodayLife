@@ -8,7 +8,7 @@
         <item name="windowNoTitle">true</item>
         <item name="buttonBarPositiveButtonStyle">@style/positiveBtnStyle</item>
         <item name="buttonBarNegativeButtonStyle">@style/negativeBtnStyle</item>
-        <item name="android:windowAnimationStyle">@style/AnimBottom</item>
+<!--        <item name="android:windowAnimationStyle">@style/AnimBottom</item>-->
     </style>
 
     <style name="positiveBtnStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
@@ -37,7 +37,6 @@
         <item name="android:scrollbarSize">4dp</item>
         <item name="android:scrollbars">vertical</item>
     </style>
-
     <style name="TransBottomSheetDialogStyle" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowIsFloating">true</item>
@@ -45,6 +44,16 @@
         <item name="android:background">@android:color/transparent</item>
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:backgroundDimAmount">0.3</item>
+    </style>
+    <style name="bottomDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>//无标题
+        <item name="android:windowBackground">@android:color/transparent</item>//背景
+        <item name="android:windowIsFloating">true</item>//悬浮
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsTranslucent">true</item><!-- 是否半透明 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowAnimationStyle">@style/AnimBottom</item>
     </style>
 
     <style name="popWindowBottom" parent="@android:style/Animation">

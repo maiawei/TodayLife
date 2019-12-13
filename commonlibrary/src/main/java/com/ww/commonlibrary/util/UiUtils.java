@@ -6,14 +6,21 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.ww.commonlibrary.R;
 import com.ww.commonlibrary.view.ToastView;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.ref.WeakReference;
 
@@ -25,29 +32,8 @@ import java.lang.ref.WeakReference;
 public class UiUtils {
     //弱引用 有助于重复利用以及内存回收
     private static WeakReference<ToastView> sToastRef = null;
-    private static WeakReference<ProgressDialog> sProgressDialogRef = null;
+    private static WeakReference<MaterialDialog> sProgressDialogRef = null;
 
-
-    public static void showProgressDialog(final Context context, String message) {
-        ProgressDialog progressDialog = new ProgressDialog(context);
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.setMessage(message);
-        progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.setCancelable(false);
-//        progressDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-//            @Override
-//            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-//                if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-//                    if (context != null) {
-//                        ((Activity) context).finish();
-//                    }
-//                }
-//                return false;
-//            }
-//        });
-        sProgressDialogRef = new WeakReference<>(progressDialog);
-        progressDialog.show();
-    }
 
     public static void hideProgressDialog() {
         if (sProgressDialogRef != null) {
@@ -57,54 +43,52 @@ public class UiUtils {
         }
     }
 
-    public static AlertDialog showSelectedDialog(Context context, int position, String title, String[] items, final DialogItemSelectedListener listener) {
-        new AlertDialog.Builder(context, R.style.AlertDialog)
-                .setTitle(title)
-                .setSingleChoiceItems(items, position, new DialogInterface.OnClickListener() {
+    public static void showConfirmDialog(Context context, int contentId, final DialogClickListener listener) {
+        new MaterialDialog.Builder(context)
+                .title(R.string.dialog_title)
+                .content(contentId)
+                .positiveText(R.string.dialog_ok)
+                .negativeText(R.string.dialog_cancel)
+                .titleColorRes(R.color.black)
+                .contentColorRes(R.color.black_333)
+                .onAny(new MaterialDialog.SingleButtonCallback() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int po) {
-                        dialogInterface.dismiss();
-                        listener.onItemSelected(po);
+                    public void onClick(@NotNull MaterialDialog dialog, @NotNull DialogAction which) {
+                        if (which == DialogAction.POSITIVE) {
+                            listener.okClick();
+                        }
+                    }
+                }).show();
+    }
+
+    public static void showProgressDialog(Context context, int contentId) {
+        MaterialDialog dialog = new MaterialDialog.Builder(context)
+                .content(contentId)
+                .contentColorRes(R.color.black_333)
+                .progress(true, 0).show();
+        hideProgressDialog();
+        sProgressDialogRef = new WeakReference<>(dialog);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+    }
+
+    public static void showSingleChoiceDialog(Context context, int titleId, int itemsId, int selected, final DialogItemSelectedListener listener) {
+        new MaterialDialog.Builder(context)
+                .title(titleId)
+                .positiveText(R.string.dialog_ok)
+                .items(itemsId)
+                .titleColorRes(R.color.black)
+                .contentColorRes(R.color.black_333)
+                .itemsCallbackSingleChoice(selected, new MaterialDialog.ListCallbackSingleChoice() {
+                    @Override
+                    public boolean onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                        listener.onItemSelected(which);
+                        return true;
                     }
                 })
-                .setNegativeButton(R.string.cancel, null)
                 .show();
-        return null;
     }
 
-
-    public static AlertDialog showAlertDialog(Context context, String title, String message, final DialogClickListener listener) {
-        final AlertDialog dialog;
-        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AlertDialog).setTitle(title).setMessage(message)
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (listener != null)
-                            listener.okClick();
-                        dialog.dismiss();
-                    }
-                });
-
-        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (listener != null) {
-                            listener.cancelClick();
-                        }
-                        dialog.dismiss();
-                    }
-                }
-        );
-        dialog = builder.create();
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.setCancelable(true);
-        dialog.show();
-        return dialog;
-    }
-
-    public static Dialog showAlertDialog(Context context, String message, DialogClickListener listener) {
-        return showAlertDialog(context, "提示", message, listener);
-    }
 
     public static void showLongToast(Context context, String msg, int status) {
         showToast(Toast.LENGTH_LONG, msg, context, status);
@@ -165,9 +149,9 @@ public class UiUtils {
     }
 
     public interface DialogClickListener {
+
         public void okClick();
 
-        public void cancelClick();
     }
 
     public interface DialogItemSelectedListener {

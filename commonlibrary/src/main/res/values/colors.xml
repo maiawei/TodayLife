@@ -7,7 +7,7 @@
     <color name="black">#000000</color>
     <color name="black_222">#222222</color>
 
-    <color name="ripple_color">#eeeeee</color>
+    <color name="ripple_color">#c8c8c8</color>
     <color name="toast_bg_color">#77000000</color>
     <color name="main_color">#F5F5F5</color>
     <color name="main_grey">#999999</color>
@@ -17,8 +17,8 @@
     <color name="black_bg">#66ffffff</color>
     <color name="black_999">#999999</color>
     <color name="scrollbar_bg_color">#55000000</color>
-
     <color name="black_333">#333333</color>
+
     <color name="black_777">#777777</color>
     <color name="translucent">#00000000</color>
     <drawable name="touchFeedback">#d8d8d8</drawable>

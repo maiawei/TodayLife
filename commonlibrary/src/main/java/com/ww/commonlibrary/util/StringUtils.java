@@ -49,6 +49,7 @@ public class StringUtils {
         StringBuilder stringBuilder = new StringBuilder();
         int scale = (int) Math.ceil(sWidth / (textSize * text.length()));
         if (scale > 1) {
+            scale = scale * 2;
             for (int i = 0; i < scale; i++) {
                 stringBuilder.append(text);
                 stringBuilder.append("  ");
@@ -109,7 +110,7 @@ public class StringUtils {
         if (count / 10000 == 0) {
             return String.valueOf(count);
         } else {
-            return count / 10000 + "万";
+            return String.format("%.1f万", (float) count / 10000f);
         }
     }
 

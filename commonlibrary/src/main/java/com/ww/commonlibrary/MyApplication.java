@@ -62,7 +62,7 @@ public class MyApplication extends MultiDexApplication {
         if (BuildConfig.LOG_DEBUG) {
             LeakCanary.install(this);
         }
-        CrashReport.initCrashReport(this, "87916bcca7", BuildConfig.DEBUG);
+        CrashReport.initCrashReport(this, "3c7e1a7844", BuildConfig.DEBUG);
     }
 
 }

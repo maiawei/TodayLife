@@ -168,7 +168,7 @@ public class FileUtils {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
             context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
                     Uri.fromFile(new File(file.getPath()))));
-            UiUtils.showShortToast(context,"已保存至sd卡TodayLife文件夹下", ToastView.TYPE_SUCCESS);
+            UiUtils.showShortToast(context, "已保存至sd卡TodayLife文件夹下", ToastView.TYPE_SUCCESS);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             file.delete();
@@ -214,7 +214,7 @@ public class FileUtils {
             return file.length();
         } else {
             File[] fileList = file.listFiles();
-            if(fileList==null){
+            if (fileList == null) {
                 return size;
             }
             for (File value : fileList) {
@@ -268,6 +268,7 @@ public class FileUtils {
             file.delete();
         }
     }
+
     /**
      * 根据图片文件类型获取图片文件的后缀名
      *
@@ -312,6 +313,7 @@ public class FileUtils {
         }
         return value;
     }
+
     /**
      * 将byte字节转换为十六进制字符串
      *

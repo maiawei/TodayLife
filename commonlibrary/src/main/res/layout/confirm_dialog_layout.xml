@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingTop="18dp"
+    android:paddingLeft="18dp"
+    android:paddingBottom="10dp">
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/titleTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:text="@string/dialog_title"
+        android:textColor="@color/black_222"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@id/space"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Space
+        android:id="@+id/space"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/contentTv"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/titleTv" />
+
+    <TextView
+        android:id="@+id/contentTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dialog_title"
+        android:textColor="@color/black_333"
+        android:textSize="15sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/space" />
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:text="@string/dialog_cancel"
+        android:textColor="@color/main_red"
+        android:textSize="15sp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/item_click_style"
+        app:layout_constraintRight_toLeftOf="@id/ok"
+        app:layout_constraintTop_toBottomOf="@id/contentTv"
+         />
+
+    <Button
+        android:id="@+id/ok"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:text="@string/dialog_ok"
+        android:textColor="@color/main_red"
+        android:textSize="15sp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/item_click_style"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/contentTv"
+        android:layout_marginEnd="8dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

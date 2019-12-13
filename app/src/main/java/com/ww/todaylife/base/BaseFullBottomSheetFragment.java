@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,45 +14,38 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.ww.commonlibrary.MyApplication;
 import com.ww.commonlibrary.util.LogUtils;
+import com.ww.commonlibrary.util.ScreenUtils;
 import com.ww.commonlibrary.view.botomSheet.BottomSheetDialogFragment;
 import com.ww.todaylife.R;
 
-import java.lang.reflect.Field;
+import org.jetbrains.annotations.NotNull;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-
-import static android.view.WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE;
-import static java.security.AccessController.getContext;
 
 
 public abstract class BaseFullBottomSheetFragment extends BottomSheetDialogFragment {
 
     private int height = 0;
-    private Unbinder unbinder;
+    private Unbinder unBinder;
     protected Context mContext;
-    private Dialog dialog;
-    public void setDialogDisMissListener(DialogDisMissListener listener) {
+    private BottomSheetDialog dialog;
+    private boolean hasLoad;
+
+    public void setDismissListenerListener(DismissListener listener) {
         this.listener = listener;
     }
 
-    private DialogDisMissListener listener;
+    private DismissListener listener;
 
-    @NonNull
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        if (getContext() == null) {
-            return super.onCreateDialog(savedInstanceState);
-        }
-        return new BottomSheetDialog(getContext(), R.style.TransBottomSheetDialogStyle);
-    }
+    private BottomSheetBehavior<FrameLayout> behavior;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,53 +53,48 @@ public abstract class BaseFullBottomSheetFragment extends BottomSheetDialogFragm
         mContext = getActivity();
 
     }
+    //懒加载 优化显示速度
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!hasLoad) {
+            initData();
+        }
+        hasLoad = true;
+    }
+
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        if (getContext() == null) {
+            return super.onCreateDialog(savedInstanceState);
+        }
+        return new BottomSheetDialog(getContext(), R.style.bottomDialog);
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(providerView(), container, false);
-        unbinder = ButterKnife.bind(this, view);
-        initData();
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
-        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
+        unBinder = ButterKnife.bind(this, view);
         return view;
     }
+
 
     @Override
     public void onStart() {
         super.onStart();
-        super.onStart();
-        dialog = getDialog();
-        if (dialog != null) {
-            View bottomSheet = dialog.findViewById(R.id.design_bottom_sheet);
-            bottomSheet.getLayoutParams().height = height == 0 ? ViewGroup.LayoutParams.MATCH_PARENT : height; //可以写入自己想要的高度
+        // 设置软键盘不自动弹出
+        dialog = (BottomSheetDialog) getDialog();
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
+        FrameLayout bottomSheet = dialog.getDelegate().findViewById(R.id.design_bottom_sheet);
+        if (bottomSheet != null) {
+            CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) bottomSheet.getLayoutParams();
+            layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
+            behavior = BottomSheetBehavior.from(bottomSheet);
+            // 初始为展开状态
+            behavior.setPeekHeight(height == 0 ? ScreenUtils.getScreenHeight() - ScreenUtils.getStatusBarHeight(MyApplication.getApp()) : height);
         }
-        final View view = getView();
-        view.post(() -> {
-            View parent = (View) view.getParent();
-            CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) (parent).getLayoutParams();
-            CoordinatorLayout.Behavior behavior = params.getBehavior();
-            BottomSheetBehavior bottomSheetBehavior = (BottomSheetBehavior) behavior;
-            bottomSheetBehavior.setPeekHeight(view.getMeasuredHeight());
-        });
-    }
-
-    @Override
-    public void onDismiss(DialogInterface dialog) {
-        if (listener != null) {
-            listener.onDialogDisMiss();
-        }
-        super.onDismiss(dialog);
-    }
-
-    @Override
-    public void onDestroy() {
-        unbinder.unbind();
-        if(dialog!=null){
-            dialog.dismiss();
-            dialog=null;
-        }
-        super.onDestroy();
     }
 
     public abstract void initData();
@@ -116,27 +105,36 @@ public abstract class BaseFullBottomSheetFragment extends BottomSheetDialogFragm
         this.height = height;
     }
 
-    public interface DialogDisMissListener {
-        void onDialogDisMiss();
+    @Override
+    public void onDestroy() {
+        if (unBinder != null) {
+            unBinder.unbind();
+        }
+        if (dialog != null) {
+            dialog.dismiss();
+            dialog = null;
+        }
+        super.onDestroy();
     }
 
     @Override
-    public void show(FragmentManager manager, String tag) {
-        try {
-            Field dismissed = DialogFragment.class.getDeclaredField("mDismissed");
-            Field shownByMe = DialogFragment.class.getDeclaredField("mShownByMe");
-            dismissed.setAccessible(true);
-            shownByMe.setAccessible(true);
-            dismissed.set(this, false);
-            shownByMe.set(this, true);
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
+    public void onDismiss(@NonNull DialogInterface dialog) {
+        hasLoad=false;
+        if (listener != null) {
+            listener.onDismiss();
         }
-        FragmentTransaction ft = manager.beginTransaction();
-        ft.add(this, tag);
-        // replace commit()
-        ft.commitAllowingStateLoss();
+        super.onDismiss(dialog);
+    }
+
+    public interface DismissListener {
+        void onDismiss();
+    }
+
+    @Override
+    public void show(@NonNull FragmentManager manager, @Nullable String tag) {
+        if(this.isAdded()){
+            return;
+        }
+        super.show(manager, tag);
     }
 }

@@ -55,6 +55,7 @@ public class AutoLoadRecyclerView extends RecyclerView {
     }
 
     public void init() {
+        setItemAnimator(null);
         addOnScrollListener(new OnScrollListener() {
             @Override
             public void onScrolled(@NotNull RecyclerView recyclerView, int dx, int dy) {

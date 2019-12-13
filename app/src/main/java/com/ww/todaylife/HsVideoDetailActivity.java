@@ -1,5 +1,6 @@
 package com.ww.todaylife;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ import com.ww.commonlibrary.view.CircleImageView;
 import com.ww.commonlibrary.view.ClickAnimImage;
 import com.ww.commonlibrary.view.widget.DragCloseHelper;
 import com.ww.todaylife.base.BaseActivity;
+import com.ww.todaylife.base.BaseFullBottomSheetFragment;
 import com.ww.todaylife.bean.httpResponse.CommentResponse;
 import com.ww.todaylife.bean.httpResponse.HsVideoRootBean;
 import com.ww.todaylife.bean.httpResponse.VideoContentBean;
@@ -75,6 +77,7 @@ public class HsVideoDetailActivity extends BaseActivity<NewsDetailPresenter> imp
     @BindView(R.id.comment_bottom)
     LinearLayout commentBottomLayout;
     Handler mHandler;
+
     @Override
     public int setContentId() {
         return R.layout.hs_video_detail_layout;
@@ -173,7 +176,7 @@ public class HsVideoDetailActivity extends BaseActivity<NewsDetailPresenter> imp
             getWindow().setSharedElementEnterTransition(changeBounds);
         }
         //结束动画防止网络慢导致界面卡住
-        mHandler =new Handler();
+        mHandler = new Handler();
         mHandler.postDelayed(this::supportStartPostponedEnterTransition, 150);
         ViewCompat.setTransitionName(jzPlayer.thumbImageView, "thumb");
         Glide.with(this)
@@ -248,7 +251,7 @@ public class HsVideoDetailActivity extends BaseActivity<NewsDetailPresenter> imp
 
     @Override
     protected void onDestroy() {
-        if(mHandler!=null){
+        if (mHandler != null) {
             mHandler.removeCallbacksAndMessages(null);
         }
         Jzvd.releaseAllVideos();
@@ -261,18 +264,25 @@ public class HsVideoDetailActivity extends BaseActivity<NewsDetailPresenter> imp
             dialogFragment = HsVideoCommentDialogFragment.newInstance(video);
             dialogFragment.setPresenter(mPresenter);
             dialogFragment.setHeight(ScreenUtils.getScreenHeight() * 2 / 3);
-            dialogFragment.setDialogDisMissListener(() -> {
-                isShowDialog = false;
+            dialogFragment.setDismissListenerListener(new BaseFullBottomSheetFragment.DismissListener() {
+                @Override
+                public void onDismiss() {
+                    isShowDialog=false;
+                }
             });
         }
         dialogFragment.show(getSupportFragmentManager(), "HsVideoCommentDialogFragment");
     }
 
 
-    @OnClick({R.id.commentLayout})
+    @OnClick({R.id.commentLayout, R.id.authorInfoLayout})
     public void onViewClicked(View view) {
         if (view.getId() == R.id.commentLayout) {
             showDialog();
+        } else {
+            Intent intent = new Intent(this, UserDetailActivity.class);
+            intent.putExtra("userId", String.valueOf(video.raw_data.user.info.user_id));
+            startActivity(intent);
         }
     }
 
