@@ -91,7 +91,7 @@ public class NewsDetailPresenter extends BasePresenter<IDetailBaseView, BaseResp
                     content +
                     "    </div>\n" +
                     "</article>\n" +
-
+                    "<script type=\"text/javascript\" src=\"file:///android_asset/todaylife_common.js\"></script>"+
                     "</body>\n" +
                     "</html>";
 

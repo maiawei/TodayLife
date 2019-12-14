@@ -75,7 +75,6 @@ public class UiUtils {
     public static void showSingleChoiceDialog(Context context, int titleId, int itemsId, int selected, final DialogItemSelectedListener listener) {
         new MaterialDialog.Builder(context)
                 .title(titleId)
-                .positiveText(R.string.dialog_ok)
                 .items(itemsId)
                 .titleColorRes(R.color.black)
                 .contentColorRes(R.color.black_333)

@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.ww.commonlibrary.MyApplication;
+import com.ww.commonlibrary.util.StringUtils;
 import com.ww.commonlibrary.util.SystemUtils;
 import com.ww.commonlibrary.util.UiUtils;
 import com.ww.commonlibrary.view.CircleImageView;
@@ -55,12 +56,6 @@ public class NewsDetailActivity extends NewsDetailBaseActivity {
     @SuppressLint("AddJavascriptInterface")
     @Override
     public void initData(Bundle savedInstanceState) {
-        webView.setPageFinishedListener((WebView view) -> {
-            addPicClickListener(view);
-            if (loadingView != null)
-                loadingView.hide();
-        });
-
         webView.addJavascriptInterface(new PicJavaScript(this), "picJavaScript");
         loadingView.setRetryListener(this::loadData);
         super.initData(savedInstanceState);
@@ -81,6 +76,11 @@ public class NewsDetailActivity extends NewsDetailBaseActivity {
                 titleLayout.setVisibility(View.GONE);
             }
         });
+        webView.setPageFinishedListener((WebView view) -> {
+            addPicClickListener(view);
+            if (loadingView != null)
+                loadingView.hide();
+        });
         super.initView();
 
     }
@@ -90,11 +90,13 @@ public class NewsDetailActivity extends NewsDetailBaseActivity {
         newsDetail.htmlString=html;
         updateNewsDetail();
         userId = String.valueOf(newsContentBean.data.creator_uid);
-        webView.loadHtml(html);
+        webView.loadHtml(StringUtils.getLoadHtml(html));
         if (newsContentBean.data.media_user != null) {
             titleTv.setText(newsContentBean.data.media_user.screen_name);
             Glide.with(this).load(newsContentBean.data.media_user.avatar_url).into(titleImg);
         }
+       // loadingView.hide();
+
     }
 
     @Override
@@ -117,18 +119,6 @@ public class NewsDetailActivity extends NewsDetailBaseActivity {
     }
 
     public void addPicClickListener(WebView view) {
-        view.loadUrl("javascript:(function  pic(){" +
-                "var imgList = \"\";" +
-                "var imgs = document.getElementsByTagName(\"img\");" +
-                "for(var i=0;i<imgs.length;i++){" +
-                "var img = imgs[i];" +
-                "imgList = imgList + img.src +\";\";" +
-                "img.onclick = function(){" +
-                "window.picJavaScript.openImg(this.src);" +
-                "}" +
-                "}" +
-                "window.picJavaScript.getImgArray(imgList);" +
-                "})()");
         view.loadUrl("javascript:(function  user(){" +
                 "var userDiv = document.getElementById(" + userId + ");" +
                 "userDiv.onclick = function(){" +

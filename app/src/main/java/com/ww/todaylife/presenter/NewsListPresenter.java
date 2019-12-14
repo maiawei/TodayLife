@@ -12,7 +12,7 @@ import com.ww.todaylife.bean.httpResponse.NewsDetail;
 import com.ww.todaylife.bean.httpResponse.VideoContentBean;
 import com.ww.todaylife.dataBase.TlDatabase;
 import com.ww.todaylife.util.DataProcessUtils;
-import com.ww.todaylife.util.PreUtils;
+import com.ww.commonlibrary.util.PreUtils;
 import com.ww.todaylife.base.BasePresenter;
 import com.ww.todaylife.bean.httpResponse.NewsListResponse;
 import com.ww.todaylife.presenter.Iview.INewsListView;

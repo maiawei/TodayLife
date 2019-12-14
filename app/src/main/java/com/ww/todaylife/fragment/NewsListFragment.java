@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.ww.commonlibrary.CommonConstant;
-import com.ww.commonlibrary.util.LogUtils;
 import com.ww.commonlibrary.view.LoadStateView;
 import com.ww.todaylife.NewsDetailActivity;
 import com.ww.todaylife.VideoNewsDetailActivity;
@@ -28,7 +27,7 @@ import com.ww.todaylife.bean.httpResponse.NewsDetail;
 import com.ww.todaylife.dataBase.TlDatabase;
 import com.ww.todaylife.presenter.Iview.INewsListView;
 import com.ww.todaylife.presenter.NewsListPresenter;
-import com.ww.todaylife.util.PreUtils;
+import com.ww.commonlibrary.util.PreUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

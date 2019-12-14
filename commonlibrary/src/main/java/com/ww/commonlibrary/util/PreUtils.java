@@ -1,4 +1,4 @@
-package com.ww.todaylife.util;
+package com.ww.commonlibrary.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;

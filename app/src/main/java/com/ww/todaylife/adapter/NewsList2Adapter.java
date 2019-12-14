@@ -14,11 +14,10 @@ import com.ww.commonlibrary.CommonConstant;
 import com.ww.commonlibrary.base.BaseAdapter;
 import com.ww.commonlibrary.util.StringUtils;
 import com.ww.commonlibrary.util.TimeUtils;
-import com.ww.commonlibrary.view.CircleImageView;
 import com.ww.todaylife.R;
 import com.ww.todaylife.base.BaseViewHolder;
 import com.ww.todaylife.bean.httpResponse.NewsDetail;
-import com.ww.todaylife.util.PreUtils;
+import com.ww.commonlibrary.util.PreUtils;
 import com.ww.todaylife.view.DeletePopWindow;
 
 import java.util.List;

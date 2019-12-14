@@ -56,4 +56,6 @@ dependencies {
     api 'com.jakewharton.rxbinding3:rxbinding-core:3.1.0'
     api 'com.afollestad.material-dialogs:core:0.9.6.0'
     api 'com.afollestad.material-dialogs:commons:0.9.6.0'
+    api 'org.jsoup:jsoup:1.10.3'
+
 }

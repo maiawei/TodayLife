@@ -3,6 +3,7 @@ package com.ww.commonlibrary.view.nestedViewGroup;
 import android.content.Context;
 
 import android.net.http.SslError;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
@@ -16,9 +17,17 @@ import android.webkit.WebViewClient;
 import android.widget.Scroller;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.NestedScrollingChild2;
 import androidx.core.view.NestedScrollingChildHelper;
 import androidx.core.view.ViewCompat;
+
+import com.ww.commonlibrary.MyApplication;
+import com.ww.commonlibrary.util.NetworkUtil;
+import com.ww.commonlibrary.util.PreUtils;
+
+import static com.ww.commonlibrary.CommonConstant.WLAN_SETTING;
 
 
 public class NestedScrollWebView extends WebView implements NestedScrollingChild2 {
@@ -38,6 +47,8 @@ public class NestedScrollWebView extends WebView implements NestedScrollingChild
     private int firstY;
     private int lastY;
     private PageFinishedListener pageFinishedListener;
+    private boolean isShowImg = true;
+
     public NestedScrollWebView(Context context) {
         this(context, null);
     }
@@ -57,9 +68,11 @@ public class NestedScrollWebView extends WebView implements NestedScrollingChild
         //TouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
         TouchSlop = Util.dip2px(3);
     }
-    public void loadHtml(String html){
+
+    public void loadHtml(String html) {
         this.loadDataWithBaseURL(null, html, "text/html", "utf-8", null);
     }
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
@@ -330,18 +343,20 @@ public class NestedScrollWebView extends WebView implements NestedScrollingChild
     public boolean dispatchNestedPreFling(float velocityX, float velocityY) {
         return getHelper().dispatchNestedPreFling(velocityX, velocityY);
     }
-    public void setPageFinishedListener(PageFinishedListener listener){
-        this.pageFinishedListener=listener;
-        WebSettings settings = getSettings();
+
+    public void setPageFinishedListener(PageFinishedListener listener) {
+        this.pageFinishedListener = listener;
+        final WebSettings settings = getSettings();
         settings.setJavaScriptEnabled(true);
         // 缓存
         settings.setBuiltInZoomControls(false);
         settings.setSupportZoom(false);
         settings.setDisplayZoomControls(false);
-
+        settings.setDomStorageEnabled(true);
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);
         settings.setDomStorageEnabled(true);
         settings.setAppCacheEnabled(true);
+        //settings.setLoadsImagesAutomatically(false);
         setWebViewClient(new WebViewClient() {
             @Override
             public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
@@ -351,10 +366,17 @@ public class NestedScrollWebView extends WebView implements NestedScrollingChild
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                if(pageFinishedListener!=null)
-                    pageFinishedListener.pageFinished( view);
-
+                if (pageFinishedListener != null)
+                    pageFinishedListener.pageFinished(view);
+                if (!NetworkUtil.isMobileConnected(MyApplication.getApp()) || PreUtils.getInt(WLAN_SETTING, 0) != 2) {
+                    isShowImg = true;
+                    view.loadUrl("javascript:loadAllImg()");
+                } else {
+                    isShowImg = false;
+                    view.loadUrl("javascript:loadSingleImg()");
+                }
             }
+
             //拦截二级网页进行处理
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -375,7 +397,7 @@ public class NestedScrollWebView extends WebView implements NestedScrollingChild
         });
     }
 
-    public interface  PageFinishedListener{
+    public interface PageFinishedListener {
         void pageFinished(WebView view);
     }
 

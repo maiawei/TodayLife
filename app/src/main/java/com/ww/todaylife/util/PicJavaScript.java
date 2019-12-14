@@ -45,7 +45,7 @@ public class PicJavaScript {
 
     @JavascriptInterface
     public void getImgArray(String arrayStr) {
-        String[] urls = arrayStr.split(";");
+        String[] urls = arrayStr.split("#todayLife#");
         for (String url : urls) {
             dataList.add(url);
         }

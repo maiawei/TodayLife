@@ -22,7 +22,7 @@ import com.ww.commonlibrary.view.ToastView;
 import com.ww.todaylife.base.BasePresenter;
 import com.ww.todaylife.base.BaseSwipeActivity;
 import com.ww.todaylife.bean.eventBean.RefreshNewsList;
-import com.ww.todaylife.util.PreUtils;
+import com.ww.commonlibrary.util.PreUtils;
 
 import org.greenrobot.eventbus.EventBus;
 

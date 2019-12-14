@@ -20,6 +20,11 @@ import com.ww.commonlibrary.R;
 import com.ww.commonlibrary.view.widget.BackgroundImageSpan;
 import com.ww.commonlibrary.view.widget.CenterAlignImageSpan;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import java.util.Random;
 import java.util.zip.CRC32;
 
@@ -112,6 +117,16 @@ public class StringUtils {
         } else {
             return String.format("%.1f万", (float) count / 10000f);
         }
+    }
+    public static String getLoadHtml(String html){
+        Document doc = Jsoup.parse(html);
+        Elements elements = doc.getElementsByTag("img");
+        for (Element element : elements) {
+            element.attr("width", "100%").attr("height", "auto");
+            element.attr("alt", element.attr("src"));
+            element.attr("src", "file:///android_asset/default_todaylife_img.jpg");
+        }
+        return doc.toString();
     }
 
 }

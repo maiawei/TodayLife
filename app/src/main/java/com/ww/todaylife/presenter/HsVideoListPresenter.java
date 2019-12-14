@@ -9,7 +9,7 @@ import com.ww.todaylife.bean.httpResponse.HsVideoRootBean;
 import com.ww.todaylife.bean.httpResponse.NewsListResponse;
 import com.ww.todaylife.api.NewsApi;
 import com.ww.todaylife.presenter.Iview.IHSVideoListView;
-import com.ww.todaylife.util.PreUtils;
+import com.ww.commonlibrary.util.PreUtils;
 
 import java.util.ArrayList;
 import java.util.List;

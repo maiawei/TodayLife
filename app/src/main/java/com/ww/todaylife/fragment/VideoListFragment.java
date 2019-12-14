@@ -21,7 +21,7 @@ import com.ww.todaylife.bean.eventBean.OnBackEvent;
 import com.ww.todaylife.bean.httpResponse.NewsDetail;
 import com.ww.todaylife.presenter.Iview.INewsListView;
 import com.ww.todaylife.presenter.NewsListPresenter;
-import com.ww.todaylife.util.PreUtils;
+import com.ww.commonlibrary.util.PreUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
