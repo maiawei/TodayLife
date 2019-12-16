@@ -8,7 +8,6 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.ww.commonlibrary.CommonConstant;
@@ -92,9 +91,7 @@ public abstract class NewsDetailBaseActivity extends BaseSwipeActivity<NewsDetai
             Bundle bundle1 = new Bundle();
             bundle1.putSerializable("comment", mList.get(position));
             commentDialogFragment.setArguments(bundle1);
-            if(commentDialogFragment.isAdded()){
-                return;
-            }
+            Log.e("startTime",System.currentTimeMillis()+"ms");
             commentDialogFragment.show(getSupportFragmentManager(), "commentDialogFragment");
         });
         if (newsDetail.isStar) {
@@ -161,13 +158,13 @@ public abstract class NewsDetailBaseActivity extends BaseSwipeActivity<NewsDetai
         }
         // error
         if (commentResponse == null) {
-            commentRv.setNoMoreData(true);
+            commentRv.setLoadMoreFinish(true);
             return;
         }
         if (commentResponse.total_number == 0) {
             commentRv.setEmpty();
         } else {
-            commentRv.setNoMoreData(hasMore);
+            commentRv.setLoadMoreFinish(hasMore);
             if (loadType == CommonConstant.TYPE_REFRESH) {
                 commentCountTv.setText(String.valueOf(commentResponse.total_number));
                 this.mList.addAll(commentResponse.data);

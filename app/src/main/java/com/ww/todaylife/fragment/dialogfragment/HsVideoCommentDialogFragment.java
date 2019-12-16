@@ -83,13 +83,13 @@ public class HsVideoCommentDialogFragment extends BaseFullBottomSheetFragment {
 
     public void handleData(CommentResponse commentResponse, int loadType, boolean hasMore) {
         if(commentResponse==null){
-            commentRv.setNoMoreData(true);
+            commentRv.setLoadMoreFinish(true);
             return;
         }
         if (commentResponse.total_number == 0) {
             commentRv.setEmpty();
         } else {
-            commentRv.setNoMoreData(hasMore);
+            commentRv.setLoadMoreFinish(hasMore);
             if (loadType == CommonConstant.TYPE_REFRESH) {
                 this.mList.addAll(commentResponse.data);
                 mAdapter.notifyDataSetChanged();

@@ -4,11 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
-import android.text.TextPaint;
-import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
@@ -17,23 +14,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
-import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.ww.commonlibrary.MyApplication;
 import com.ww.commonlibrary.base.BaseLoadAdapter;
 import com.ww.commonlibrary.util.GlideUtils;
 import com.ww.commonlibrary.util.TimeUtils;
 import com.ww.commonlibrary.view.CircleImageView;
 import com.ww.commonlibrary.view.ClickAnimImage;
-import com.ww.commonlibrary.view.widget.CenterAlignImageSpan;
 import com.ww.commonlibrary.view.widget.LinkTouchMovementMethod;
 import com.ww.commonlibrary.view.widget.TouchableSpan;
 import com.ww.todaylife.R;
 import com.ww.todaylife.UserDetailActivity;
 import com.ww.todaylife.base.BaseViewHolder;
-import com.ww.todaylife.bean.httpResponse.CommentData;
 import com.ww.todaylife.bean.httpResponse.CommentReply;
 
 import org.jetbrains.annotations.NotNull;
@@ -101,7 +93,7 @@ public class ReplyAdapter extends BaseLoadAdapter<CommentReply> {
         ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(Color.parseColor("#275E91"));
         stringBuilder.setSpan(foregroundColorSpan, text.length() + 2, stringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         ClickableSpan clickableSpan = new TouchableSpan(ContextCompat.getColor(mContext,R.color.blue),
-                ContextCompat.getColor(mContext,R.color.main_red),ContextCompat.getColor(mContext,R.color.translucent)) {
+                ContextCompat.getColor(mContext,R.color.main_red),ContextCompat.getColor(mContext,R.color.transparent)) {
             @Override
             public void onClick(@NotNull View view) {
                 gotoUserDetail(id);

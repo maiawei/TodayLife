@@ -107,7 +107,7 @@ public class AutoLoadRecyclerView extends RecyclerView {
         });
     }
 
-    public void setNoMoreData(boolean hasMore) {
+    public void setLoadMoreFinish(boolean hasMore) {
         BaseLoadAdapter mAdapter = (BaseLoadAdapter) getAdapter();
         if (mAdapter.getItems() == null && mAdapter.getItems().size() == 0) {
             return;

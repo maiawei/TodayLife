@@ -9,9 +9,11 @@ import android.text.TextUtils;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.FutureTarget;
+import com.bumptech.glide.request.target.Target;
 import com.ww.commonlibrary.base.BaseObserver;
 import com.ww.commonlibrary.view.ToastView;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,6 +24,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.channels.FileChannel;
 import java.util.HashMap;
 
 import io.reactivex.Observable;
@@ -118,21 +123,34 @@ public class FileUtils {
         }
     }
 
-    public static void downImage(final Context context, final Uri uri) {
-        Observable.create(new ObservableOnSubscribe<Bitmap>() {
+    public static void downImage(final Context context, final String url) {
+        Observable.create(new ObservableOnSubscribe<String>() {
             @Override
-            public void subscribe(ObservableEmitter<Bitmap> emitter) throws Exception {
-                FutureTarget<Bitmap> futureBitmap = Glide.with(context).asBitmap()
-                        .load(uri)
-                        .submit();
-                emitter.onNext(futureBitmap.get());
+            public void subscribe(ObservableEmitter<String> emitter) throws Exception {
+                try {
+                    File file = null;
+                    FutureTarget<File> future = Glide
+                            .with(context)
+                            .load(url)
+                            .downloadOnly(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL);
+                    file = future.get();
+                    String filePath = file.getAbsolutePath();
+                    String destFileName = System.currentTimeMillis() + getImageFileType(filePath);
+                    File destFile = new File(getSDPath() + "/" + APP_NAME, destFileName);
+                    FileUtils.copy(file, destFile);
+                    context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+                            Uri.fromFile(new File(file.getPath()))));
+                    emitter.onNext("已保存至sd卡TodayLife文件夹下");
+                } catch (Exception e) {
+                    emitter.onNext(e.getMessage());
+                }
             }
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<Bitmap>() {
+                .subscribe(new BaseObserver<String>() {
                     @Override
-                    public void success(Bitmap bitmap) {
-                        saveBitmap(bitmap, String.valueOf(System.currentTimeMillis()), context);
+                    public void success(String msg) {
+                        UiUtils.showShortToast(context, msg, ToastView.TYPE_SUCCESS);
                     }
 
                     @Override
@@ -154,7 +172,7 @@ public class FileUtils {
         if (!appDir.exists()) {
             appDir.mkdirs();
         }
-        File file = new File(appDir, fileName + ".jpg");
+        File file = new File(appDir, fileName);
         if (!file.exists()) {
             try {
                 file.createNewFile();
@@ -275,7 +293,7 @@ public class FileUtils {
      * @param filePath
      * @return
      */
-    public static String getImageFileExt(String filePath) {
+    public static String getImageFileType(String filePath) {
         HashMap<String, String> mFileTypes = new HashMap<String, String>();
         mFileTypes.put("FFD8FF", ".jpg");
         mFileTypes.put("89504E47", ".png");
@@ -336,4 +354,15 @@ public class FileUtils {
         String header = builder.toString();
         return header;
     }
+
+    public static void copy(File src, File dst) throws IOException {
+        FileInputStream inStream = new FileInputStream(src);
+        FileOutputStream outStream = new FileOutputStream(dst);
+        FileChannel inChannel = inStream.getChannel();
+        FileChannel outChannel = outStream.getChannel();
+        inChannel.transferTo(0L, inChannel.size(), outChannel);
+        inStream.close();
+        outStream.close();
+    }
+
 }

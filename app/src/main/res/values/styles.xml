@@ -6,7 +6,7 @@
         <item name="colorPrimary">@color/main_red</item>
         <item name="colorPrimaryDark">@color/main_grey</item>
         <item name="colorAccent">@color/main_red</item>
-        <item name="windowNoTitle">?android:windowNoTitle</item>
+        <item name="windowNoTitle">true</item>
         <item name="android:listDivider">@drawable/divider_bg</item>
         <item name="windowActionBar">false</item>
     </style>

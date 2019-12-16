@@ -44,7 +44,7 @@ public class SearchListAdapter extends BaseAdapter<NewsDetail, SearchListAdapter
             holder.newsTitle.setText(item.title);
             holder.authorName.setText(item.media_name);
             holder.commentCount.setText(String.format("评论%d", item.comment_count));
-            GlideUtils.loadCircleImage(mContext,item.media_avatar_url,holder.authorImg);
+            GlideUtils.loadAvatar(mContext,item.media_avatar_url,holder.authorImg);
             if (holder instanceof TextNewsVh) {
                 TextNewsVh vh = (TextNewsVh) holder;
                 vh.abstractTv.setText(item.abstractX);

@@ -42,7 +42,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
                 window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                window.setStatusBarColor(getResources().getColor(R.color.translucent));
+                window.setStatusBarColor(getResources().getColor(R.color.transparent));
                 window.setNavigationBarColor(Color.TRANSPARENT);
             }
         }

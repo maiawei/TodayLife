@@ -20,6 +20,6 @@
     <color name="black_333">#333333</color>
 
     <color name="black_777">#777777</color>
-    <color name="translucent">#00000000</color>
+    <color name="transparent">#00000000</color>
     <drawable name="touchFeedback">#d8d8d8</drawable>
 </resources>

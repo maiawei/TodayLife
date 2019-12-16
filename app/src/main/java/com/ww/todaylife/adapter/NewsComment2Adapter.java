@@ -7,8 +7,6 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
-import android.text.TextPaint;
-import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
@@ -19,13 +17,11 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.ww.commonlibrary.MyApplication;
 import com.ww.commonlibrary.base.BaseLoadAdapter;
+import com.ww.commonlibrary.util.GlideUtils;
 import com.ww.commonlibrary.util.ScreenUtils;
-import com.ww.commonlibrary.util.StringUtils;
 import com.ww.commonlibrary.util.TimeUtils;
-import com.ww.commonlibrary.util.UiUtils;
 import com.ww.commonlibrary.view.CircleImageView;
 import com.ww.commonlibrary.view.ClickAnimImage;
 import com.ww.commonlibrary.view.LimitTextView;
@@ -72,9 +68,9 @@ public class NewsComment2Adapter extends BaseLoadAdapter<CommentData> {
             CommentData item = mItems.get(position);
             if (item != null) {
                 ItemViewHolder viewHolder = (ItemViewHolder) holder;
-                Glide.with(mContext).load(item.comment.user_profile_image_url).placeholder(R.mipmap.ic_default_avatar).into(viewHolder.headerImage);
+                GlideUtils.loadAvatar(mContext,item.comment.user_profile_image_url,viewHolder.headerImage);
                 viewHolder.author.setText(item.comment.user_name);
-                viewHolder.content.setContent(item.comment.text, ScreenUtils.getScreenWidth()-ScreenUtils.dip2px(mContext,75));
+                viewHolder.content.setContent(item.comment.text, ScreenUtils.getScreenWidth() - ScreenUtils.dip2px(mContext, 75));
                 if (item.comment.reply_count > 0) {
                     viewHolder.commentDate.setText(TimeUtils.getShortTime(item.comment.create_time * 1000) + " · ");
                     viewHolder.replyCount.setVisibility(View.VISIBLE);
@@ -102,10 +98,16 @@ public class NewsComment2Adapter extends BaseLoadAdapter<CommentData> {
                     gotoUserDetail(String.valueOf(item.comment.user_id));
                 });
                 viewHolder.content.setOnClickListener(v -> {
-                    viewHolder.itemView.performClick();
+                    if(clickListener!=null)
+                    clickListener.itemClick(position);
                 });
             }
         }
+    }
+
+    @Override
+    public boolean isSetItemBackground() {
+        return true;
     }
 
     private void gotoUserDetail(String id) {
@@ -122,8 +124,8 @@ public class NewsComment2Adapter extends BaseLoadAdapter<CommentData> {
         drawable.setBounds(userName.length(), 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
         CenterAlignImageSpan ab = new CenterAlignImageSpan(drawable);
         stringBuilder.setSpan(ab, userName.length(), stringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        ClickableSpan clickableSpan = new TouchableSpan(ContextCompat.getColor(mContext,R.color.blue),
-                ContextCompat.getColor(mContext,R.color.main_red),ContextCompat.getColor(mContext,R.color.translucent)) {
+        ClickableSpan clickableSpan = new TouchableSpan(ContextCompat.getColor(mContext, R.color.blue),
+                ContextCompat.getColor(mContext, R.color.main_red), ContextCompat.getColor(mContext, R.color.transparent)) {
             @Override
             public void onClick(@NotNull View view) {
                 gotoUserDetail(id);

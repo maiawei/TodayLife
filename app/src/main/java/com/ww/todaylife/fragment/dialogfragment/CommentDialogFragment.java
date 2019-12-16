@@ -9,17 +9,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.ww.commonlibrary.CommonConstant;
-import com.ww.commonlibrary.util.LogUtils;
 import com.ww.commonlibrary.util.ScreenUtils;
 import com.ww.commonlibrary.util.TimeUtils;
 import com.ww.commonlibrary.view.CircleImageView;
-import com.ww.commonlibrary.view.ClickAnimImage;
 import com.ww.commonlibrary.view.LimitTextView;
 import com.ww.commonlibrary.view.autoLoadMoreRecyclerView.AutoLoadRecyclerView;
 import com.ww.todaylife.R;
@@ -27,7 +23,6 @@ import com.ww.todaylife.adapter.ReplyAdapter;
 import com.ww.todaylife.base.BaseFullBottomSheetFragment;
 import com.ww.todaylife.bean.httpResponse.CommentData;
 import com.ww.todaylife.bean.httpResponse.CommentReply;
-import com.ww.todaylife.bean.httpResponse.HsVideoRootBean;
 import com.ww.todaylife.bean.httpResponse.ReplyListResponse;
 import com.ww.todaylife.presenter.NewsDetailPresenter;
 
@@ -41,7 +36,7 @@ public class CommentDialogFragment extends BaseFullBottomSheetFragment {
     @BindView(R.id.replyRv)
     AutoLoadRecyclerView replyRv;
     private ReplyAdapter mAdapter;
-    private ArrayList<CommentReply> mList = new ArrayList<>();
+    private ArrayList<CommentReply> mList ;
     private NewsDetailPresenter presenter;
     @BindView(R.id.replyCount)
     TextView replyCount;
@@ -62,6 +57,7 @@ public class CommentDialogFragment extends BaseFullBottomSheetFragment {
         if (item == null) {
             return;
         }
+        mList= new ArrayList<>();
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         replyRv.setLayoutManager(layoutManager);
         mAdapter = new ReplyAdapter(mContext, mList);
@@ -101,13 +97,13 @@ public class CommentDialogFragment extends BaseFullBottomSheetFragment {
     public void handleData(ReplyListResponse commentReply, int loadType, boolean hasMore) {
         loadLayout.setVisibility(View.GONE);
         if (commentReply == null) {
-            replyRv.setNoMoreData(true);
+            replyRv.setLoadMoreFinish(true);
             return;
         }
         if (commentReply.data.total_count == 0) {
             replyRv.setEmpty();
         } else {
-            replyRv.setNoMoreData(hasMore);
+            replyRv.setLoadMoreFinish(hasMore);
             if (loadType == CommonConstant.TYPE_REFRESH) {
                 this.mList.addAll(commentReply.data.data);
                 mAdapter.notifyDataSetChanged();
@@ -124,7 +120,6 @@ public class CommentDialogFragment extends BaseFullBottomSheetFragment {
 
     @Override
     public void onDismiss(@NonNull DialogInterface dialog) {
-        mList.clear();
         super.onDismiss(dialog);
     }
 }

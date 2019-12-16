@@ -52,7 +52,7 @@
         <item name="android:windowIsFloating">true</item>//悬浮
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowIsTranslucent">true</item><!-- 是否半透明 -->
-        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
         <item name="android:windowAnimationStyle">@style/AnimBottom</item>
     </style>
 

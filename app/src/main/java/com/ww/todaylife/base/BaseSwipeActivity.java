@@ -24,7 +24,7 @@ import butterknife.Unbinder;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 
-public abstract class BaseSwipeActivity<T extends BasePresenter> extends  SwipeBackActivity {
+public abstract class BaseSwipeActivity<T extends BasePresenter> extends SwipeBackActivity {
     protected T mPresenter;
     private Unbinder unbinder;
 
@@ -43,7 +43,7 @@ public abstract class BaseSwipeActivity<T extends BasePresenter> extends  SwipeB
                 window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                window.setStatusBarColor(getResources().getColor(R.color.translucent));
+                window.setStatusBarColor(getResources().getColor(R.color.transparent));
                 window.setNavigationBarColor(Color.TRANSPARENT);
             }
         }
@@ -54,13 +54,14 @@ public abstract class BaseSwipeActivity<T extends BasePresenter> extends  SwipeB
         initData(savedInstanceState);
         setOnBack();
     }
-   public void setOnBack(){
-        if(findViewById(R.id.backImg)!=null){
+
+    public void setOnBack() {
+        if (findViewById(R.id.backImg) != null) {
             findViewById(R.id.backImg).setOnClickListener(v -> {
                 this.finish();
             });
         }
-   }
+    }
 
     public void setToolbar(View view) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -102,7 +103,7 @@ public abstract class BaseSwipeActivity<T extends BasePresenter> extends  SwipeB
     public void setWindowAlpha(float alpha) {
         Window window = getWindow();
         WindowManager.LayoutParams params = window.getAttributes();
-        params.alpha=alpha;
+        params.alpha = alpha;
         window.setAttributes(params);
     }
 
@@ -116,12 +117,17 @@ public abstract class BaseSwipeActivity<T extends BasePresenter> extends  SwipeB
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-            View v = getCurrentFocus();
-            if (isShouldHideKeyboard(v, ev)) {
-                UiUtils.hideSoftInput(this);
+        try {
+            if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+                View v = getCurrentFocus();
+                if (isShouldHideKeyboard(v, ev)) {
+                    UiUtils.hideSoftInput(this);
+                }
             }
+        } catch (IllegalArgumentException e) {
+            return super.dispatchTouchEvent(ev);
         }
+
         return super.dispatchTouchEvent(ev);
     }
 

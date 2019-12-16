@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 
@@ -121,9 +122,7 @@ public class HSDetailJzvdStd extends JzvdStd {
 
                 float offsetX = Math.abs(currentX - downX);
                 float offsetY = Math.abs(currentY - downY);
-                if (offsetY > offsetX && (currentY - downY) < 0) {
-
-                    LogUtils.e("showCommentDialog");
+                if (offsetY > offsetX && (currentY - downY) < -ViewConfiguration.get(this.getContext()).getScaledTouchSlop()) {
                     if (callBack != null && isCallBack) {
                         isCallBack=false;
                         callBack.showCommentDialog();

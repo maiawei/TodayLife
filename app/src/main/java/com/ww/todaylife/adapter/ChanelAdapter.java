@@ -6,34 +6,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.jakewharton.rxbinding3.view.RxView;
 import com.ww.commonlibrary.base.BaseAdapter;
 import com.ww.commonlibrary.util.LogUtils;
 import com.ww.commonlibrary.util.TimeUtils;
 import com.ww.todaylife.R;
 import com.ww.todaylife.bean.ChanelCategory;
-import com.ww.todaylife.bean.eventBean.NewsTabEvent;
-import com.ww.todaylife.util.DataProcessUtils;
 
-import org.greenrobot.eventbus.EventBus;
-
-import java.security.PublicKey;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import io.reactivex.Observable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import kotlin.Unit;
 
 public class ChanelAdapter extends BaseAdapter<ChanelCategory, ChanelAdapter.ChanelVh> {
 
@@ -71,7 +56,7 @@ public class ChanelAdapter extends BaseAdapter<ChanelCategory, ChanelAdapter.Cha
                 if(item.isSelected){
                     holder.chanelName.setBackgroundResource(R.drawable.chanel_item_bg);
                 }else {
-                    holder.chanelName.setBackgroundColor(mContext.getResources().getColor(R.color.translucent));
+                    holder.chanelName.setBackgroundColor(mContext.getResources().getColor(R.color.transparent));
                 }
                 holder.chanelName.setText(item.name);
             }

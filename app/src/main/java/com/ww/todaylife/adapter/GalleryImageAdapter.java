@@ -13,8 +13,11 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.github.chrisbanes.photoview.PhotoView;
+import com.ww.commonlibrary.glideloader.GlideImageLoader;
+import com.ww.commonlibrary.view.CircleProgressView;
 import com.ww.todaylife.R;
 import com.ww.todaylife.base.RecyclingPagerAdapter;
 
@@ -42,20 +45,8 @@ public class GalleryImageAdapter extends RecyclingPagerAdapter {
             holder = new AdapterViewHolder(view);
             view.setTag(holder);
         }
-
-        Glide.with(mContext).load(mList.get(position)).error(R.mipmap.error_picture).listener(new RequestListener<Drawable>() {
-            @Override
-            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                holder.progressBar.setVisibility(View.GONE);
-                return false;
-            }
-
-            @Override
-            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                holder.progressBar.setVisibility(View.GONE);
-                return false;
-            }
-        }).into(holder.photoView);
+        new GlideImageLoader(mContext, holder.photoView,
+                holder.progressBar).load(mList.get(position));
         return view;
     }
 
@@ -66,7 +57,8 @@ public class GalleryImageAdapter extends RecyclingPagerAdapter {
 
     public static class AdapterViewHolder {
         public final PhotoView photoView;
-        public final ProgressBar progressBar;
+        public final CircleProgressView progressBar;
+
         public AdapterViewHolder(View view) {
             photoView = view.findViewById(R.id.photoView);
             progressBar = view.findViewById(R.id.progressBar);

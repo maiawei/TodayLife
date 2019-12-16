@@ -96,7 +96,6 @@ public class NewsDetailActivity extends NewsDetailBaseActivity {
             Glide.with(this).load(newsContentBean.data.media_user.avatar_url).into(titleImg);
         }
        // loadingView.hide();
-
     }
 
     @Override

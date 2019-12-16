@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ww.commonlibrary.util.LogUtils;
 import com.ww.commonlibrary.view.widget.RvItemAnimator;
 import com.ww.todaylife.R;
 import com.ww.todaylife.adapter.ChanelAdapter;

@@ -1,7 +1,6 @@
 package com.ww.todaylife;
 
 import android.annotation.SuppressLint;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.widget.RelativeLayout;
@@ -86,7 +85,7 @@ public class GalleryDetailActivity extends BaseSwipeActivity {
 
     @Override
     public void initView() {
-        SystemUtils.setWindowStatusBarColor(this, R.color.translucent);
+        SystemUtils.setWindowStatusBarColor(this, R.color.transparent);
         dragCloseHelper = new DragCloseHelper(this);
         dragCloseHelper.setDragCloseViews(rootLayout, mViewPager);
         dragCloseHelper.setClickListener((view) -> {
@@ -156,6 +155,6 @@ public class GalleryDetailActivity extends BaseSwipeActivity {
 
     @OnClick(R.id.saveTv)
     public void onViewClicked() {
-        FileUtils.downImage(MyApplication.getApp(), Uri.parse(mList.get(currentPosition)));
+        FileUtils.downImage(MyApplication.getApp(), mList.get(currentPosition));
     }
 }

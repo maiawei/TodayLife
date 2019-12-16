@@ -18,6 +18,7 @@ import android.widget.Scroller;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.NestedScrollingChild2;
 import androidx.core.view.NestedScrollingChildHelper;
@@ -47,7 +48,6 @@ public class NestedScrollWebView extends WebView implements NestedScrollingChild
     private int firstY;
     private int lastY;
     private PageFinishedListener pageFinishedListener;
-    private boolean isShowImg = true;
 
     public NestedScrollWebView(Context context) {
         this(context, null);
@@ -363,17 +363,24 @@ public class NestedScrollWebView extends WebView implements NestedScrollingChild
                 handler.proceed();// 接受所有网站的证书，忽略错误
             }
 
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 if (pageFinishedListener != null)
                     pageFinishedListener.pageFinished(view);
                 if (!NetworkUtil.isMobileConnected(MyApplication.getApp()) || PreUtils.getInt(WLAN_SETTING, 0) != 2) {
-                    isShowImg = true;
-                    view.loadUrl("javascript:loadAllImg()");
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                        view.evaluateJavascript("javascript:loadAllImg()", null);
+                    } else {
+                        view.loadUrl("javascript:loadAllImg()");
+                    }
                 } else {
-                    isShowImg = false;
-                    view.loadUrl("javascript:loadSingleImg()");
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                        view.evaluateJavascript("javascript:loadSingleImg()", null);
+                    } else {
+                        view.loadUrl("javascript:loadSingleImg()");
+                    }
                 }
             }
 

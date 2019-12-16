@@ -3,7 +3,7 @@
     android:shape="rectangle" >
 
     <solid
-        android:color="@color/divider_color"/>
+        android:color="@color/white"/>
     <size android:height="4dp"/>
 
 </shape>

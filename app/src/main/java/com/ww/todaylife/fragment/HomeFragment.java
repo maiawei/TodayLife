@@ -144,9 +144,6 @@ public class HomeFragment extends BaseFragment {
         } else if (view.getId() == R.id.tabOperationImage) {
             if (chanelDialog == null)
                 chanelDialog = new ChanelDialogFragment();
-            if(chanelDialog.isAdded()){
-                return;
-            }
             chanelDialog.show(getChildFragmentManager(), "ChanelDialogFragment");
 
         }

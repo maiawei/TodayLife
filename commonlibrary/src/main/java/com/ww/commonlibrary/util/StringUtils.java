@@ -25,6 +25,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.Random;
 import java.util.zip.CRC32;
 
@@ -118,7 +121,8 @@ public class StringUtils {
             return String.format("%.1f万", (float) count / 10000f);
         }
     }
-    public static String getLoadHtml(String html){
+
+    public static String getLoadHtml(String html) {
         Document doc = Jsoup.parse(html);
         Elements elements = doc.getElementsByTag("img");
         for (Element element : elements) {

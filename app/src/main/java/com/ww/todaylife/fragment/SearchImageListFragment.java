@@ -2,7 +2,6 @@ package com.ww.todaylife.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,7 +11,6 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.ww.commonlibrary.CommonConstant;
-import com.ww.commonlibrary.util.LogUtils;
 import com.ww.commonlibrary.view.LoadStateView;
 import com.ww.commonlibrary.view.widget.DividerGridItemDecoration;
 import com.ww.todaylife.GalleryDetailActivity;
@@ -79,7 +77,7 @@ public class SearchImageListFragment extends LazyFragment<SearchNewsListPresente
         recyclerView.setItemAnimator(null);
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
-        recyclerView.addItemDecoration(new DividerGridItemDecoration(mBaseActivity, R.drawable.pic_divider_bg));
+        recyclerView.addItemDecoration(new DividerGridItemDecoration(mBaseActivity, R.drawable.search_image_divider_bg));
         recyclerView.setLayoutManager(layoutManager);
         refreshLayout.setEnableRefresh(false);
         refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {

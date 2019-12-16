@@ -24,7 +24,7 @@ public abstract class BaseAdapter<E, VH extends RecyclerView.ViewHolder> extends
         this.clickListener = clickListener;
     }
 
-    private ItemClickListener clickListener;
+    protected ItemClickListener clickListener;
     private ItemLongClickListener longClickListener;
 
     public BaseAdapter(Context context, List<E> list) {
