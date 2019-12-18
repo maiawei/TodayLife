@@ -1,5 +1,6 @@
 package com.ww.commonlibrary.util;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -114,6 +115,7 @@ public class StringUtils {
         return hStr + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
     }
 
+    @SuppressLint("DefaultLocale")
     public static String getCountStr(int count) {
         if (count / 10000 == 0) {
             return String.valueOf(count);

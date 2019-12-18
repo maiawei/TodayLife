@@ -129,7 +129,7 @@ public abstract class BaseAdapter<E, VH extends RecyclerView.ViewHolder> extends
      * @since 1.0
      */
     public boolean remove(int position) {
-        if (mItems.get(position) != null && position != -1) {
+        if (position != -1 && mItems.get(position) != null) {
             mItems.remove(position);
             notifyItemRemoved(position);
             notifyItemRangeChanged(position, mItems.size() - position);

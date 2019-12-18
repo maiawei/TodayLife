@@ -10,21 +10,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <TextView
+    <Button
+        android:layout_marginLeft="5dp"
+        android:background="@drawable/save_btn_bg"
         android:gravity="center"
         android:id="@+id/positionTv"
         android:layout_width="70dp"
         android:layout_height="35dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
-        android:padding="5dp"
         android:text=""
         android:textColor="#fff"
         android:textSize="15sp" />
 
     <Button
+        android:layout_marginRight="5dp"
         android:gravity="center"
-        android:background="@null"
+        android:background="@drawable/save_btn_bg"
         android:id="@+id/saveTv"
         android:layout_width="70dp"
         android:layout_height="35dp"
@@ -32,7 +34,6 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
         android:clickable="true"
-        android:padding="5dp"
         android:text="保存"
         android:textColor="#fff"
         android:textSize="15sp" />

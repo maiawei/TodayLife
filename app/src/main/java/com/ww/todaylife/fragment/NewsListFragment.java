@@ -1,12 +1,20 @@
 package com.ww.todaylife.fragment;
 
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.ww.commonlibrary.CommonConstant;
+import com.ww.commonlibrary.util.ScreenUtils;
 import com.ww.commonlibrary.view.LoadStateView;
 import com.ww.todaylife.NewsDetailActivity;
 import com.ww.todaylife.VideoNewsDetailActivity;
@@ -45,11 +54,17 @@ public class NewsListFragment extends LazyFragment<NewsListPresenter> implements
     SmartRefreshLayout refreshLayout;
     @BindView(R.id.loadingView)
     LoadStateView loadingView;
+    @BindView(R.id.refreshCountTv)
+    TextView refreshCountTv;
     int currentPosition = -1, currentSize = -1;
     private NewsList2Adapter newsListAdapter;
     private ArrayList<NewsDetail> mList = new ArrayList<>();
     private String typeCode;
     private LinearLayoutManager linearLayoutManager;
+    private Animation animation;
+    private Runnable countTvHideRunnable;
+    private LinearLayout.LayoutParams params;
+    private ValueAnimator hideAnim;
 
     @Override
     public int getLayoutId() {
@@ -172,6 +187,7 @@ public class NewsListFragment extends LazyFragment<NewsListPresenter> implements
     @SuppressLint("CheckResult")
     @Override
     public void onGetNewsList(List<NewsDetail> newsDetailList, int loadType) {
+        showRefreshCount(newsDetailList.size());
         if (loadType == CommonConstant.TYPE_REFRESH) {
             // dealData();
             mList.addAll(0, newsDetailList);
@@ -183,6 +199,30 @@ public class NewsListFragment extends LazyFragment<NewsListPresenter> implements
             newsListAdapter.addAll(newsDetailList);
             refreshLayout.finishLoadMore();
         }
+    }
+
+    @SuppressLint("DefaultLocale")
+    public void showRefreshCount(int length) {
+        params = (LinearLayout.LayoutParams) refreshCountTv.getLayoutParams();
+        params.height = ScreenUtils.dip2px(mBaseActivity, 40);
+        params.width=ScreenUtils.getScreenWidth();
+        refreshCountTv.setVisibility(View.VISIBLE);
+        if (animation == null)
+            animation = AnimationUtils.loadAnimation(mBaseActivity, R.anim.scale_text_in);
+        refreshCountTv.setText(String.format("今日生活推荐引擎有%d更新", length));
+        refreshCountTv.startAnimation(animation);
+        if (countTvHideRunnable == null) {
+            countTvHideRunnable = () -> {
+                hideAnim = ValueAnimator.ofInt(ScreenUtils.dip2px(mBaseActivity, 40), 0);
+                hideAnim.addUpdateListener(animation -> {
+                    params.height = (int) animation.getAnimatedValue();
+                    refreshCountTv.setLayoutParams(params);
+                });
+                hideAnim.setDuration(150);
+                hideAnim.start();
+            };
+        }
+        refreshCountTv.postDelayed(countTvHideRunnable, 1500);
     }
 
     public void dealData() {
@@ -222,6 +262,9 @@ public class NewsListFragment extends LazyFragment<NewsListPresenter> implements
     @Override
     public void onDestroy() {
         EventBus.getDefault().unregister(this);
+        if (countTvHideRunnable != null) {
+            refreshCountTv.removeCallbacks(countTvHideRunnable);
+        }
         super.onDestroy();
     }
 }

@@ -13,11 +13,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            style="@style/scrollbarStyle"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/refreshCountTv"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:background="@color/blue"
+                android:gravity="center"
+                android:text="更新了条数据"
+                android:alpha="0.7"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                style="@style/scrollbarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
     <com.ww.commonlibrary.view.LoadStateView

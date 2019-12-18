@@ -123,12 +123,14 @@ public abstract class BaseSwipeActivity<T extends BasePresenter> extends SwipeBa
                 if (isShouldHideKeyboard(v, ev)) {
                     UiUtils.hideSoftInput(this);
                 }
+
             }
-        } catch (IllegalArgumentException e) {
             return super.dispatchTouchEvent(ev);
+
+        } catch (IllegalArgumentException e) {
+            return false;
         }
 
-        return super.dispatchTouchEvent(ev);
     }
 
     public void startActivityWithAnimation(Intent it, int animation) {
