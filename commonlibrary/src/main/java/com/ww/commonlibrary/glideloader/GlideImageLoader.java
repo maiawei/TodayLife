@@ -15,6 +15,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.github.chrisbanes.photoview.PhotoView;
+import com.ww.commonlibrary.MyApplication;
 import com.ww.commonlibrary.util.LogUtils;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
@@ -26,11 +27,9 @@ public class GlideImageLoader {
 
     private ImageView mImageView;
     private ProgressBar mProgressBar;
-    private Context context;
-    public GlideImageLoader(Context context,ImageView imageView, ProgressBar progressBar) {
+    public GlideImageLoader(ImageView imageView, ProgressBar progressBar) {
         mImageView = imageView;
         mProgressBar = progressBar;
-        this.context=context;
     }
 
     public void load(final String url) {
@@ -53,7 +52,7 @@ public class GlideImageLoader {
             }
         });
         //Get Image
-        Glide.with(context)
+        Glide.with(MyApplication.getApp())
                 .load(url)
                 .transition(withCrossFade())
                 .listener(new RequestListener<Drawable>() {

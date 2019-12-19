@@ -88,7 +88,7 @@ public abstract class BaseFullBottomSheetFragment extends BottomSheetDialogFragm
         FrameLayout bottomSheet = dialog.getDelegate().findViewById(R.id.design_bottom_sheet);
         if (bottomSheet != null) {
             CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) bottomSheet.getLayoutParams();
-            layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
+            layoutParams.height = height == 0 ? ViewGroup.LayoutParams.MATCH_PARENT : height;
             BottomSheetBehavior<FrameLayout> behavior = BottomSheetBehavior.from(bottomSheet);
             // 初始为展开状态
             behavior.setPeekHeight(height == 0 ? ScreenUtils.getScreenHeight() - ScreenUtils.getStatusBarHeight(MyApplication.getApp()) : height);

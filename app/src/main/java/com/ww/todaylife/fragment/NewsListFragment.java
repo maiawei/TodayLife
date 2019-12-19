@@ -215,6 +215,9 @@ public class NewsListFragment extends LazyFragment<NewsListPresenter> implements
             countTvHideRunnable = () -> {
                 hideAnim = ValueAnimator.ofInt(ScreenUtils.dip2px(mBaseActivity, 40), 0);
                 hideAnim.addUpdateListener(animation -> {
+                    if(refreshCountTv==null){
+                        return;
+                    }
                     params.height = (int) animation.getAnimatedValue();
                     refreshCountTv.setLayoutParams(params);
                 });

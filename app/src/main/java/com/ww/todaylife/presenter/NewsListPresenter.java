@@ -54,13 +54,15 @@ public class NewsListPresenter extends BasePresenter<INewsListView, BaseResponse
                     news.typeCode = typeCode;
                     newsList.add(news);
                 }
+                DataProcessUtils.dealNewsData(newsList);
+                Collections.reverse(newsList);
                 TlDatabase.getInstance().newsDao().insertNewsList(newsList);
+                Collections.reverse(newsList);
                 if (typeCode.equals("") && newsList.size() > 1) {
                     newsList.get(0).topping = 1;
                     newsList.get(1).topping = 1;
                 }
             }
-            DataProcessUtils.dealNewsData(newsList);
             responseData.news = newsList;
         }), new BaseObserver<NewsListResponse>() {
             @Override
@@ -81,7 +83,6 @@ public class NewsListPresenter extends BasePresenter<INewsListView, BaseResponse
         addDatabaseDisposable(Observable.create((ObservableOnSubscribe<List<NewsDetail>>) emitter -> {
             List<NewsDetail> newsDetailList = new ArrayList<>();
             newsDetailList = TlDatabase.getInstance().newsDao().searchNewsPage(typeCode, startIndex);
-            Collections.reverse(newsDetailList);
             emitter.onNext(newsDetailList);
         }), new BaseObserver<List<NewsDetail>>() {
             @Override

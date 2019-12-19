@@ -28,6 +28,9 @@ public class DataProcessUtils {
     //获取屏蔽的关键字
     public static ArrayList<String> dealHiddenWords(List<FilterWords> newsList) {
         ArrayList<String> words = new ArrayList<>();
+        if (newsList == null) {
+            return words;
+        }
         Iterator<FilterWords> it = newsList.iterator();
         while (it.hasNext()) {
             FilterWords filterWords = it.next();
@@ -81,6 +84,7 @@ public class DataProcessUtils {
             }
         }
     }
+
     //处理 重复历史news
     public static ArrayList<NewsDetail> dealRepeatNews(List<NewsDetail> newsList) {
         LinkedHashSet linkedHashSet = new LinkedHashSet(newsList);

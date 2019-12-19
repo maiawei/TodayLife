@@ -3,6 +3,7 @@ package com.ww.commonlibrary.util;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
 import android.text.TextUtils;
@@ -138,8 +139,8 @@ public class FileUtils {
                     String destFileName = System.currentTimeMillis() + getImageFileType(filePath);
                     File destFile = new File(getSDPath() + "/" + APP_NAME, destFileName);
                     FileUtils.copy(file, destFile);
-                    context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
-                            Uri.fromFile(new File(file.getPath()))));
+                    //刷新media
+                    MediaScannerConnection.scanFile(context, new String[]{destFile.getAbsolutePath()}, null, null);
                     emitter.onNext("已保存至sd卡TodayLife文件夹下");
                 } catch (Exception e) {
                     emitter.onNext(e.getMessage());

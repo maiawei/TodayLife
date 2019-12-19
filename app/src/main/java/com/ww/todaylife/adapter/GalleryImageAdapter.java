@@ -45,7 +45,7 @@ public class GalleryImageAdapter extends RecyclingPagerAdapter {
             holder = new AdapterViewHolder(view);
             view.setTag(holder);
         }
-        new GlideImageLoader(mContext, holder.photoView,
+        new GlideImageLoader(holder.photoView,
                 holder.progressBar).load(mList.get(position));
         return view;
     }

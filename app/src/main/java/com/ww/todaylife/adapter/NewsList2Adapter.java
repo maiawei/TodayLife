@@ -77,6 +77,7 @@ public class NewsList2Adapter extends BaseAdapter<NewsDetail, BaseViewHolder> {
                 if (item.video_detail_info != null) {
                     Glide.with(mContext).load(item.video_detail_info.detail_video_large_image.url).into(vh.newsCover);
                 }
+                vh.adTagTv.setVisibility(item.article_type == 1 ? View.VISIBLE :View.GONE);
                 vh.durationTv.setText(StringUtils.timeToMS(item.video_duration));
             }
             if (holder instanceof HiddenVh) {
@@ -270,11 +271,12 @@ public class NewsList2Adapter extends BaseAdapter<NewsDetail, BaseViewHolder> {
     public class VideoNewsVh extends NewsItemVh {
         ImageView newsCover;
         TextView durationTv;
-
+        TextView adTagTv;
         private VideoNewsVh(View view) {
             super(view);
             durationTv = view.findViewById(R.id.durationTv);
             newsCover = view.findViewById(R.id.news_cover);
+            adTagTv = view.findViewById(R.id.adTag);
         }
     }
 }
