@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.ww.commonlibrary.CommonConstant;
 import com.ww.commonlibrary.MyApplication;
 import com.ww.commonlibrary.util.SystemUtils;
@@ -83,20 +84,20 @@ public class StartActivity extends AppCompatActivity {
                 //外部存储同意授权
                 dealConfig();
             } else {
-//                UiUtils.showAlertDialog(StartActivity.this, getResources().getString(R.string.permissions_hint), new UiUtils.DialogClickListener() {
-//                    @Override
-//                    public void okClick() {
-//                        startActivity(SystemUtils.getAppDetailSettingIntent(getPackageName()));
-//                        StartActivity.this.finish();
-//                    }
-//
-//                    @Override
-//                    public void cancelClick() {
-//                        StartActivity.this.finish();
-//                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);//透明主题与activity动画不兼容
-//                    }
-//                });
+                UiUtils.showConfirmDialog(StartActivity.this, R.string.permissions_hint, new UiUtils.DialogClickListener() {
+                    @Override
+                    public void onClick(DialogAction type) {
+                        if (type == DialogAction.POSITIVE) {
+                            startActivity(SystemUtils.getAppDetailSettingIntent(getPackageName()));
+                            StartActivity.this.finish();
+                        } else {
+                            StartActivity.this.finish();
+                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);//透明主题与activity动画不兼容
+                        }
+                    }
+                });
             }
+
         }
     }
 

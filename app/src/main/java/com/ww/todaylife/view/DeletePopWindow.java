@@ -26,6 +26,7 @@ import com.ww.todaylife.bean.httpResponse.NewsDetail;
 import com.ww.todaylife.util.DataProcessUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -94,7 +95,7 @@ public class DeletePopWindow extends PopupWindow {
             keywordTv.setText(keys.get(0) + "、" + keys.get(1));
             keywordTv1.setText(keys.get(0));
             keywordTv2.setText(keys.get(1));
-        } else {
+        } else if (!keys.isEmpty()){
             keywordTv.setText(keys.get(0));
             keywordTv1.setText(keys.get(0));
             keywordTv2.setVisibility(View.GONE);

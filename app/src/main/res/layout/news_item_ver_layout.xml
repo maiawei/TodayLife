@@ -84,23 +84,7 @@
         app:layout_constrainedWidth="true"
         app:layout_constraintRight_toLeftOf="@id/authorName"
         app:layout_constraintTop_toBottomOf="@id/abstractTv" />
-    <TextView
-        android:id="@+id/adTag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/news_ad_bg"
-        android:gravity="center"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:text="广告"
-        android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="@id/authorName"
-        android:textColor="@color/blue"
-        app:layout_constrainedWidth="true"
-        app:layout_constraintRight_toLeftOf="@id/authorName"
-        app:layout_constraintTop_toBottomOf="@id/abstractTv" />
+  
     <Space
         android:id="@+id/space"
         android:layout_width="wrap_content"

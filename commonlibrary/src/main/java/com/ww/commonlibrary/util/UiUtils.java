@@ -54,9 +54,7 @@ public class UiUtils {
                 .onAny(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NotNull MaterialDialog dialog, @NotNull DialogAction which) {
-                        if (which == DialogAction.POSITIVE) {
-                            listener.okClick();
-                        }
+                        listener.onClick(which);
                     }
                 }).show();
     }
@@ -148,9 +146,7 @@ public class UiUtils {
     }
 
     public interface DialogClickListener {
-
-        public void okClick();
-
+        public void onClick(DialogAction type);
     }
 
     public interface DialogItemSelectedListener {

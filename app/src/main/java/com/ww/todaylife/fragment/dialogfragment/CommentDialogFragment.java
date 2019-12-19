@@ -79,15 +79,14 @@ public class CommentDialogFragment extends BaseFullBottomSheetFragment {
         View hView = LayoutInflater.from(mContext).inflate(R.layout.common_detail_header, null);
         CircleImageView header = hView.findViewById(R.id.header);
         TextView author = hView.findViewById(R.id.author);
-        LimitTextView content = hView.findViewById(R.id.content);
+        TextView content = hView.findViewById(R.id.content);
         TextView likeCount = hView.findViewById(R.id.likeCount);
         TextView diggCountTv = hView.findViewById(R.id.diggCountTv);
         TextView commentDate = hView.findViewById(R.id.commentDate);
         loadLayout = hView.findViewById(R.id.loadLayout);
-        content.setCanExpand(true);
         Glide.with(mContext).load(item.comment.user_profile_image_url).into(header);
         author.setText(item.comment.user_name);
-        content.setContent(item.comment.text, ScreenUtils.getScreenWidth() - ScreenUtils.dip2px(mContext, 75));
+        content.setText(item.comment.text);
         diggCountTv.setText(item.comment.digg_count > 0 ? item.comment.digg_count + "人赞过 >" : "暂无人赞过");
         likeCount.setText(String.valueOf(item.comment.digg_count));
         commentDate.setText(TimeUtils.getShortTime(item.comment.create_time * 1000));

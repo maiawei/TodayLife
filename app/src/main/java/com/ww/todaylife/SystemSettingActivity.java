@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory;
 import com.ww.commonlibrary.CommonConstant;
@@ -95,26 +96,28 @@ public class SystemSettingActivity extends BaseSwipeActivity {
     }
 
     public void clearCache() {
-        UiUtils.showConfirmDialog(this, R.string.clear_cache_hint, () -> {
-            UiUtils.showProgressDialog(SystemSettingActivity.this, R.string.dialog_deleting);
-            Observable.create(emitter -> {
-                Glide.get(SystemSettingActivity.this).clearDiskCache();
-                emitter.onNext(new Object());
-            }).subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new BaseObserver<Object>() {
-                        @Override
-                        public void success(Object o) {
-                            new Handler().postDelayed(() -> {
-                                UiUtils.hideProgressDialog();
-                                getCaCheSize();
-                            }, 500);
-                        }
+        UiUtils.showConfirmDialog(this, R.string.clear_cache_hint, (type) -> {
+            if (type == DialogAction.POSITIVE) {
+                UiUtils.showProgressDialog(SystemSettingActivity.this, R.string.dialog_deleting);
+                Observable.create(emitter -> {
+                    Glide.get(SystemSettingActivity.this).clearDiskCache();
+                    emitter.onNext(new Object());
+                }).subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new BaseObserver<Object>() {
+                            @Override
+                            public void success(Object o) {
+                                new Handler().postDelayed(() -> {
+                                    UiUtils.hideProgressDialog();
+                                    getCaCheSize();
+                                }, 500);
+                            }
 
-                        @Override
-                        public void failure() {
-                        }
-                    });
+                            @Override
+                            public void failure() {
+                            }
+                        });
+            }
         });
     }
 
