@@ -185,7 +185,7 @@ public class DragCloseHelper {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     //界面保存按钮 不处理
-                    if (getTouchTarget(parentV, (int) event.getX(), (int) event.getY()) != null && getTouchTarget(parentV, (int) event.getX(), (int) event.getY()) instanceof Button) {
+                    if (getTouchTarget(parentV, (int) event.getX(), (int) event.getY()) != null && !isSwipingToClose && getTouchTarget(parentV, (int) event.getX(), (int) event.getY()) instanceof Button) {
                         return false;
                     }
                 } else if (event.getAction() == MotionEvent.ACTION_CANCEL) {
@@ -279,7 +279,7 @@ public class DragCloseHelper {
                     return true;
                 }
                 //界面保存按钮 不处理
-                if (getTouchTarget(parentV, (int) event.getX(), (int) event.getY()) != null && getTouchTarget(parentV, (int) event.getX(), (int) event.getY()) instanceof Button) {
+                if (getTouchTarget(parentV, (int) event.getX(), (int) event.getY()) != null && !isSwipingToClose && getTouchTarget(parentV, (int) event.getX(), (int) event.getY()) instanceof Button) {
                     return false;
                 }
                 mLastRawY = -1;
