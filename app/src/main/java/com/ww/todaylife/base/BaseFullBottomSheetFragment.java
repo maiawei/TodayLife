@@ -19,10 +19,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.ww.commonlibrary.MyApplication;
 import com.ww.commonlibrary.util.LogUtils;
 import com.ww.commonlibrary.util.ScreenUtils;
-import com.ww.commonlibrary.view.botomSheet.BottomSheetDialogFragment;
 import com.ww.todaylife.R;
 
 import org.jetbrains.annotations.NotNull;
@@ -30,6 +30,9 @@ import org.jetbrains.annotations.NotNull;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+/**
+ * created by wang.wei on 2019-11-07
+ */
 
 public abstract class BaseFullBottomSheetFragment extends BottomSheetDialogFragment {
 
