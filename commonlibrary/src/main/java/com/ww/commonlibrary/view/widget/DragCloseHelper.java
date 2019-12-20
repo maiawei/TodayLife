@@ -404,7 +404,7 @@ public class DragCloseHelper {
                     mCurrentTranslationX = ratio * mCurrentTranslationY;
                     mLastTranslationY = mCurrentTranslationY;
                     mLastTranslationX = mCurrentTranslationX;
-                    DragCloseHelper.this.updateChildView(mLastTranslationX, mCurrentTranslationY);
+                    updateChildView(mLastTranslationX, mCurrentTranslationY);
                 }
             }
         });
