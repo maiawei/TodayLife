@@ -3,6 +3,7 @@ package com.ww.commonlibrary.view;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -10,14 +11,12 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.RelativeLayout;
 
-import androidx.appcompat.widget.AppCompatImageView;
-
 import com.ww.commonlibrary.util.ScreenUtils;
 
 /**
  * created by wang.wei on 2019-12-20
  */
-public class AsideImage extends AppCompatImageView {
+public class AsideImageLayout extends RelativeLayout {
     private ViewConfiguration configuration;
     private boolean isMoving;
     private float downX, downY;
@@ -38,21 +37,21 @@ public class AsideImage extends AppCompatImageView {
 
     private boolean canAsideLeft = true;
 
-    public AsideImage(Context context) {
+    public AsideImageLayout(Context context) {
         this(context, null);
     }
 
-    public AsideImage(Context context, AttributeSet attrs) {
+    public AsideImageLayout(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public AsideImage(Context context, AttributeSet attrs, int defStyleAttr) {
+    public AsideImageLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         configuration = ViewConfiguration.get(context);
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
+    public boolean dispatchTouchEvent(MotionEvent event) {
         currentX = event.getRawX();
         currentY = event.getRawY();
         switch (event.getAction()) {

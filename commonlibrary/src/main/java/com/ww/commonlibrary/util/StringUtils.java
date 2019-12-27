@@ -65,7 +65,7 @@ public class StringUtils {
             }
             return stringBuilder.toString();
         }
-        return text;
+        return text + text;
     }
 
     public static String[] getHiddenKeyword(String text) {

@@ -158,10 +158,4 @@ public class TodayLifeHeader extends LinearLayout implements RefreshHeader {
         }
     }
 
-    @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        mHandler.removeCallbacksAndMessages(null);
-        mHandler = null;
-    }
 }

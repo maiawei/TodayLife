@@ -10,6 +10,7 @@ import com.ww.todaylife.HistoryAndStarNewsActivity;
 import com.ww.todaylife.PicWatchActivity;
 import com.ww.todaylife.R;
 import com.ww.todaylife.SystemSettingActivity;
+import com.ww.todaylife.TestActivity;
 import com.ww.todaylife.base.BaseFragment;
 import com.ww.todaylife.base.BasePresenter;
 
@@ -43,7 +44,7 @@ public class MeFragment extends BaseFragment {
         return null;
     }
 
-    @OnClick({R.id.noticesLayout, R.id.starLayout, R.id.historyLayout, R.id.settingLayout})
+    @OnClick({R.id.noticesLayout, R.id.starLayout, R.id.historyLayout, R.id.settingLayout,R.id.userCallBack})
     public void onViewClicked(View view) {
         if (view.getId() == R.id.starLayout || view.getId() == R.id.historyLayout) {
             Intent intent = new Intent(mBaseActivity, HistoryAndStarNewsActivity.class);
@@ -55,6 +56,9 @@ public class MeFragment extends BaseFragment {
             startActivity(intent);
         } else if (view.getId() == R.id.settingLayout) {
             startActivity(new Intent(mBaseActivity, SystemSettingActivity.class));
+        }else if(view.getId() == R.id.userCallBack){
+            startActivity(new Intent(mBaseActivity, TestActivity.class));
+
         }
 
     }

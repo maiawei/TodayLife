@@ -170,6 +170,7 @@ public class DragCloseHelper {
      */
     public boolean handleEvent(MotionEvent event) {
         if (event.getPointerCount() > 1) {
+            LogUtils.e("getPointerCount");
             //如果有多个手指
             if (isSwipingToClose) {
                 //已经开始滑动关闭，恢复原状，否则需要派发事件
@@ -180,6 +181,7 @@ public class DragCloseHelper {
             reset();
             return false;
         } else if (dragCloseListener != null && dragCloseListener.intercept()) {
+            LogUtils.e("intercept");
             //被接口中的方法拦截，但是如果设置了点击事件，将继续执行点击逻辑
             if (clickListener != null) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -195,10 +197,10 @@ public class DragCloseHelper {
             isSwipingToClose = false;
             return false;
         } else {
+            LogUtils.e("no-->intercept");
             //不拦截
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
                 reset();
-                LogUtils.e("currentDown" + event.getRawY());
                 mLastY = event.getY();
                 mLastX = event.getX();
                 mLastRawY = event.getRawY();

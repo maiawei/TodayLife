@@ -111,6 +111,7 @@ public class ServiceGenerator {
                 Request.Builder requestBuilder = original.newBuilder()
                         .method(original.method(), original.body());
                 requestBuilder.header("User-Agent", USER_AGENT);
+                //requestBuilder.addHeader()
                 requestBuilder.header("Referer", REFERER);
                 Request request = requestBuilder.header("User-Agent", removeChineseWord(System.getProperty("http.agent"))).build();
                 Response response = chain.proceed(request);

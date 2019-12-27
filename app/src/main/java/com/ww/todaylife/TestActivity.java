@@ -1,8 +1,11 @@
 package com.ww.todaylife;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
+import com.ww.commonlibrary.util.UiUtils;
+import com.ww.commonlibrary.view.AsideImageLayout;
 import com.ww.todaylife.base.BasePresenter;
 import com.ww.todaylife.base.BaseSwipeActivity;
 
@@ -28,7 +31,6 @@ public class TestActivity extends BaseSwipeActivity {
 
     @Override
     public void initView() {
-        //startActivity(new Intent(this, MainActivity.class));
 
     }
 }

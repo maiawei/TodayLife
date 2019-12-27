@@ -75,6 +75,9 @@
         <activity
             android:name=".SystemSettingActivity"
             android:theme="@style/MainAppTheme" />
+        <activity
+            android:name=".TestActivity"
+            android:theme="@style/MainAppTheme" />
     </application>
 
 </manifest>

@@ -4,6 +4,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+  <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
+      android:id="@+id/scaleView"
+      android:visibility="gone"
+      android:layout_width="match_parent"
+      app:quickScaleEnabled="true"
+      android:layout_height="match_parent"/>
+
   <com.github.chrisbanes.photoview.PhotoView
       android:id="@+id/photoView"
       android:layout_width="match_parent"
@@ -21,4 +28,5 @@
         app:cpv_progressNormalColor="@color/transparent"
         app:cpv_progressReachColor="@color/white"
         app:cpv_progressStyle="FillInnerArc"/>
+
 </RelativeLayout>

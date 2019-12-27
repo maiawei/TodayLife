@@ -1,8 +1,10 @@
 package com.ww.todaylife;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -38,7 +40,7 @@ public class GalleryDetailActivity extends BaseSwipeActivity {
     RelativeLayout rootLayout;
     int currentPosition;
     GalleryImageAdapter.AdapterViewHolder currentVh;
-
+    private Context mThis;
     @Override
     public int setContentId() {
         return R.layout.gallery_detail_layout;
@@ -59,7 +61,7 @@ public class GalleryDetailActivity extends BaseSwipeActivity {
         currentPosition = getIntent().getIntExtra("position", 0);
         positionTv.setText(String.format("%1$d/%2$d", currentPosition + 1, mList.size()));
         mViewPager.setCurrentItem(currentPosition, false);
-        mAdapter = new GalleryImageAdapter(this, mList);
+        mAdapter = new GalleryImageAdapter(mThis, mList);
         mViewPager.setAdapter(mAdapter);
         mViewPager.setOffscreenPageLimit(1);
         mViewPager.setCurrentItem(currentPosition);
@@ -83,8 +85,21 @@ public class GalleryDetailActivity extends BaseSwipeActivity {
         });
     }
 
+    @SuppressLint("ClickableViewAccessibility")
+    public boolean getCurrentViewStatus() {
+        currentVh = (GalleryImageAdapter.AdapterViewHolder) mAdapter.getCurrentView().getTag();
+        if (currentVh.photoView.getVisibility() == View.VISIBLE && currentVh.photoView.getScale() != 1) {
+            return true;
+        }
+        if (currentVh.scaleImageView.getVisibility() == View.VISIBLE) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public void initView() {
+        mThis = this;
         SystemUtils.setWindowStatusBarColor(this, R.color.transparent);
         dragCloseHelper = new DragCloseHelper(this);
         dragCloseHelper.setDragCloseViews(rootLayout, mViewPager);
@@ -95,8 +110,7 @@ public class GalleryDetailActivity extends BaseSwipeActivity {
             @Override
             public boolean intercept() {
                 if (mAdapter.getCurrentView() != null) {
-                    currentVh = (GalleryImageAdapter.AdapterViewHolder) mAdapter.getCurrentView().getTag();
-                    return scrolling || currentVh.photoView.getScale() != 1;
+                    return scrolling || getCurrentViewStatus();
 
                 } else {
                     return scrolling;
@@ -128,6 +142,12 @@ public class GalleryDetailActivity extends BaseSwipeActivity {
     public void finish() {
         super.finish();
         overridePendingTransition(0, R.anim.search_window_out);
+    }
+
+    @Override
+    protected void onDestroy() {
+        mThis = null;
+        super.onDestroy();
     }
 
     @Override
