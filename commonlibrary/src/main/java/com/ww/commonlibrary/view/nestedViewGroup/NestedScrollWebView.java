@@ -356,6 +356,7 @@ public class NestedScrollWebView extends WebView implements NestedScrollingChild
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);
         settings.setDomStorageEnabled(true);
         settings.setAppCacheEnabled(true);
+       // settings.setBlockNetworkImage(true);
         //settings.setLoadsImagesAutomatically(false);
         setWebViewClient(new WebViewClient() {
             @Override

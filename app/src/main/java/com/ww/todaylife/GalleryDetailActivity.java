@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.ww.commonlibrary.MyApplication;
+import com.ww.commonlibrary.glideloader.ProgressAppGlideModule;
 import com.ww.commonlibrary.util.FileUtils;
 import com.ww.commonlibrary.util.SystemUtils;
 import com.ww.commonlibrary.view.widget.DragCloseHelper;
@@ -146,6 +147,7 @@ public class GalleryDetailActivity extends BaseSwipeActivity {
 
     @Override
     protected void onDestroy() {
+        ProgressAppGlideModule.clearMap();
         mThis = null;
         super.onDestroy();
     }

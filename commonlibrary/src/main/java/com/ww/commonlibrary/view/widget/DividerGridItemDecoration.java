@@ -26,11 +26,11 @@ import java.lang.annotation.RetentionPolicy;
 
 public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
 
-//    private static final int[] ATTRS = new int[]{android.R.attr.listDivider};
+    //    private static final int[] ATTRS = new int[]{android.R.attr.listDivider};
     private Drawable mDivider;
 
 
-    public DividerGridItemDecoration(Context context,int id) {
+    public DividerGridItemDecoration(Context context, int id) {
 
         mDivider = context.getResources().getDrawable(id);
 
@@ -108,10 +108,6 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
                 {
                     return true;
                 }
-            } else {
-                childCount = childCount - childCount % spanCount;
-                if (pos >= childCount)// 如果是最后一列，则不需要绘制右边
-                    return true;
             }
         }
         return false;
@@ -156,7 +152,7 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
         if (isLastColumn(parent, parent.getChildLayoutPosition(view), spanCount, childCount))// 如果是最后一列，则不需要绘制右边
         {
 
-            outRect.set(0, 0, mDivider.getIntrinsicHeight(), mDivider.getIntrinsicHeight());
+            outRect.set(0, 0, 0, mDivider.getIntrinsicHeight());
         } else {
             outRect.set(0, 0, mDivider.getIntrinsicHeight(),
                     mDivider.getIntrinsicHeight());

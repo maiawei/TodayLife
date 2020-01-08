@@ -56,6 +56,9 @@ public class ProgressAppGlideModule extends AppGlideModule {
     public static void forget(String url) {
         ProgressAppGlideModule.DispatchingProgressListener.forget(url);
     }
+    public static void clearMap() {
+        ProgressAppGlideModule.DispatchingProgressListener.clear();
+    }
     public static void expect(String url, ProgressAppGlideModule.UIonProgressListener listener) {
         ProgressAppGlideModule.DispatchingProgressListener.expect(url, listener);
     }
@@ -87,7 +90,10 @@ public class ProgressAppGlideModule extends AppGlideModule {
             LISTENERS.remove(url);
             PROGRESSES.remove(url);
         }
-
+        static void clear() {
+            LISTENERS.clear();
+            PROGRESSES.clear();
+        }
         static void expect(String url, UIonProgressListener listener) {
             LISTENERS.put(url, listener);
         }
