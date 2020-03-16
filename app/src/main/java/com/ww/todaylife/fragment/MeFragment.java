@@ -57,7 +57,7 @@ public class MeFragment extends BaseFragment {
         } else if (view.getId() == R.id.settingLayout) {
             startActivity(new Intent(mBaseActivity, SystemSettingActivity.class));
         }else if(view.getId() == R.id.userCallBack){
-            startActivity(new Intent(mBaseActivity, TestActivity.class));
+          //  startActivity(new Intent(mBaseActivity, TestActivity.class));
 
         }
 

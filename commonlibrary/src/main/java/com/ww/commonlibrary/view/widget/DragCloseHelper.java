@@ -211,6 +211,7 @@ public class DragCloseHelper {
                 }
                 //初始化数据
                 lastPointerId = event.getPointerId(0);
+                //event.getX(1);
             } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
                 float currentY = event.getY();
                 float currentX = event.getX();

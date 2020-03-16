@@ -56,11 +56,10 @@ public class NewsListFragment extends LazyFragment<NewsListPresenter> implements
     LoadStateView loadingView;
     @BindView(R.id.refreshCountTv)
     TextView refreshCountTv;
-    int currentPosition = -1, currentSize = -1;
+    private int currentPosition = -1, currentSize = -1;
     private NewsList2Adapter newsListAdapter;
     private ArrayList<NewsDetail> mList = new ArrayList<>();
     private String typeCode;
-    private LinearLayoutManager linearLayoutManager;
     private Animation animation;
     private Runnable countTvHideRunnable;
     private LinearLayout.LayoutParams params;
@@ -116,7 +115,7 @@ public class NewsListFragment extends LazyFragment<NewsListPresenter> implements
     @Override
     protected void initViews() {
         EventBus.getDefault().register(this);
-        linearLayoutManager = new LinearLayoutManager(mBaseActivity);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mBaseActivity);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(mBaseActivity, LinearLayoutManager.VERTICAL));
         refreshLayout.setOnRefreshListener(refreshLayout -> loadData(CommonConstant.TYPE_REFRESH));

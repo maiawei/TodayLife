@@ -52,7 +52,7 @@ public class AsideImage extends AppCompatImageView {
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
+    public boolean dispatchTouchEvent(MotionEvent event) {
         currentX = event.getRawX();
         currentY = event.getRawY();
         switch (event.getAction()) {
