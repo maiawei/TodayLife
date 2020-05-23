@@ -4,4 +4,5 @@ public class ResDetail {
     public String id;
     public String name;
     public String version;
+    public String filePath;
 }
